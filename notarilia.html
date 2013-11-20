@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="utf-8"" />
+<title>Archivio di Stato di Roma - Progetto Imago II</title>
+<meta name="keywords" content="ICRCPAL: Istituto Centrale per il Restauro e la Conservazione del Patrimonio Archivistico e Librario, Restauro, Biblioteca, conservazione, Digital Library, CFLR, Imago, ICPL, ICPAL, ICRCPAL" />
+<meta name="description" content="ICRCPAL: Istituto Centrale per il Restauro e la Conservazione del Patrimonio Archivistico e Librario, Restauro, Biblioteca, conservazione, Digital Library, CFLR, Imago, ICPL,ICPAL, ICRCPAL" />
+<link href="../common/style_icrcpal2.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<script id="templateNotaio" type="text/template">
+<div class='notaio'>
+<p class= 'intestazione'><strong>Varianti</strong></p>
+<p><strong>Fonte: </strong><%= notaio.fonte %></p>
+<p><strong>Alias: </strong><%= notaio.alias %></p>
+</div>
+<div class='notaio'>
+<p class= 'intestazione'><strong>Nome normalizzato</strong></p>
+<p><strong>Nome: </strong><%= notaio.nome %></p>
+<p ><strong>Cognome: </strong><%= notaio.cognome %></p>
+</div>
+
+
+
+
+</script>
+
+<script id="templateVolume" type="text/template">
+
+<div class='recipe'>
+<p  ><%= volume.fondo %></p>
+<p  ><%= volume.ufficio %></p>
+</div>
+<div class='recipe'>
+<p  ><%= volume.serie %></p>
+
+
+</div>
+</script>
+
+<script id="templateCounter" type="text/template">
+<%= item %> trovate: <strong><%= count %></strong>
+</script>
+
+<script id="templateNav" type="text/template">
+<button id="Prev">Prev</button>
+<button id="Succ">Succ</button>
+</script>
+
+<script id="templateVolumiCollButton" type="text/template">
+<button id="VolumiCollButton">Cerca volumi collegati</button>
+</script>
+  
+<div  id="outer">
+	
+  <div id="header"> 
+    <h1>IMAGO</h1>
+    <h2>Atlante della Cina</h2>
+  </div>
+  <div id="banner"> 
+    <p align='right'> <a style="font-size: 10pt; color: yellow" href="http://www.archiviodistatoroma.beniculturali.it/"> 
+      <img src="../images/header_ASRoma.jpg" width="638" height="59" border="0"><br>
+      Torna al sito istituzionale</a> </div>
+
+	
+  <div id="menu"> 
+    <ul>
+      <li ><a href="../index.html">Home Imago</a></li>
+      <li ><a href="../serie.html">Serie Imago</a></li>
+      <li class="first"><a href="ruggieri_intro.html">Atlante della Cina</a></li>
+    </ul>
+  </div>
+	<div id="content" >
+		
+    <div id="tertiaryContent"> </div>
+<div id="primaryContentContainer">
+  <div id="primaryContent" style="text-align: center">
+
+    
+		      <div id="Loading" >
+			    <img src='img/ajax-loader.gif'><br>
+			      Caricamento dati...
+			</div> 
+		<div id="Risultati">             
+              
+            </div>
+		<div id="Nav" class="nav" ></div> 
+              <div id="Counter"></div>
+              
+              
+    </div>          
+
+  </div>
+</div>
+		
+		
+    <div id="secondaryContent"> 
+           <div id="NotaiForm">
+     
+            
+              <input id="searchText" type="text" placeholder="Inserire il nome" class="form-control">
+            
+            
+            <button  id="searchNotaiButton">Cerca notai</button>
+          
+      </div>
+	   <div>
+	    <button  id="searchVolumiButton">Cerca volumi</button>
+	   </div>
+    </div>
+</div></div></body>
+
+	
+        <script src="js/vendor/jquery-1.10.1.min.js"></script>
+	<script src="js/vendor/underscore.js"></script>
+	<script src="js/vendor/jquery.pages.js"></script>
+        <script src="js/main.js"></script>
+	<script type="text/javascript">
+	   $( document ).ready(function() {
+$("#searchNotaiButton").bind( "click", function(){
+   getNotai();
+   });
+$("#searchVolumiButton").bind( "click", function(){
+   getVolumi();
+   });	  
+ getNotai();
+});
+	 
+	</script>
+</html>

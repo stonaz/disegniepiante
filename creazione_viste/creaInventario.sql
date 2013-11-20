@@ -1,0 +1,7 @@
+ SELECT fondi.fondo, fondi."ordine fondi", uffici.ufficio, uffici."ordine uffici", notai_volumi.successione, serie."ordine serie", serie.serie, volumi."data iniziale presunta", volumi."data iniziale", volumi."estremi cronologici", volumi."anno iniziale", volumi."anno finale", volumi."data finale", volumi."data finale presunta", volumi.parte, volumi.volume, volumi.sub, notai_volumi.pagina, volumi.cartulazione, volumi.dorso, volumi.volume_old, volumi.sub_old, notai_volumi.cognome, notai_volumi.nome, notai_volumi.funzione, volumi.lacune, volumi.documenti, volumi.note
+   FROM fondi
+   JOIN uffici ON fondi.fondo::text = uffici.fondo::text
+   LEFT JOIN (serie
+   LEFT JOIN (notai_volumi
+   LEFT JOIN volumi ON notai_volumi.pagina = volumi.pagina AND notai_volumi.volume = volumi.volume AND notai_volumi."ordine serie" = volumi."ordine serie" AND notai_volumi.ufficio::text = volumi.ufficio::text AND notai_volumi.fondo::text = volumi.fondo::text) ON serie."ordine serie" = notai_volumi."ordine serie" AND serie.ufficio::text = notai_volumi.ufficio::text AND serie.fondo::text = notai_volumi.fondo::text) ON uffici.ufficio::text = serie.ufficio::text AND uffici.fondo::text = serie.fondo::text
+  ORDER BY fondi."ordine fondi", uffici."ordine uffici", serie."ordine serie", volumi.volume, volumi.sub, notai_volumi.pagina;
