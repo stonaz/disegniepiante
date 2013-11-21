@@ -71,7 +71,7 @@ $("#Nav").append(output);
 
 var tmplMarkup = $('#templateVolumiCollButton').html();
 var output = _.template(tmplMarkup, { nome:notaio.nome,cognome:notaio.cognome } );
-$("#Counter").append(output);
+$("#Nav").append(output);
 $("#VolumiCollButton").bind( "click", function(){
    getVolumi(notaio.nome,notaio.cognome)
    
