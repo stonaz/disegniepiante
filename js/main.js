@@ -48,6 +48,7 @@ function printNotai(data,offset)
 {
 var count;
 $("#Loading").show()
+$("#Intestazione").html('');
 $("#Risultati").html('');
 $("#Counter").html('');
 $("#Nav").html('');
@@ -56,7 +57,7 @@ $("#Nav").html('');
 console.log(count);
 var tmplMarkup = $('#templateCounter').html();
 var compiledTmpl = _.template(tmplMarkup, { count : count, item : "Occorrenze" });
-$("#Counter").append(compiledTmpl);
+$("#Intestazione").append(compiledTmpl);
 if (count > 0) {
 
 var notaio = data[offset];   
@@ -103,7 +104,9 @@ $("#Loading").hide()
 function printVolumi(data,offset)
 {
 var count;
-$("#Loading").show()
+
+$("#Loading").show();
+$("#Intestazione").html('');
 $("#Risultati").html('');
 $("#Counter").html('');
 $("#Nav").html('');
@@ -112,7 +115,8 @@ $("#Nav").html('');
 console.log(count);
 var tmplMarkup = $('#templateCounter').html();
 var compiledTmpl = _.template(tmplMarkup, { count : count, item : "Occorrenze" });
-$("#Counter").append(compiledTmpl);
+$("#Intestazione").append(compiledTmpl);
+
 if (count > 0) {
 
 volume = data[offset];   

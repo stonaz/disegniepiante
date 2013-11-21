@@ -46,6 +46,7 @@
 </script>
 
 <script id="templateNav" type="text/template">
+<%=  offset+1 %> di <%= count %>
 <button id="Prev">Prev</button>
 <button id="Succ">Succ</button>
 </script>
@@ -83,7 +84,10 @@
 		      <div id="Loading" >
 			    <img src='img/ajax-loader.gif'><br>
 			      Caricamento dati...
-			</div> 
+			</div>
+		      <div id =Intestazione>
+			</div>
+		      
 		<div id="Risultati">             
               
             </div>
@@ -107,7 +111,9 @@
             <button  id="searchNotaiButton">Cerca notai</button>
           
       </div>
-	   <div>
+	   <div id="VolumiForm">
+	    <input id="startDate" type="text" placeholder="Anno inizio" class="form-control">
+	      <input id="endDate" type="text" placeholder="Anno fine" class="form-control">
 	    <button  id="searchVolumiButton">Cerca volumi</button>
 	   </div>
     </div>
