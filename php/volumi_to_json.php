@@ -13,7 +13,7 @@ if ($_GET['nome']){
 
 if ($_GET['text']){
     $text= ($_GET['text']);
-    $sql .= " where nome like '%$text%' or cognome like '%$text%' or note like '%$text%'";
+    $sql .= " where nome ILIKE '%$text%' or cognome ILIKE '%$text%' or note ILIKE '%$text%'";
     
 }
 //echo $sql;
