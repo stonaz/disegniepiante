@@ -136,9 +136,9 @@
 		
     <div id="tertiaryContent"> </div>
 
-  <div id="primaryContent" >
+  <div id="primaryContentContainer" >
 
-    <div id="primaryContentContainer">
+    <div id="primaryContent">
   <div id="Loading" >
 			    <img src='img/ajax-loader.gif'><br>
 			      Caricamento dati...
@@ -160,21 +160,17 @@
 </div>
 		
 		
-    <div id="secondaryContent"> 
+    <div id="secondaryContent">
+    
            <div id="NotaiForm">
-     
-            
-              <input id="searchText" class="formfield" type="text" placeholder="Inserire il nome" class="form-control">
-            
-            
+	    <strong>Ricerca notaio </strong>             
+            <input id="searchText" class="formfield" type="text" placeholder="Inserire il nome" class="form-control"> 
             <button  id="searchNotaiButton">Cerca notai</button>
           
       </div>
 	   <div id="VolumiForm">
-	    <input id="startDate" class="formfield" type="text" placeholder="Anno inizio" class="form-control">
-	      <input id="endDate" class="formfield" type="text" placeholder="Anno fine" class="form-control">
-		<input id="textVolumi" class="formfield" type="text" placeholder="Testo libero" class="form-control">
-
+	    <strong>Ricerca nei volumi</strong> 
+	    <input id="textVolumi" class="formfield" type="text" placeholder="Testo libero" class="form-control">
 	    <button  id="searchVolumiButton" >Cerca volumi</button>
 	   </div>
     </div>

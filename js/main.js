@@ -143,46 +143,50 @@ var compiledTmpl = _.template(tmplMarkup, {titolo: "Volumi", count : count, item
 $("#Intestazione").append(compiledTmpl);
 
 if (count > 0) {
-$("#Risultati").css("width","90%")
-volume = data[offset];   
-
-var tmplMarkup = $('#templateVolume').html();
-var output = _.template(tmplMarkup, { volume : volume } );
-$("#Risultati").append(output);
-
-var tmplMarkup = $('#templateNav').html();
-var output = _.template(tmplMarkup, { offset:offset,count : count, } );
-$("#Nav").append(output);
-
-if (offset > 0) {
-   $("#Prev").bind( "click", function(){
-   printVolumi(data,offset-1);
+   $("#Risultati").css("width","90%")
+   volume = data[offset];   
    
-   });
-   $("#Prev").addClass("enabled")
-}
-
-if (offset+1 < count) {
-   $("#Succ").bind( "click", function(){
-   printVolumi(data,offset+1);
-   });
-   $("#Succ").addClass("enabled")
-}
-
-console.log(offset)
+   var tmplMarkup = $('#templateVolume').html();
+   var output = _.template(tmplMarkup, { volume : volume } );
+   $("#Risultati").append(output);
+   
+   var tmplMarkup = $('#templateNav').html();
+   var output = _.template(tmplMarkup, { offset:offset,count : count, } );
+   $("#Nav").append(output);
+   
+   if (offset > 0) {
+      $("#Prev").bind( "click", function(){
+      printVolumi(data,offset-1);
+      
+      });
+      $("#Prev").addClass("enabled")
+   }
+   
+   if (offset+1 < count) {
+      $("#Succ").bind( "click", function(){
+      printVolumi(data,offset+1);
+      });
+      $("#Succ").addClass("enabled")
+   }
+   
+   console.log(offset)
 
 }
 else
 {
-var tmplMarkup = $('#templateFrancoisCollButton').html();
-var output = _.template(tmplMarkup );
-$("#Intestazione").append(output);
-
-$("#FrancoisCollButton").bind( "click", function(){
-   //alert('francois')
-   getFrancois(args)
+   //Abilita la ricerca nel francois solo se si viene dalla ricerca notaio
+   if (typeof args.cognome !== 'undefined') {
+      var tmplMarkup = $('#templateFrancoisCollButton').html();
+      var output = _.template(tmplMarkup );
+      $("#Intestazione").append(output);
    
-   }); 
+      $("#FrancoisCollButton").bind( "click", function(){
+      //alert('francois')
+      getFrancois(args)
+      
+      }); 
+   }
+   
 }
 $("#Loading").hide()
 }
