@@ -3,12 +3,18 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+#Intestazione {
+    width: 90%;
+}
 
 #Risultati
 {
+overflow:hidden;
 text-align:left;
 width: 70% ;
 border: thin solid;
+clear: both;
+padding-left: 10px;
 }
 
 #NotaiForm
@@ -16,7 +22,7 @@ border: thin solid;
     border: thin solid;
     margin: 10px;
     padding: 10px;
-    text-align: center;
+    
 }
 
 #VolumiForm
@@ -26,33 +32,64 @@ border: thin solid;
     padding: 10px;
 }
 
+.titolo
+{
+    float: left;
+    margin-right: 20px;
+    font-weight: bold;
+    font-size: 16px;
+    color: black;
+}
 
-.intestazione
+.count
+{
+    float: left;
+    margin-right: 20px;
+    font-size: 12px;
+}
+
+.group
+{
+    background-color: #CCCCCC;
+    border:thin solid;
+    margin:5px;
+    padding:5px;
+    float: left;
+    width: 300px;
+}
+
+.notaioIntestazione
 {
     
-    background-color: #819FF7;
+    background-color: #CCCCCC;
     color: #000;
-    padding: 10px;
+    
 }
 .notaio
 {
-    /*float:left;*/
-/*    
-*/    margin: 5px;
-    padding: 5px;
+   margin: 5px;
+
 }
 
 
 .nav
 {
-    width: 70% ; 
-    border: thin solid
+    width: 40% ; 
+/*    border: solid;
+    border-width: 0px 1px 1px 1px;*/
+    padding: 5px;
+    clear: both;
 }
 
 .enabled {
   color:white;
   background-color: #666;
   cursor:pointer;
+}
+
+.formfield
+{
+    width: 70%;
 }
 
 

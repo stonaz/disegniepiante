@@ -13,53 +13,111 @@
 
 <script id="templateNotaio" type="text/template">
 <div class='notaio'>
-<p class= 'intestazione'><strong>Varianti</strong></p>
+<p class= 'notaioIntestazione'><strong>Varianti</strong></p>
 <p><strong>Fonte: </strong><%= notaio.fonte %></p>
 <p><strong>Alias: </strong><%= notaio.alias %></p>
 </div>
 <div class='notaio'>
-<p class= 'intestazione'><strong>Nome normalizzato</strong></p>
+<p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
 <p><strong>Nome: </strong><%= notaio.nome %></p>
 <p ><strong>Cognome: </strong><%= notaio.cognome %></p>
 </div>
-
-
-
-
 </script>
 
 <script id="templateVolume" type="text/template">
 
-<div class='recipe'>
-<p  ><%= volume.fondo %></p>
-<p  ><%= volume.ufficio %></p>
+<div class="group">
+<p><strong>Nome: </strong><%= volume.nome %></p>
+<p><strong>Cognome: </strong><%= volume.cognome %></p>
+<p><strong>Funzione: </strong><%= volume.funzione %></p>
 </div>
-<div class='recipe'>
-<p  ><%= volume.serie %></p>
+<div class="group">
+<p><strong>Fondo: </strong><%= volume.fondo %></p>
+<p  ><strong>Ufficio: </strong><%= volume.ufficio %></p>
+<p  ><strong>Serie: </strong><%= volume.serie %></p>
+<p>
+  <strong>Volume: </strong><%= volume.volume %>
+  <strong>Volume_old: </strong><%= volume.volume_old %>
+</p>
+<p>
+  <strong>Sub/pag: </strong><%= volume.sub %>
+  <strong>Sub_old: </strong><%= volume.sub_old %>
+</p>
+</div>
+<div class="group">
+  <p  ><strong>Estremi cronologici: </strong><%= volume["estremi cronologici"] %></p>
+<p  ><strong>Anno iniziale: </strong><%= volume["anno iniziale"] %></p>
+<p><strong>Data iniziale: </strong><%= volume["data iniziale"] %></p>
+<p  ><strong>Data iniziale presunta: </strong><%= volume["data iniziale presunta"] %></p>
+<p><strong>Anno finale: </strong><%= volume["anno finale"] %></p>
+<p><strong>Data finale: </strong><%= volume["data finale"] %></p>
+<p  ><strong>Data iniziale presunta: </strong><%= volume["data finale presunta"] %></p>
 
+</div>
+<div class="group">
+<p><strong>Note: </strong><%= volume.note %></p>
+</div>
+<div class="group">
+<p><strong>Dorso: </strong><%= volume.dorso %></p>
+</div>
+<div class="group">
+<p><strong>Cartulazione: </strong><%= volume.cartulazione %></p>
+</div>
+<div class="group">
+<p><strong>Parte: </strong><%= volume.parte %></p>
+<p><strong>Lacune: </strong><%= volume.lacune %></p>
+<p><strong>Documenti: </strong><%= volume.documenti %></p>
+</div>
+</script>
 
+<script id="templateFrancois" type="text/template">
+<div class="group" >
+<p><strong>Fondo: </strong><%= francois.fondo %></p>
+<p  ><strong>Ufficio: </strong><%= francois.ufficio %></p>
+</div>
+<div class="group" 	>
+<p ><strong>Nome: </strong><%= francois.nome %></p>
+<p  ><strong>Cognome: </strong><%= francois.cognome %></p>
+</div>
+<div class="group"  >
+<p  ><strong>Inizio: </strong><%= francois["data inizio"] %></p>
+<p  ><strong>Fine: </strong><%= francois["data fine"] %></p>
+
+</div>
+<div class="group" 	>
+<p  ><strong>Successione: </strong><%= francois.successione %></p>
+<p  ><strong>Funzione: </strong><%= francois.funzione %></p>
+<p  ><strong>Periodo: </strong><%= francois.periodo %></p>
 </div>
 </script>
 
 <script id="templateCounter" type="text/template">
-<%= item %> trovate: <strong><%= count %></strong>
+<p class="titolo"><%= titolo %></p>
+<p class="count"><strong><%= item %> trovate: </strong><%= count %></p>
 </script>
 
 <script id="templateNav" type="text/template">
-<%=  offset+1 %> di <%= count %>
 <button id="Prev">Prev</button>
 <button id="Succ">Succ</button>
+<%=  offset+1 %> di <%= count %>
 </script>
 
 <script id="templateVolumiCollButton" type="text/template">
 <button id="VolumiCollButton">Cerca volumi collegati</button>
 </script>
-  
+
+<script id="templateFrancoisCollButton" type="text/template">
+  <div style="clear: both;">
+ <button id="FrancoisCollButton">Ripeti ricerca nel Francois</button>   
+  </div>
+
+</script>
+
 <div  id="outer">
 	
   <div id="header"> 
     <h1>IMAGO</h1>
-    <h2>Atlante della Cina</h2>
+    <h2>Notarilia</h2>
   </div>
   <div id="banner"> 
     <p align='right'> <a style="font-size: 10pt; color: yellow" href="http://www.archiviodistatoroma.beniculturali.it/"> 
@@ -71,27 +129,28 @@
     <ul>
       <li ><a href="../index.html">Home Imago</a></li>
       <li ><a href="../serie.html">Serie Imago</a></li>
-      <li class="first"><a href="ruggieri_intro.html">Atlante della Cina</a></li>
+      <li class="first"><a href="notarilia_intro.html">Notarilia</a></li>
     </ul>
   </div>
 	<div id="content" >
 		
     <div id="tertiaryContent"> </div>
-<div id="primaryContentContainer">
-  <div id="primaryContent" style="text-align: center">
 
-    
-		      <div id="Loading" >
+  <div id="primaryContent" >
+
+    <div id="primaryContentContainer">
+  <div id="Loading" >
 			    <img src='img/ajax-loader.gif'><br>
 			      Caricamento dati...
 			</div>
+		      
 		      <div id =Intestazione>
 			</div>
-		      
+		 <div id="Nav" class="nav" ></div>      
 		<div id="Risultati">             
               
             </div>
-		<div id="Nav" class="nav" ></div> 
+		
               <div id="Counter"></div>
               
               
@@ -105,16 +164,18 @@
            <div id="NotaiForm">
      
             
-              <input id="searchText" type="text" placeholder="Inserire il nome" class="form-control">
+              <input id="searchText" class="formfield" type="text" placeholder="Inserire il nome" class="form-control">
             
             
             <button  id="searchNotaiButton">Cerca notai</button>
           
       </div>
 	   <div id="VolumiForm">
-	    <input id="startDate" type="text" placeholder="Anno inizio" class="form-control">
-	      <input id="endDate" type="text" placeholder="Anno fine" class="form-control">
-	    <button  id="searchVolumiButton">Cerca volumi</button>
+	    <input id="startDate" class="formfield" type="text" placeholder="Anno inizio" class="form-control">
+	      <input id="endDate" class="formfield" type="text" placeholder="Anno fine" class="form-control">
+		<input id="textVolumi" class="formfield" type="text" placeholder="Testo libero" class="form-control">
+
+	    <button  id="searchVolumiButton" >Cerca volumi</button>
 	   </div>
     </div>
 </div></div></body>
@@ -130,7 +191,9 @@ $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
 $("#searchVolumiButton").bind( "click", function(){
-   getVolumi();
+  var args={text:$("#textVolumi").val()};
+  console.log(args)
+   getVolumi(args);
    });	  
  getNotai();
 });

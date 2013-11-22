@@ -4,9 +4,10 @@ require 'functions.php'; // functions used in the script
 header('Content-Type: application/json'); //for correct output in browsers
 $sql='SELECT *  FROM "francois" ';
 //$sql='SELECT * from inventario';
-if ($_GET['alias']){
-    $alias= ($_GET['alias']);
-    $sql .= " where alias ILIKE '%$alias%' ";
+if ($_GET['nome']){
+    $nome= ($_GET['nome']);
+    $cognome= ($_GET['cognome']);
+    $sql .= " where nome = '$nome' and cognome = '$cognome' ";
     
 }
 //echo $sql;

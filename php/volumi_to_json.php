@@ -10,6 +10,12 @@ if ($_GET['nome']){
     $sql .= " where nome = '$nome' and cognome = '$cognome' ";
     
 }
+
+if ($_GET['text']){
+    $text= ($_GET['text']);
+    $sql .= " where nome like '%$text%' or cognome like '%$text%' or note like '%$text%'";
+    
+}
 //echo $sql;
 $items_list=get_items_list($dbconn,$sql);
 echo json_encode($items_list);
