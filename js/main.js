@@ -181,7 +181,6 @@ else
       $("#Intestazione").append(output);
    
       $("#FrancoisCollButton").bind( "click", function(){
-      //alert('francois')
       getFrancois(args)
       
       }); 
@@ -218,8 +217,7 @@ $("#Nav").append(output);
 
 if (offset > 0) {
    $("#Prev").bind( "click", function(){
-   printFrancois(data,offset-1);
-   
+   printFrancois(data,offset-1);  
    });
    $("#Prev").addClass("enabled")
 }
@@ -232,7 +230,6 @@ if (offset+1 < count) {
 }
 
 console.log(francois["data fine"])
-
 }
 
 $("#Loading").hide()
