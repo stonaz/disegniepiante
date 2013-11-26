@@ -3,6 +3,8 @@ var notarilia = {};
 function cleanScreen(){
    $("#Intestazione").html('');
    $("#Risultati").html('');
+   $("#IntestazioneCollegati").html('');
+   $("#RisultatiCollegati").html('');
    $("#Counter").html('');
    $("#Nav").html('');
    
@@ -51,11 +53,30 @@ function getVolumi(args)
     });
 }
 
+function getVolumiCollegati(args)
+{
+      var url="php/volumi_to_json.php";
+      //cleanScreen();
+      $("#Loading").show();
+      $.ajax({
+        async: true, 
+        url: url,
+        dataType: 'json',
+        data:args,
+        success: function(response){
+       console.log('ok');
+         printVolumiCollegati(response,0,args);
+       
+      
+          }
+        
+    });
+}
+
 function getFrancois(args)
 {
    console.log(searchText);
-   cleanScreen();
-   $("#Loading").show();
+   //$("#Loading").show();
    
       var url="php/francois_to_json.php";
       $.ajax({
@@ -79,7 +100,6 @@ cleanScreen();
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
-//(typeof data.lenght undefined)? var count =data.length :var count =0
 console.log(count);
 var tmplMarkup = $('#templateCounter').html();
 var compiledTmpl = _.template(tmplMarkup, { titolo: "Notai",count : count, item : "Occorrenze" });
@@ -96,17 +116,9 @@ var tmplMarkup = $('#templateNav').html();
 var output = _.template(tmplMarkup, { offset:offset,count : count, } );
 $("#Nav").append(output);
 
-var tmplMarkup = $('#templateVolumiCollButton').html();
-var output = _.template(tmplMarkup, { nome:notaio.nome,cognome:notaio.cognome } );
-$("#Nav").append(output);
-
-$("#VolumiCollButton").bind( "click", function(){
-   var args={};
-   args.nome=notaio.nome
-   args.cognome=notaio.cognome
-   getVolumi(args)
-   
-   });
+//var tmplMarkup = $('#templateVolumiCollButton').html();
+//var output = _.template(tmplMarkup );
+//$("#Nav").append(output);
 
 if (offset > 0) {
    $("#Prev").bind( "click", function(){
@@ -122,6 +134,11 @@ if (offset+1 < count) {
    });
    $("#Succ").addClass("enabled")
 }
+var args = {};
+   args.nome=notaio.nome
+   args.cognome=notaio.cognome
+   getVolumiCollegati(args)
+
 
 console.log(offset)
 
@@ -130,9 +147,11 @@ $("#Loading").hide()
 }
 
 
+
 function printVolumi(data,offset,args)
 {
 cleanScreen();
+$("#RisultatiCollegati").hide();
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
@@ -143,7 +162,7 @@ var compiledTmpl = _.template(tmplMarkup, {titolo: "Volumi", count : count, item
 $("#Intestazione").append(compiledTmpl);
 
 if (count > 0) {
-   $("#Risultati").css("width","90%")
+   $("#Risultati").css("width","100%")
    volume = data[offset];   
    
    var tmplMarkup = $('#templateVolume').html();
@@ -190,44 +209,75 @@ else
 $("#Loading").hide()
 }
 
+function printVolumiCollegati(data,offset,args)
+{
+$("#IntestazioneCollegati").html('');
+$("#RisultatiCollegati").html('');
+var count;
+
+(data.length === undefined) ? count=0 : count =data.length;
+console.log(count);
+var tmplMarkup = $('#templateCollegatiCounter').html();
+var compiledTmpl = _.template(tmplMarkup, {count : count, item : "Volumi" });
+$("#IntestazioneCollegati").append(compiledTmpl);
+
+if (count > 0) {
+   
+   //$("#RisultatiIntestazione").css("width","100%");
+   $("#RisultatiCollegati").show();
+   var tmplMarkup = $('#templateVolume').html();
+   //volume = data[offset];   
+   _.each(data, function(v){
+      var output = _.template(tmplMarkup, { volume : v } );
+      $("#RisultatiCollegati").append(output);
+      console.log (v);
+   })
+     
+   console.log(offset)
+
+}
+else
+{
+   $("#RisultatiCollegati").hide();
+   if (typeof args.cognome !== 'undefined') {
+      var tmplMarkup = $('#templateFrancoisCollButton').html();
+      var output = _.template(tmplMarkup );
+      $("#IntestazioneCollegati").append(output);
+   
+      $("#FrancoisCollButton").bind( "click", function(){
+      getFrancois(args)
+      
+      }); 
+   }
+   
+}
+$("#Loading").hide()
+}
+
 function printFrancois(data,offset,args)
 {
-cleanScreen();
+//$("#IntestazioneCollegati").html('');
+$("#RisultatiCollegati").html('');
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
 //(typeof data.lenght undefined)? var count =data.length :var count =0
 console.log(count);
-var tmplMarkup = $('#templateCounter').html();
-var compiledTmpl = _.template(tmplMarkup, {titolo: "Francois", count : count, item : "Occorrenze" });
-$("#Intestazione").append(compiledTmpl);
+
+//var tmplMarkup = $('#templateCounter').html();
+//var compiledTmpl = _.template(tmplMarkup, {titolo: "Francois", count : count, item : "Occorrenze" });
+//$("#IntestazioneCollegati").append(compiledTmpl);
 
 if (count > 0) {
-
+$("#RisultatiCollegati").show();
 francois = data[offset];
 
 
 var tmplMarkup = $('#templateFrancois').html();
 var output = _.template(tmplMarkup, { francois : francois } );
-$("#Risultati").append(output);
+$("#RisultatiCollegati").append(output);
 
-var tmplMarkup = $('#templateNav').html();
-var output = _.template(tmplMarkup, { offset:offset,count : count, } );
-$("#Nav").append(output);
 
-if (offset > 0) {
-   $("#Prev").bind( "click", function(){
-   printFrancois(data,offset-1);  
-   });
-   $("#Prev").addClass("enabled")
-}
-
-if (offset+1 < count) {
-   $("#Succ").bind( "click", function(){
-   printFrancois(data,offset+1);
-   });
-   $("#Succ").addClass("enabled")
-}
 
 console.log(francois["data fine"])
 }
