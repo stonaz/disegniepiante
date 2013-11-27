@@ -10,6 +10,52 @@ function cleanScreen(){
    
 }
 
+function createSelectFondi() {
+                var tmplMarkup = $('#templateSelectFondi').html();
+                var url="php/fondi_to_json.php"
+                $.ajax({
+                  async: true, 
+                  url: url,
+                  dataType: 'json',
+                  //data:{alias: searchText },
+                  success: function(response){
+                        
+                           var compiledTmpl = _.template(tmplMarkup,{fondi:response});
+                           $('#elencoFondi').append(compiledTmpl);
+                           
+      
+                        }
+        
+                });
+                $('#elencoFondi').bind('change',function(){
+                  console.log( $(this).val());
+                  createSelectUffici($(this).val());
+                });
+                //createSelectUffici($('#elencoFondi').val());
+}
+
+function createSelectUffici(fondo) {
+                var tmplMarkup = $('#templateSelectUfficio').html();
+                var url="php/uffici_to_json.php"
+                $.ajax({
+                  async: true, 
+                  url: url,
+                  dataType: 'json',
+                  data:{fondo: fondo },
+                  success: function(response){
+                        console.log(response)
+                        $('#elencoUffici').html('');
+                           var compiledTmpl = _.template(tmplMarkup,{uffici:response});
+                           
+                           $('#elencoUffici').append(compiledTmpl);
+                           
+                           
+      
+                        }
+        
+                });
+}
+
 function getNotai()
 {
    var searchText=$("#searchText").val();

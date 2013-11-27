@@ -12,6 +12,13 @@
 </head>
 
 <body>
+<script id="templateSelectFondi" type="text/template">
+<% _.each(fondi, function(fondo) { %> <option value="<%= fondo.fondo %>"> <%= fondo.fondo %></option> <% }); %>
+</script>
+
+<script id="templateSelectUfficio" type="text/template">
+<% _.each(uffici, function(ufficio) { %> <option value="<%= ufficio.ufficio %>"> <%= ufficio.ufficio %></option> <% }); %>
+</script>
 
 <script id="templateNotaio" type="text/template">
 <div class='schedaNotaio'>
@@ -138,12 +145,49 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
+      <div class="SearchContainer" style="width: 100%">
+          <div id="NotaiForm" class="SearchForm" style="float: left;background-color: #E1D8ED; width: 120px;height: 140px;">
+	    <strong>Ricerca notaio </strong>    <br>         
+            <input id="searchText" class="formfield" type="text" value="Ubertus"  > <br>
+            <button  id="searchNotaiButton">Cerca </button>
+          
+	  </div>
+	  <div id="VolumiForm" class="SearchForm"  style="float: left;background-color: #A29AAD;height: 140px;">
+	    <div style="clear: both;">
+	    <strong>Ricerca nei volumi</strong>
+	    <div >
+		<div style="float: left; width: 120px;">
+		    Testo<br>
+		    <input id="textVolumi" class="formfield" type="text"  class="form-control">
+		    Data iniziale
+		    <input id="dataIniziale" class="formfield" type="text"  >
+		    <br>
+		    Data finale
+		   <input id="dataFinale" class="formfield" type="text"  >
+		    <br>
+		</div>
+		<div style="float: left;  width: 500px;">
+		    
+		    Fondo: <br>
+		    <select id ="elencoFondi">
+		      <option> </option>
+		    </select><br>
+		    Ufficio: <br>
+		    <select id ="elencoUffici"></select><br>
+		    
+		      <br><button  id="searchVolumiButton" >Cerca</button>
+		</div>
+	      </div> 
+	    </div>
+	   </div>
+      </div>
+    
   <div id="Loading" >
-			    <img src='img/ajax-loader.gif'><br>
-			      Caricamento dati...
-			</div>
+<img src='img/ajax-loader.gif'><br>
+Caricamento dati...
+  </div>
 		      
-		      <div id =Intestazione>
+		      <div id =Intestazione style="clear: both";>
 			</div>
 		 <div id="Nav" class="nav" ></div>      
 		<div id="Risultati">             
@@ -169,28 +213,7 @@
 		
     <div id="secondaryContent">
     
-           <div id="NotaiForm">
-	    <strong>Ricerca notaio </strong>             
-            <input id="searchText" class="formfield" type="text" value="Ubertus" placeholder="Inserire il nome" class="form-control"> 
-            <button  id="searchNotaiButton">Cerca notai</button>
-          
-      </div>
-	   <div id="VolumiForm">
-	    <p>
-	    <strong>Ricerca nei volumi</strong>
-	    Ricerca testo
-	    <input id="textVolumi" class="formfield" type="text" placeholder="Testo libero" class="form-control">
-	    <button  id="searchVolumiButton" >Cerca</button>
-	    </p>
-	    <p>
-	    Ricerca Ufficio e periodo
-	    Data iniziale
-	     <input id="dataIniziale" class="formfield" type="text"  >
-	      <br>
-	      Data finale
-	     <input id="dataFinale" class="formfield" type="text"  >
-	</p>
-	   </div>
+       
     </div>
 </div></div></body>
 
@@ -220,8 +243,14 @@ $("#searchVolumiButton").bind( "click", function(){
   var args={text:$("#textVolumi").val()};
   console.log(args)
    getVolumi(args);
-   });	  
+   });
+
  getNotai();
+ createSelectFondi(function(){
+  console.log('Val' +$('#elencoFondi').val())
+ });
+                          
+
 });
 	 
 	</script>

@@ -72,20 +72,47 @@ display:none;
  margin-bottom: 0em;   
 }
 
-#NotaiForm
+.SearchIntestazione
 {
-    border: thin solid;
-    margin: 10px;
-    padding: 10px;
+    
+    /*margin: 10px;*/
+    /*padding: 10px;*/
+    color: #000000;
+    line-height: 1em;
+    min-height: 150px;
+    
     
 }
 
-#VolumiForm
+.SearchContainer
 {
-    border: thin solid;
-    margin: 10px;
-    padding: 10px;
+    /*border: thin solid;*/
+    margin-bottom: 5px;
+    /*padding: 10px;*/
+    color: #000000;
+    line-height: 1em;
+    min-height: 160px;
+    
+    
 }
+
+.SearchForm
+{
+    /*border: thin solid;*/
+    
+    color: #000000;
+    line-height: 1em;
+    padding: 3  px;
+    
+    
+}
+
+/*#VolumiForm*/
+/*{*/
+/*    */
+/*    margin: 0px;*/
+/*    padding: 0px;*/
+/*}*/
 .scheda
 {
     clear: both;
@@ -139,7 +166,7 @@ display:none;
 
 .formfield
 {
-    width: 70%;
+    width: 100px;
 }
 
 
