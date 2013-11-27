@@ -7,7 +7,26 @@ function cleanScreen(){
    $("#RisultatiCollegati").html('');
    $("#Counter").html('');
    $("#Nav").html('');
+   $("#Error").hide();
    
+}
+
+function confronta_data(data1, data2){
+	//trasformo le date nel formato aaaammgg (es. 20081103)
+        data1str = data1.substr(6)+data1.substr(3, 2)+data1.substr(0, 2);
+		data2str = data2.substr(6)+data2.substr(3, 2)+data2.substr(0, 2);
+		console.log(data1str)
+                console.log(data2str)
+        if (data2str-data1str<0) {
+         $("#Error").show();
+            $("#Error").html('La data iniziale deve essere precedente quella finale');
+            console.log("La data iniziale deve essere precedente quella finale");
+            return false
+        }else{
+			console.log("ok");
+                        return true
+        }
+    
 }
 
 function createSelectFondi() {

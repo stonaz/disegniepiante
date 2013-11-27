@@ -22,12 +22,17 @@
 
 <script id="templateNotaio" type="text/template">
 <div class='schedaNotaio'>
+  <div class="group">
 <p class= 'notaioIntestazione'><strong>Varianti</strong></p>
 <p><strong>Fonte: </strong><%= notaio.fonte %></p>
 <p><strong>Alias: </strong><%= notaio.alias %></p>
+  </div>
+  <div class="group">
+  
 <p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
 <p><strong>Nome: </strong><%= notaio.nome %></p>
 <p ><strong>Cognome: </strong><%= notaio.cognome %></p>
+  </div>
 </div>
 </script>
 
@@ -69,7 +74,7 @@
 <p ><strong>Data finale presunta: </strong><%= volume["data finale presunta"] %></p>
 </div>
 
-<div class="group">
+<div class="notaVolumi" >
 <p ><strong>Note: </strong><%= volume.note %></p>
 </div>
 </div>
@@ -97,8 +102,8 @@
 </script>
 
 <script id="templateCounter" type="text/template">
-<p class="titolo"><%= titolo %></p>
-<p class="count"><strong>Occorrenze trovate: </strong><%= count %></p>
+<div class="titolo"><%= titolo %></div>
+<div class="count"><strong>Occorrenze trovate: </strong><%= count %></div>
 </script>
 
 <script id="templateCollegatiCounter" type="text/template">
@@ -147,16 +152,18 @@
     <div id="primaryContent">
       <div class="SearchContainer" style="width: 100%">
           <div id="NotaiForm" class="SearchForm" style="float: left;background-color: #E1D8ED; width: 120px;height: 140px;">
-	    <strong>Ricerca notaio </strong>    <br>         
-            <input id="searchText" class="formfield" type="text" value="Ubertus"  > <br>
+	    <div class="ricercaIntestazioneNotai"><strong>Ricerca notaio </strong> </div>
+	    <div style="font-size: 1.1em;margin-top: 2px;">
+	    Notaio<br>
+            <input id="searchText" class="formfield" type="text" value="Ubertus"  > <br><br>
             <button  id="searchNotaiButton">Cerca </button>
-          
+          </div>
 	  </div>
 	  <div id="VolumiForm" class="SearchForm"  style="float: left;background-color: #A29AAD;height: 140px;">
-	    <div style="clear: both;">
+	    <div style="clear: both;" class="ricercaIntestazioneVolumi">
 	    <strong>Ricerca nei volumi</strong>
 	    <div >
-		<div style="float: left; width: 120px;">
+		<div style="float: left; width: 120px;margin-top: 4px;">
 		    Testo<br>
 		    <input id="textVolumi" class="formfield" type="text"  class="form-control">
 		    Data iniziale
@@ -166,7 +173,7 @@
 		   <input id="dataFinale" class="formfield" type="text"  >
 		    <br>
 		</div>
-		<div style="float: left;  width: 500px;">
+		<div style="float: left;  width: 500px;margin-top: 4px;">
 		    
 		    Fondo: <br>
 		    <select id ="elencoFondi">
@@ -181,7 +188,7 @@
 	    </div>
 	   </div>
       </div>
-    
+    <div id="Error"></div>
   <div id="Loading" >
 <img src='img/ajax-loader.gif'><br>
 Caricamento dati...
@@ -212,7 +219,16 @@ Caricamento dati...
 		
 		
     <div id="secondaryContent">
-    
+    <div class="spiegazione">
+      Nella base di dati sono registrati i volumi di tutti i
+fondi/serie notarili.<br>
+Per il fondo dei Notai romani o "30 notai", sono al momento presenti
+solo i volumi degli uffici 1-2: gli altri sono in corso di immissione
+o di schedatura.<br>
+Per  questi ultimi quindi le uniche indicazioni
+disponibili sono ancora quelle del Francois, visualizzabili con il
+pulsante accanto.
+   </div>
        
     </div>
 </div></div></body>
@@ -234,21 +250,30 @@ $.datepicker.setDefaults(
 	);
 //$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy" });
 $( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy",changeYear: true ,defaultDate:"01-01-1300", yearRange: "1300:1870"});
-
 $( "#dataFinale" ).datepicker({ dateFormat: "dd-mm-yy", changeYear: true , defaultDate:"01-01-1300", yearRange: "1300:1870"});
 $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
 $("#searchVolumiButton").bind( "click", function(){
+  $("#searchText").val('')
   var args={};
+  var check_date=true
   args.text=$("#textVolumi").val();
   args.ufficio=$("#elencoUffici").val();
   args.fondo=$("#elencoFondi").val();
   args.dataIniziale=$("#dataIniziale").val();
   args.dataFinale=$("#dataFinale").val();
+  console.log($("#dataIniziale").val() + $("#dataFinale").val() )
+  if ($("#dataIniziale").val() !== "" && $("#dataFinale").val() !== "") {
+    check_date=confronta_data(args.dataIniziale,args.dataFinale);
   
-  console.log(args)
-   getVolumi(args);
+  }
+  
+    if (check_date) {
+      console.log(args);
+      getVolumi(args);	
+    }
+  
    });
 
  getNotai();
