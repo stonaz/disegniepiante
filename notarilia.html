@@ -240,14 +240,19 @@ $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
 $("#searchVolumiButton").bind( "click", function(){
-  var args={text:$("#textVolumi").val()};
+  var args={};
+  args.text=$("#textVolumi").val();
+  args.ufficio=$("#elencoUffici").val();
+  args.fondo=$("#elencoFondi").val();
+  args.dataIniziale=$("#dataIniziale").val();
+  args.dataFinale=$("#dataFinale").val();
+  
   console.log(args)
    getVolumi(args);
    });
 
  getNotai();
  createSelectFondi(function(){
-  console.log('Val' +$('#elencoFondi').val())
  });
                           
 

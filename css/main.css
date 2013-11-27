@@ -12,13 +12,15 @@ button{
 
 #Risultati
 {
-
+border: thin solid;
+border-color: #0000FF;
 text-align:left;
 width: 100% ;
 clear: both;
 line-height: 1.2em;
 margin-bottom: 10px;
 color: #000000;
+background-color: #c0c0c0;
 }
 
 #Risultati p
@@ -64,7 +66,7 @@ line-height: 1.2em;
 overflow:auto;
 max-height: 500px;
 display:none;
-
+background-color: #c0c0c0;
 }
 
 #RisultatiCollegati p
