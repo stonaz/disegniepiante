@@ -48,7 +48,16 @@ function createSelectFondi() {
                 });
                 $('#elencoFondi').bind('change',function(){
                   console.log( $(this).val());
-                  createSelectUffici($(this).val());
+                  if ($(this).val() != "") {
+                     console.log('change uffici');
+                     createSelectUffici($(this).val());
+                  }
+                  else
+                  {
+                     console.log('azzera uffici')
+                     $('#elencoUffici').html('');
+                  }
+                  
                 });
 }
 
