@@ -43,6 +43,7 @@
 <p ><strong>Cognome: </strong><%= volume.cognome %></p>
 <p ><strong>Funzione: </strong><%= volume.funzione %></p>
 <hr>
+ <p style="float:right;"> <button>Inventario</button></p>
 <p ><strong>Fondo: </strong><%= volume.fondo %></p>
 <p ><strong>Ufficio: </strong><%= volume.ufficio %></p>
 <p ><strong>Serie: </strong><%= volume.serie %></p>
@@ -263,14 +264,14 @@ $("#searchVolumiButton").bind( "click", function(){
   args.fondo=$("#elencoFondi").val();
   args.dataIniziale=$("#dataIniziale").val();
   args.dataFinale=$("#dataFinale").val();
-  console.log($("#dataIniziale").val() + $("#dataFinale").val() )
+ // console.log($("#dataIniziale").val() + $("#dataFinale").val() )
   if ($("#dataIniziale").val() !== "" && $("#dataFinale").val() !== "") {
     check_date=confronta_data(args.dataIniziale,args.dataFinale);
   
   }
   
     if (check_date) {
-      console.log(args);
+      //console.log(args);
       getVolumi(args);	
     }
   

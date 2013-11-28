@@ -14,17 +14,15 @@ function cleanScreen(){
 function confronta_data(data1, data2){
 	//trasformo le date nel formato aaaammgg (es. 20081103)
         data1str = data1.substr(6)+data1.substr(3, 2)+data1.substr(0, 2);
-		data2str = data2.substr(6)+data2.substr(3, 2)+data2.substr(0, 2);
-		console.log(data1str)
-                console.log(data2str)
+        data2str = data2.substr(6)+data2.substr(3, 2)+data2.substr(0, 2);
         if (data2str-data1str<0) {
          $("#Error").show();
             $("#Error").html('La data iniziale deve essere precedente quella finale');
             console.log("La data iniziale deve essere precedente quella finale");
             return false
         }else{
-			console.log("ok");
-                        return true
+		     
+            return true
         }
     
 }
@@ -40,21 +38,18 @@ function createSelectFondi() {
                   success: function(response){
                         
                            var compiledTmpl = _.template(tmplMarkup,{fondi:response});
-                           $('#elencoFondi').append(compiledTmpl);
-                           
-      
-                        }
-        
+                           $('#elencoFondi').append(compiledTmpl);                                 
+                        }        
                 });
                 $('#elencoFondi').bind('change',function(){
-                  console.log( $(this).val());
+                  //console.log( $(this).val());
                   if ($(this).val() != "") {
-                     console.log('change uffici');
+                    // console.log('change uffici');
                      createSelectUffici($(this).val());
                   }
                   else
                   {
-                     console.log('azzera uffici')
+                   //  console.log('azzera uffici')
                      $('#elencoUffici').html('');
                   }
                   
@@ -70,7 +65,7 @@ function createSelectUffici(fondo) {
                   dataType: 'json',
                   data:{fondo: fondo },
                   success: function(response){
-                        console.log(response)
+                     //   console.log(response)
                         $('#elencoUffici').html('');
                            var compiledTmpl = _.template(tmplMarkup,{uffici:response});
                            
@@ -117,7 +112,6 @@ function getVolumi(args)
         dataType: 'json',
         data:args,
         success: function(response){
-       console.log('ok');
          printVolumi(response,0,args);
        
       
@@ -137,10 +131,7 @@ function getVolumiCollegati(args)
         dataType: 'json',
         data:args,
         success: function(response){
-       console.log('ok');
-         printVolumiCollegati(response,0,args);
-       
-      
+         printVolumiCollegati(response,0,args);      
           }
         
     });
@@ -148,8 +139,6 @@ function getVolumiCollegati(args)
 
 function getFrancois(args)
 {
-   console.log(searchText);
-   //$("#Loading").show();
    
       var url="php/francois_to_json.php";
       $.ajax({
@@ -158,10 +147,7 @@ function getFrancois(args)
         dataType: 'json',
         data:args,
         success: function(response){
-       console.log('ok');
-         printFrancois(response,0);
-       
-      
+         printFrancois(response,0);          
           }
         
     });
@@ -173,7 +159,6 @@ cleanScreen();
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
-console.log(count);
 var tmplMarkup = $('#templateCounter').html();
 var compiledTmpl = _.template(tmplMarkup, { titolo: "Notai",count : count, item : "Occorrenze" });
 $("#Intestazione").append(compiledTmpl);
@@ -191,8 +176,7 @@ $("#Nav").append(output);
 
 if (offset > 0) {
    $("#Prev").bind( "click", function(){
-   printNotai(data,offset-1);
-   
+   printNotai(data,offset-1);   
    });
    $("#Prev").addClass("enabled")
 }
@@ -251,8 +235,6 @@ if (count > 0) {
       });
       $("#Succ").addClass("enabled")
    }
-   
-   console.log(offset)
 
 }
 else
@@ -280,7 +262,6 @@ $("#RisultatiCollegati").html('');
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
-console.log(count);
 var tmplMarkup = $('#templateCollegatiCounter').html();
 var compiledTmpl = _.template(tmplMarkup, {count : count, item : "Volumi" });
 $("#IntestazioneCollegati").append(compiledTmpl);
@@ -296,8 +277,6 @@ if (count > 0) {
       $("#RisultatiCollegati").append(output);
       console.log (v);
    })
-     
-   console.log(offset)
 
 }
 else
@@ -326,20 +305,13 @@ var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
 
-console.log(count);
-
 if (count > 0) {
 $("#RisultatiCollegati").show();
 francois = data[offset];
 
-
 var tmplMarkup = $('#templateFrancois').html();
 var output = _.template(tmplMarkup, { francois : francois } );
 $("#RisultatiCollegati").append(output);
-
-
-
-console.log(francois["data fine"])
 }
 
 $("#Loading").hide()

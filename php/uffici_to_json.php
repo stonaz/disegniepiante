@@ -6,10 +6,10 @@ $sql='SELECT *  FROM "uffici" ';
 
 if ($_GET['fondo']){
     $fondo= ($_GET['fondo']);
-    $sql .= " where fondo = '$fondo'";
+    $sql .= " where fondo = '$fondo' ";
     
 }
-
+$sql .= " ORDER BY ufficio ";
 //echo $sql;
 $items_list=get_items_list($dbconn,$sql);
 //foreach ($items_list as $)
