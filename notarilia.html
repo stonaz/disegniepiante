@@ -37,13 +37,13 @@
 </script>
 
 <script id="templateVolume" type="text/template">
-<div class="scheda">
+<div class="schedaVolumi">
 <div class="group">
 <p ><strong>Nome: </strong><%= volume.nome %></p>
 <p ><strong>Cognome: </strong><%= volume.cognome %></p>
 <p ><strong>Funzione: </strong><%= volume.funzione %></p>
 <hr>
- <p style="float:right;"> <button>Inventario</button></p>
+ <p style="float:right;"> <button id="<%= buttonID %>">Inventario</button></p>
 <p ><strong>Fondo: </strong><%= volume.fondo %></p>
 <p ><strong>Ufficio: </strong><%= volume.ufficio %></p>
 <p ><strong>Serie: </strong><%= volume.serie %></p>
@@ -82,6 +82,7 @@
 </script>
 
 <script id="templateFrancois" type="text/template">
+  <div class="schedaFrancois">
 <div class="group" >
 <p ><strong>Fondo: </strong><%= francois.fondo %></p>
 <p ><strong>Ufficio: </strong><%= francois.ufficio %></p>
@@ -100,6 +101,7 @@
 <p ><strong>Funzione: </strong><%= francois.funzione %></p>
 <p ><strong>Periodo: </strong><%= francois.periodo %></p>
 </div>
+  </div>
 </script>
 
 <script id="templateCounter" type="text/template">
@@ -154,40 +156,48 @@
       <div class="SearchContainer" style="width: 100%">
           <div id="NotaiForm" class="SearchForm" style="float: left;background-color: #E1D8ED; width: 120px;height: 140px;">
 	    <div class="ricercaIntestazioneNotai"><strong>Ricerca notaio </strong> </div>
-	    <div style="font-size: 1.1em;margin-top: 2px;">
+	    <div style="font-size: 1.1em;margin-top: 2px;padding-left: 2px;">
 	    Notaio<br>
-            <input id="searchText" class="formfield" type="text" value="Ubertus"  > <br><br>
+            <input id="searchText" class="formfield" type="text"  > <br><br><br><br><br>
             <button  id="searchNotaiButton">Cerca </button>
           </div>
 	  </div>
-	  <div id="VolumiForm" class="SearchForm"  style="float: left;background-color: #A29AAD;height: 140px;">
+	  <div id="VolumiForm" class="SearchForm"  style="float: left;background-color: #C0C0C0;height: 140px;">
 	    <div style="clear: both;" class="ricercaIntestazioneVolumi">
 	    <strong>Ricerca nei volumi</strong>
 	    <div >
-		<div style="float: left; width: 120px;margin-top: 4px;">
-		    Testo<br>
-		    <input id="textVolumi" class="formfield" type="text"  class="form-control">
-		    Data iniziale
-		    <input id="dataIniziale" class="formfield" type="text"  >
-		    <br>
-		    Data finale
-		   <input id="dataFinale" class="formfield" type="text"  >
-		    <br>
-		</div>
-		<div style="float: left;  width: 500px;margin-top: 4px;">
+		<div style="float: left;  width: 400px;margin-top: 4px;">
 		    
 		    Fondo: <br>
 		    <select id ="elencoFondi">
 		      <option> </option>
 		    </select><br>
 		    Ufficio: <br>
-		    <select id ="elencoUffici"></select><br>
+		    <select id ="elencoUffici"></select>
 		    
-		      <br><button  id="searchVolumiButton" >Cerca</button>
+		    <br>
+		    Testo<br>
+		    <input id="textVolumi" class="formfield" type="text"  >
+		    
+		    
+		      
 		</div>
+		<div style="float: left; width: 120px;margin-top: 4px;">
+		  Data iniziale
+		    <input id="dataIniziale" class="formfield" type="text"  >
+		    <br>    
+		    Data finale
+		   <input id="dataFinale" class="formfield" type="text"  >
+		    <br><br><button  id="searchVolumiButton" >Cerca</button>
+		</div>
+		
+		
 	      </div> 
 	    </div>
 	   </div>
+	  <div style="clear: both;text-align: center;width: 658px;background-color: grey ">
+		      <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
+      </div>	
       </div>
     <div id="Error"></div>
   <div id="Loading" >

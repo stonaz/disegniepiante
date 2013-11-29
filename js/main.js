@@ -11,14 +11,26 @@ function cleanScreen(){
    
 }
 
+function cancellaSelezioni()
+{
+   $("#dataIniziale").val('');
+   $("#dataFinale").val('');
+   $("#searchText").val('');
+   $("#textVolumi").val('');
+   $("#elencoFondi").val('');
+   $("#elencoUffici").html('');
+   
+}
+
 function confronta_data(data1, data2){
 	//trasformo le date nel formato aaaammgg (es. 20081103)
         data1str = data1.substr(6)+data1.substr(3, 2)+data1.substr(0, 2);
         data2str = data2.substr(6)+data2.substr(3, 2)+data2.substr(0, 2);
         if (data2str-data1str<0) {
+         cleanScreen();
          $("#Error").show();
             $("#Error").html('La data iniziale deve essere precedente quella finale');
-            console.log("La data iniziale deve essere precedente quella finale");
+            //console.log("La data iniziale deve essere precedente quella finale");
             return false
         }else{
 		     
@@ -41,7 +53,7 @@ function createSelectFondi() {
                            $('#elencoFondi').append(compiledTmpl);                                 
                         }        
                 });
-                $('#elencoFondi').bind('change',function(){
+                $('#elencoFondi').on('change',function(){
                   //console.log( $(this).val());
                   if ($(this).val() != "") {
                     // console.log('change uffici');
@@ -137,6 +149,17 @@ function getVolumiCollegati(args)
     });
 }
 
+function openProvenienza(fondo,ufficio)
+{
+      var url="php/provenienza_to_json.php";
+      //cleanScreen();
+      var args ={fondo:fondo,ufficio:ufficio};
+      //console.log(fondo);
+      window.provenienza=args;
+      window.open("provenienza.html", "provenienza", "location=0,scrollbars=0,resizable=0,height=450,width=600");
+}
+
+
 function getFrancois(args)
 {
    
@@ -175,14 +198,14 @@ var output = _.template(tmplMarkup, { offset:offset,count : count, } );
 $("#Nav").append(output);
 
 if (offset > 0) {
-   $("#Prev").bind( "click", function(){
+   $("#Prev").on( "click", function(){
    printNotai(data,offset-1);   
    });
    $("#Prev").addClass("enabled")
 }
 
 if (offset+1 < count) {
-   $("#Succ").bind( "click", function(){
+   $("#Succ").on( "click", function(){
    printNotai(data,offset+1);
    });
    $("#Succ").addClass("enabled")
@@ -206,7 +229,7 @@ var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
 var tmplMarkup = $('#templateCounter').html();
-var compiledTmpl = _.template(tmplMarkup, {titolo: "Volumi", count : count, item : "Occorrenze" });
+var compiledTmpl = _.template(tmplMarkup, {titolo: "Volumi", count : count, item : "Occorrenze"});
 $("#Intestazione").append(compiledTmpl);
 
 if (count > 0) {
@@ -214,15 +237,19 @@ if (count > 0) {
    volume = data[offset];   
    
    var tmplMarkup = $('#templateVolume').html();
-   var output = _.template(tmplMarkup, { volume : volume } );
+   buttonID="Vol-"+volume.volume+"-"+offset
+   var output = _.template(tmplMarkup, { volume : volume ,buttonID: buttonID } );
    $("#Risultati").append(output);
-   
+   $("#"+buttonID).on("click",function(){
+      openProvenienza(volume.fondo,volume.ufficio)
+      
+      }); 
    var tmplMarkup = $('#templateNav').html();
    var output = _.template(tmplMarkup, { offset:offset,count : count, } );
    $("#Nav").append(output);
    
    if (offset > 0) {
-      $("#Prev").bind( "click", function(){
+      $("#Prev").on( "click", function(){
       printVolumi(data,offset-1);
       
       });
@@ -230,7 +257,7 @@ if (count > 0) {
    }
    
    if (offset+1 < count) {
-      $("#Succ").bind( "click", function(){
+      $("#Succ").on( "click", function(){
       printVolumi(data,offset+1);
       });
       $("#Succ").addClass("enabled")
@@ -245,7 +272,7 @@ else
       var output = _.template(tmplMarkup );
       $("#Intestazione").append(output);
    
-      $("#FrancoisCollButton").bind( "click", function(){
+      $("#FrancoisCollButton").on( "click", function(){
       getFrancois(args)
       
       }); 
@@ -268,16 +295,21 @@ $("#IntestazioneCollegati").append(compiledTmpl);
 
 if (count > 0) {
    
-   //$("#RisultatiIntestazione").css("width","100%");
    $("#RisultatiCollegati").show();
-   var tmplMarkup = $('#templateVolume').html();
-   //volume = data[offset];   
-   _.each(data, function(v){
-      var output = _.template(tmplMarkup, { volume : v } );
+   var tmplMarkup = $('#templateVolume').html();   
+   _.each(data, function(v,i){
+      
+      buttonID="Vol-"+v.volume+"-"+i
+      var output = _.template(tmplMarkup, { volume : v ,buttonID: buttonID} );
       $("#RisultatiCollegati").append(output);
-      console.log (v);
-   })
+      //var button=i
+    $("#"+buttonID).on("click",function(){
+      openProvenienza(v.fondo,v.ufficio)
+      
+      }); 
 
+   })
+   
 }
 else
 {
@@ -287,7 +319,7 @@ else
       var output = _.template(tmplMarkup );
       $("#IntestazioneCollegati").append(output);
    
-      $("#FrancoisCollButton").bind( "click", function(){
+      $("#FrancoisCollButton").on( "click", function(){
       getFrancois(args)
       
       }); 
@@ -299,25 +331,33 @@ $("#Loading").hide()
 
 function printFrancois(data,offset,args)
 {
-//$("#IntestazioneCollegati").html('');
 $("#RisultatiCollegati").html('');
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
-
+console.log(count)
 if (count > 0) {
 $("#RisultatiCollegati").show();
 francois = data[offset];
 
 var tmplMarkup = $('#templateFrancois').html();
-var output = _.template(tmplMarkup, { francois : francois } );
+_.each(data, function(f){
+var output = _.template(tmplMarkup, { francois : f } );
 $("#RisultatiCollegati").append(output);
-}
 
+})
+}
+else
+{
+   $("#RisultatiCollegati").show();
+   $("#RisultatiCollegati").html('Nessun risultato trovato');
+}
 $("#Loading").hide()
 }
 
- $(function() {
+
+
+$(function() {
 	
     $.ajaxSetup({
 
