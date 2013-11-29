@@ -14,7 +14,7 @@ function getProvenienza(fondo,ufficio)
             var provenienza=response[0];
             var tmplMarkup = $('#templateProvenienza').html();
             var output = _.template(tmplMarkup, { provenienza : provenienza } );
-            $("#Risultati").append(output);
+            $("#RisultatiProvenienza").append(output);
           }
         
     });

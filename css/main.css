@@ -32,6 +32,19 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 /*border: thin solid;
 border-color: #0000FF;*/
 text-align:left;
+width: 772px ;
+clear: both;
+line-height: 1.2em;
+margin-bottom: 10px;
+color: #000000;
+background-color: #FFFFFF;
+}
+
+#RisultatiProvenienza
+{
+/*border: thin solid;
+border-color: #0000FF;*/
+text-align:left;
 width: 100% ;
 clear: both;
 line-height: 1.2em;
@@ -49,7 +62,7 @@ background-color: #FFFFFF;
 {
 
 text-align:left;
-width: 70% ;
+width: 80% ;
 border: 1px solid;
 border-color: #0000FF;
 clear: both;
@@ -105,7 +118,7 @@ background-color: #E1D8ED;
 {
 overflow:hidden;
 text-align:left;
-width: 100% ;
+width:  772px ;
 clear: both;
 line-height: 1.2em;
 overflow:auto;
