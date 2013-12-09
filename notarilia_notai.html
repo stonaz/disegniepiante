@@ -44,7 +44,7 @@
 <p ><strong>Cognome: </strong><%= volume.cognome %></p>
 <p ><strong>Funzione: </strong><%= volume.funzione %></p>
 <hr>
- <p style="float:right;"> <button id="<%= buttonID %>">Inventario</button></p>
+ 
 <p ><strong>Fondo: </strong><%= volume.fondo %></p>
 <p ><strong>Ufficio: </strong><%= volume.ufficio %></p>
 <p ><strong>Serie: </strong><%= volume.serie %></p>
@@ -61,6 +61,7 @@
 <p ><strong>Lacune: </strong><%= volume.lacune %></p>
 <p ><strong>Documenti: </strong><%= volume.documenti %></p>
 </div>
+
 <div class="group">
 
 <p ><strong>Dorso: </strong><%= volume.dorso %></p>
@@ -79,6 +80,7 @@
 <div class="notaVolumi" >
 <p ><strong>Note: </strong><%= volume.note %></p>
 </div>
+<p > <button id="<%= buttonID %>">Inventario</button></p>
 </div>
 </script>
 
@@ -236,8 +238,13 @@ response( $.grep( AliasNotai, function( item ){
 return matcher.test( item );
 }) );
 }
+,
+select: function( event, ui ) {
+  $(this).val(ui.item.value);
+  getNotai();
+}
 });
-
+//$( "#searchNotaio" ).on( "autocompleteselect", function( event, ui ) {getNotai()} );
 $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
