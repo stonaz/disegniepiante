@@ -21,6 +21,98 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 
 }
 
+/* Notai */
+
+#NotaiFormLeft
+{
+    float: left;
+    background-color: #C0C0C0;
+    width: 160px;
+    height: 140px;
+    color: #000000;
+    line-height: 1em;
+    padding: 3px;
+}
+
+#NotaiFormRight
+{
+    float: left;
+    background-color: #C0C0C0;
+    height: 140px;
+    width: 500px;
+    color: #000000;
+    line-height: 1em;
+    padding: 3px;
+}
+
+#searchNotaio
+{
+    width:140px;
+}
+
+.ricercaIntestazioneNotai
+{    
+    border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid; 
+    border-color: #000000;
+    background-color: #A29AAD;
+    padding:2px;
+    font-size: 1.2em;
+    width: 766px;
+}
+
+#RisultatiNotai
+{
+/*border: thin solid;
+border-color: #0000FF;*/
+text-align:left;
+width: 606px ;
+clear: both;
+line-height: 1.2em;
+margin-bottom: 10px;
+color: #000000;
+
+}
+
+#RisultatiNotai p
+{
+ margin-bottom: 0em;
+}
+
+.schedaNotaio
+{
+text-align:left;
+/*width: 80% ;*/
+/*border: 1px solid;
+border-color: #0000FF;*/
+clear: both;
+line-height: 1.2em;
+margin-bottom: 0em;
+color:#000000;
+/*padding: 5px;*/
+min-height: 80px;
+
+}
+
+.notaioIntestazione
+{
+    
+    background-color: #A29AAD;
+    padding:2px;
+    font-size: 1.1em;
+    
+}
+
+.navNotaio
+{
+    width: 40% ; 
+    padding-bottom:5px;
+    clear: both;
+    margin-left: 2px;
+}
+
 #Intestazione {
     width: 90%;
     line-height: 1.0em;
@@ -40,23 +132,6 @@ color: #000000;
 background-color: #FFFFFF;
 }
 
-#RisultatiNotai
-{
-/*border: thin solid;
-border-color: #0000FF;*/
-text-align:left;
-width: 606px ;
-clear: both;
-line-height: 1.2em;
-margin-bottom: 10px;
-color: #000000;
-background-color: #FFFFFF;
-}
-
-#RisultatiNotai p
-{
- margin-bottom: 0em;
-}
 
 #RisultatiProvenienza
 {
@@ -76,34 +151,8 @@ background-color: #FFFFFF;
  margin-bottom: 0em;
 }
 
-.schedaNotaio
-{
 
-text-align:left;
-/*width: 80% ;*/
-border: 1px solid;
-border-color: #0000FF;
-clear: both;
-line-height: 1.2em;
-margin-bottom: 0em;
-color:#000000;
-padding: 5px;
-min-height: 80px;
-background-color: #E1D8ED;
 
-}
-.ricercaIntestazioneNotai
-{
-    
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid; 
-    border-color: #000000;
-    background-color: #c0c0c0;
-    padding:2px;
-    font-size: 1.1em;   
-}
 .ricercaIntestazioneVolumi
 {
     
@@ -116,14 +165,7 @@ background-color: #E1D8ED;
     padding:2px;
     font-size: 1.1em;   
 }
-.notaioIntestazione
-{
-    
-    background-color: #A29AAD;
-    padding:2px;
-    font-size: 1.1em;
-    
-}
+
 
 #IntestazioneCollegati {
     width: 90%;
@@ -171,6 +213,7 @@ color: #FF0000;
     min-height: 150px;
     
     
+    
 }
 
 .SearchContainer
@@ -180,9 +223,8 @@ color: #FF0000;
     /*padding: 10px;*/
     color: #000000;
     line-height: 1em;
-    min-height: 160px;
-    
-    
+    min-height: 170px;
+    background-color: #C0C0C0;   
 }
 
 .SearchForm

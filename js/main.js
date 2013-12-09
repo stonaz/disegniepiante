@@ -95,9 +95,30 @@ function createSelectUffici(fondo) {
  * Ricerca e visualizzazione Notai e Volumi collegati
  */
 
+function getAlias()
+{
+
+   var alias
+   
+      var url="php/alias_to_json.php"
+      $.ajax({
+        async: false, 
+        url: url,
+        dataType: 'json',
+        success: function(response){
+       
+           alias= response;
+       
+      
+          }
+        
+    });
+      return alias;
+}
+
 function getNotai()
 {
-   var searchText=$("#searchText").val();
+   var searchText=$("#searchNotaio").val();
    //console.log(searchText);
    cleanScreen();
    $("#Loading").show();
@@ -307,7 +328,7 @@ if (count > 0) {
    volume = data[offset];   
    
    var tmplMarkup = $('#templateVolume').html();
-   buttonID="Vol-"+volume.volume+"-"+offset
+   buttonID="Vol-"+volume.volume+"-"+offset;
    var output = _.template(tmplMarkup, { volume : volume ,buttonID: buttonID } );
    $("#Risultati").append(output);
    $("#"+buttonID).on("click",function(){

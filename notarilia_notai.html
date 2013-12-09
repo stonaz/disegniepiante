@@ -8,7 +8,7 @@
 <link href="../common/style_icrcpal2.css" rel="stylesheet" type="text/css" />
 
 <link href="css/main.css" rel="stylesheet" type="text/css" />
-<link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
 </head>
 
 <body>
@@ -25,8 +25,8 @@
   <div class="group">
 
 <p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
-<p><strong>Nome: </strong><%= notaio.nome %></p>
 <p ><strong>Cognome: </strong><%= notaio.cognome %></p>
+<p><strong>Nome: </strong><%= notaio.nome %></p>
   </div>
   <div class="group">
 <p class= 'notaioIntestazione'><strong>Varianti</strong></p>
@@ -154,49 +154,18 @@
 
     <div id="primaryContent">
       <div class="SearchContainer" style="width: 772px">
-          <div id="NotaiForm" class="SearchForm" style="float: left;background-color: #E1D8ED; width: 150px;height: 140px;">
-	    <div class="ricercaIntestazioneNotai"><strong>Ricerca notaio </strong> </div>
-	    <div style="font-size: 1.1em;margin-top: 2px;padding-left: 2px;">
-	    Notaio<br>
-            <input id="searchText" class="formfield" type="text"  > <br><br>
+       <div class="ricercaIntestazioneNotai"><strong>Ricerca notaio </strong> </div>
+          <div id="NotaiFormLeft"  >
+	    
+	    <div style="font-size: 1.1em;margin-top: 5px;padding-left: 2px;">
+	    
+            <input id="searchNotaio" type="text"  > <br><br>
             <button  id="searchNotaiButton">Cerca </button>
           </div>
-	     <div id =Intestazione style="clear: both";>
+	     <div id =Intestazione >
 			</div>
 	  </div>
-	  <div id="VolumiForm" class="SearchForm"  style="float: left;background-color: #C0C0C0;height: 140px;">
-	<!--    <div style="clear: both;" class="ricercaIntestazioneVolumi">
-	    <strong>Notai</strong>
-	    
-		<div style="float: left;  width: 470px;margin-top: 4px;">
-		    
-		    Fondo: <br>
-		    <select id ="elencoFondi">
-		      <option> </option>
-		    </select><br>
-		    Ufficio: <br>
-		    <select id ="elencoUffici"></select>
-		    
-		    <br>
-		    Testo<br>
-		    <input id="textVolumi" class="formfield" type="text" style="width: 200px" >
-		    
-		    
-		      
-		</div>
-		<div style="float: left; width: 140px;margin-top: 4px;">
-		  Data iniziale
-		    <input id="dataIniziale" class="formfield" type="text"  >
-		    <br>    
-		    Data finale
-		   <input id="dataFinale" class="formfield" type="text"  >
-		    <br><br><button  id="searchVolumiButton" >Cerca</button>
-		</div>
-		
-		
-	      
-	    </div>
-	    Results-->
+	  <div id="NotaiFormRight"   >
 	    
 	    <div id="Loading" >
 <img src='img/ajax-loader.gif'><br>
@@ -207,11 +176,9 @@ Caricamento dati...
 		      <div id="RisultatiNotai">             
               
             </div>
-		 <div id="Nav" class="nav" ></div>  
+		 <div id="Nav" class="navNotaio" ></div>  
 	   </div>
-	  <div style="clear: both;text-align: center;width: 768px;background-color: grey ">
-		      <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
-      </div>	
+		
       </div>
     <div id="Error"></div>
       
@@ -256,45 +223,28 @@ pulsante accanto.
 	<script src="js/vendor/jquery.ui.datepicker-it.js"></script>
 	
         <script src="js/main.js"></script>
+        
 	<script type="text/javascript">
+         var availableTags;
 $( document ).ready(function() {
-$.datepicker.setDefaults(
-	  $.extend(
-		{'dateFormat':'dd-mm-yy'},
-		$.datepicker.regional['it']
-	    )
-	);
-//$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy" });
-$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy",changeYear: true ,defaultDate:"01-01-1300", yearRange: "1300:1870"});
-$( "#dataFinale" ).datepicker({ dateFormat: "dd-mm-yy", changeYear: true , defaultDate:"01-01-1300", yearRange: "1300:1870"});
+
+var AliasNotai = getAlias();
+$( "#searchNotaio" ).autocomplete({
+source: function( request, response ) {
+var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+response( $.grep( AliasNotai, function( item ){
+return matcher.test( item );
+}) );
+}
+});
+
 $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
-$("#searchVolumiButton").bind( "click", function(){
-  $("#searchText").val('')
-  var args={};
-  var check_date=true
-  args.text=$("#textVolumi").val();
-  args.ufficio=$("#elencoUffici").val();
-  args.fondo=$("#elencoFondi").val();
-  args.dataIniziale=$("#dataIniziale").val();
-  args.dataFinale=$("#dataFinale").val();
- // console.log($("#dataIniziale").val() + $("#dataFinale").val() )
-  if ($("#dataIniziale").val() !== "" && $("#dataFinale").val() !== "") {
-    check_date=confronta_data(args.dataIniziale,args.dataFinale);
-  
-  }
-  
-    if (check_date) {
-      //console.log(args);
-      getVolumi(args);	
-    }
-  
-   });
+
 
  getNotai();
- createSelectFondi(function(){
- });
+
                           
 
 });
