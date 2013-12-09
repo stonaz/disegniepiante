@@ -40,6 +40,24 @@ color: #000000;
 background-color: #FFFFFF;
 }
 
+#RisultatiNotai
+{
+/*border: thin solid;
+border-color: #0000FF;*/
+text-align:left;
+width: 606px ;
+clear: both;
+line-height: 1.2em;
+margin-bottom: 10px;
+color: #000000;
+background-color: #FFFFFF;
+}
+
+#RisultatiNotai p
+{
+ margin-bottom: 0em;
+}
+
 #RisultatiProvenienza
 {
 /*border: thin solid;
@@ -62,7 +80,7 @@ background-color: #FFFFFF;
 {
 
 text-align:left;
-width: 80% ;
+/*width: 80% ;*/
 border: 1px solid;
 border-color: #0000FF;
 clear: both;
@@ -222,8 +240,9 @@ color: #FF0000;
 .count
 {
     float: left;
-    margin-right: 20px;
-    font-size: 12px;
+    margin-top: 6px;
+    margin-left: 2px;
+    font-size: 11px;
 }
 
 .group

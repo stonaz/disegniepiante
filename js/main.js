@@ -8,6 +8,7 @@ function cleanScreen(){
    $("#Counter").html('');
    $("#Nav").html('');
    $("#Error").hide();
+   $("#RisultatiNotai").html('');
    
 }
 
@@ -90,6 +91,10 @@ function createSelectUffici(fondo) {
                 });
 }
 
+/*
+ * Ricerca e visualizzazione Notai e Volumi collegati
+ */
+
 function getNotai()
 {
    var searchText=$("#searchText").val();
@@ -113,69 +118,6 @@ function getNotai()
     });
 }
 
-function getVolumi(args)
-{
-      var url="php/volumi_to_json.php";
-      cleanScreen();
-      $("#Loading").show();
-      $.ajax({
-        async: true, 
-        url: url,
-        dataType: 'json',
-        data:args,
-        success: function(response){
-         printVolumi(response,0,args);
-       
-      
-          }
-        
-    });
-}
-
-function getVolumiCollegati(args)
-{
-      var url="php/volumi_to_json.php";
-      //cleanScreen();
-      $("#Loading").show();
-      $.ajax({
-        async: true, 
-        url: url,
-        dataType: 'json',
-        data:args,
-        success: function(response){
-         printVolumiCollegati(response,0,args);      
-          }
-        
-    });
-}
-
-function openProvenienza(fondo,ufficio)
-{
-      var url="php/provenienza_to_json.php";
-      //cleanScreen();
-      var args ={fondo:fondo,ufficio:ufficio};
-      //console.log(fondo);
-      window.provenienza=args;
-      window.open("provenienza.html", "provenienza", "location=0,scrollbars=0,resizable=0,height=450,width=600");
-}
-
-
-function getFrancois(args)
-{
-   
-      var url="php/francois_to_json.php";
-      $.ajax({
-        async: true, 
-        url: url,
-        dataType: 'json',
-        data:args,
-        success: function(response){
-         printFrancois(response,0);          
-          }
-        
-    });
-}
-
 function printNotai(data,offset)
 {
 cleanScreen();
@@ -191,7 +133,7 @@ var notaio = data[offset];
 
 var tmplMarkup = $('#templateNotaio').html();
 var output = _.template(tmplMarkup, { notaio : notaio } );
-$("#Risultati").append(output);
+$("#RisultatiNotai").append(output);
 
 var tmplMarkup = $('#templateNav').html();
 var output = _.template(tmplMarkup, { offset:offset,count : count, } );
@@ -219,7 +161,135 @@ var args = {};
 $("#Loading").hide()
 }
 
+function getVolumiCollegati(args)
+{
+      var url="php/volumi_to_json.php";
+      //cleanScreen();
+      $("#Loading").show();
+      $.ajax({
+        async: true, 
+        url: url,
+        dataType: 'json',
+        data:args,
+        success: function(response){
+         printVolumiCollegati(response,0,args);      
+          }
+        
+    });
+}
 
+function printVolumiCollegati(data,offset,args)
+{
+$("#IntestazioneCollegati").html('');
+$("#RisultatiCollegati").html('');
+var count;
+
+(data.length === undefined) ? count=0 : count =data.length;
+var tmplMarkup = $('#templateCollegatiCounter').html();
+var compiledTmpl = _.template(tmplMarkup, {count : count, item : "Volumi" });
+$("#IntestazioneCollegati").append(compiledTmpl);
+
+if (count > 0) {
+   
+   $("#RisultatiCollegati").show();
+   var tmplMarkup = $('#templateVolume').html();   
+   _.each(data, function(v,i){
+      
+      buttonID="Vol-"+v.volume+"-"+i
+      var output = _.template(tmplMarkup, { volume : v ,buttonID: buttonID} );
+      $("#RisultatiCollegati").append(output);
+      //var button=i
+    $("#"+buttonID).on("click",function(){
+      openProvenienza(v.fondo,v.ufficio)
+      
+      }); 
+
+   })
+   
+}
+else
+{
+   $("#RisultatiCollegati").hide();
+   if (typeof args.cognome !== 'undefined') {
+      var tmplMarkup = $('#templateFrancoisCollButton').html();
+      var output = _.template(tmplMarkup );
+      $("#IntestazioneCollegati").append(output);
+   
+      $("#FrancoisCollButton").on( "click", function(){
+      getFrancois(args)
+      
+      }); 
+   }
+   
+}
+$("#Loading").hide()
+}
+
+
+function getFrancois(args)
+{
+   
+      var url="php/francois_to_json.php";
+      $.ajax({
+        async: true, 
+        url: url,
+        dataType: 'json',
+        data:args,
+        success: function(response){
+         printFrancois(response,0);          
+          }
+        
+    });
+}
+
+function printFrancois(data,offset,args)
+{
+$("#RisultatiCollegati").html('');
+var count;
+
+(data.length === undefined) ? count=0 : count =data.length;
+console.log(count)
+if (count > 0) {
+$("#RisultatiCollegati").show();
+francois = data[offset];
+
+var tmplMarkup = $('#templateFrancois').html();
+_.each(data, function(f){
+var output = _.template(tmplMarkup, { francois : f } );
+$("#RisultatiCollegati").append(output);
+
+})
+}
+else
+{
+   $("#RisultatiCollegati").show();
+   $("#RisultatiCollegati").html('Nessun risultato trovato');
+}
+$("#Loading").hide()
+}
+
+/*
+ * Ricerca e visualizzazione Volumi
+ */
+
+function getVolumi(args)
+{
+      var url="php/volumi_to_json.php";
+      cleanScreen();
+      $("#Loading").show();
+      $.ajax({
+        async: true, 
+        url: url,
+        dataType: 'json',
+        data:args,
+        success: function(response){
+         printVolumi(response,0,args);
+       
+      
+          }
+        
+    });
+}
 
 function printVolumi(data,offset,args)
 {
@@ -282,77 +352,18 @@ else
 $("#Loading").hide()
 }
 
-function printVolumiCollegati(data,offset,args)
+/*
+ * Apri finestra Provenienza
+ */
+
+function openProvenienza(fondo,ufficio)
 {
-$("#IntestazioneCollegati").html('');
-$("#RisultatiCollegati").html('');
-var count;
-
-(data.length === undefined) ? count=0 : count =data.length;
-var tmplMarkup = $('#templateCollegatiCounter').html();
-var compiledTmpl = _.template(tmplMarkup, {count : count, item : "Volumi" });
-$("#IntestazioneCollegati").append(compiledTmpl);
-
-if (count > 0) {
-   
-   $("#RisultatiCollegati").show();
-   var tmplMarkup = $('#templateVolume').html();   
-   _.each(data, function(v,i){
-      
-      buttonID="Vol-"+v.volume+"-"+i
-      var output = _.template(tmplMarkup, { volume : v ,buttonID: buttonID} );
-      $("#RisultatiCollegati").append(output);
-      //var button=i
-    $("#"+buttonID).on("click",function(){
-      openProvenienza(v.fondo,v.ufficio)
-      
-      }); 
-
-   })
-   
-}
-else
-{
-   $("#RisultatiCollegati").hide();
-   if (typeof args.cognome !== 'undefined') {
-      var tmplMarkup = $('#templateFrancoisCollButton').html();
-      var output = _.template(tmplMarkup );
-      $("#IntestazioneCollegati").append(output);
-   
-      $("#FrancoisCollButton").on( "click", function(){
-      getFrancois(args)
-      
-      }); 
-   }
-   
-}
-$("#Loading").hide()
-}
-
-function printFrancois(data,offset,args)
-{
-$("#RisultatiCollegati").html('');
-var count;
-
-(data.length === undefined) ? count=0 : count =data.length;
-console.log(count)
-if (count > 0) {
-$("#RisultatiCollegati").show();
-francois = data[offset];
-
-var tmplMarkup = $('#templateFrancois').html();
-_.each(data, function(f){
-var output = _.template(tmplMarkup, { francois : f } );
-$("#RisultatiCollegati").append(output);
-
-})
-}
-else
-{
-   $("#RisultatiCollegati").show();
-   $("#RisultatiCollegati").html('Nessun risultato trovato');
-}
-$("#Loading").hide()
+      var url="php/provenienza_to_json.php";
+      //cleanScreen();
+      var args ={fondo:fondo,ufficio:ufficio};
+      //console.log(fondo);
+      window.provenienza=args;
+      window.open("provenienza.html", "provenienza", "location=0,scrollbars=0,resizable=0,height=450,width=600");
 }
 
 
