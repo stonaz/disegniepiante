@@ -21,7 +21,93 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 
 }
 
-/* Notai */
+/*
+Forms
+*/
+
+.tabContainer
+{    
+   /* border-top: 1px solid;
+    border-bottom: 1px solid;
+    border-left: 1px solid;
+    border-right: 1px solid; 
+    border-color: #000000;*/
+    /*background-color: #A29AAD;*/
+    /*padding:2px;*/
+    font-size: 1.2em;
+    /*width: 766px;*/
+    width: 772px;
+    min-height: 30px;
+    
+}
+
+.tabNotai
+{
+    float:left;
+    background-color: #C0C0C0;
+    color: black;
+    /*padding: 2px;*/
+    /*border: thin solid;*/
+    cursor: pointer;
+    height: 30px;
+    padding:5px;
+    margin-right:  5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+/*    border-top: thin solid blue;
+    border-left: thin solid blue;
+    border-right: thin solid blue;*/
+}
+
+.tabVolumi
+{
+    float:left;
+    background-color: #A29AAD;
+    color: black;   
+    /*padding: 2px;*/
+    /*border: thin solid;*/
+    cursor: pointer;
+    height: 30px;
+    padding:5px;
+    margin-right:  5px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+/*    border-top: thin solid blue;
+    border-left: thin solid blue;
+    border-right: thin solid blue;*/
+}
+
+#RicercaVolumiContainer{
+    display: none;
+}
+
+.SearchContainerNotaio
+{
+    /*border: thin solid;*/
+    margin-bottom: 5px;
+    /*padding: 10px;*/
+    color: #000000;
+    line-height: 1em;
+    min-height: 170px;
+    background-color: #C0C0C0;
+    width: 772px;
+    clear: both;
+}
+
+.SearchContainerVolumi
+{
+    /*border: thin solid;*/
+    margin-bottom: 5px;
+    /*padding: 10px;*/
+    color: #000000;
+    line-height: 1em;
+    min-height: 170px;
+    background-color: #A29AAD;
+    width: 772px;
+    clear: both;
+}
+
+/* Notai form */
 
 #NotaiFormLeft
 {
@@ -50,17 +136,55 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
     width:140px;
 }
 
-.ricercaIntestazioneNotai
-{    
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid; 
-    border-color: #000000;
-    background-color: #A29AAD;
-    padding:2px;
-    font-size: 1.2em;
-    width: 766px;
+/* Volumi form */
+
+.VolumiFormLeft
+{
+    float: left;
+    width: 470px;
+    margin-top: 4px;
+    padding-left: 4px;
+}
+
+.VolumiFormRight
+{
+    float: left;
+    width: 140px;
+    margin-top: 4px;
+}
+
+.VolumiFormBottom
+{
+    clear: both;
+    text-align: left;
+    width: 768px;
+    background-color: #A29AAD ;
+    padding-left: 4px;
+    
+}
+
+/* Results */
+
+.navNotaio
+{
+    width: 40% ; 
+    padding-bottom:5px;
+    clear: both;
+    margin-left: 2px;
+    background-color: #c0c0c0;
+}
+
+.navVolumi
+{
+    
+    padding-bottom:5px;
+    clear: both;
+    margin-left: 2px;
+    background-color: #c0c0c0;
+    margin-top: 5px;
+    padding-top: 5px;
+    padding-left: 4px;
+    
 }
 
 #RisultatiNotai
@@ -99,24 +223,23 @@ min-height: 80px;
 .notaioIntestazione
 {
     
-    background-color: #A29AAD;
+    background-color: #968F96;
     padding:2px;
     font-size: 1.1em;
     
-}
-
-.navNotaio
-{
-    width: 40% ; 
-    padding-bottom:5px;
-    clear: both;
-    margin-left: 2px;
 }
 
 #Intestazione {
     width: 90%;
     line-height: 1.0em;
     margin-bottom: 10px;
+}
+
+#IntestazioneVolumi {
+    
+    line-height: 1.0em;
+    margin-bottom: 10px;
+    margin-top: 5px;
 }
 
 #Risultati
@@ -132,6 +255,15 @@ color: #000000;
 background-color: #FFFFFF;
 }
 
+#Risultati p
+{
+ margin-bottom: 0em;
+}
+
+#RisultatiVolumi p
+{
+ margin-bottom: 0em;
+}
 
 #RisultatiProvenienza
 {
@@ -146,25 +278,7 @@ color: #000000;
 background-color: #FFFFFF;
 }
 
-#Risultati p
-{
- margin-bottom: 0em;
-}
 
-
-
-.ricercaIntestazioneVolumi
-{
-    
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-left: 1px solid;;
-    border-right: 1px solid;
-    border-color: #000000;
-    background-color: #c0c0c0;
-    padding:2px;
-    font-size: 1.1em;   
-}
 
 
 #IntestazioneCollegati {
@@ -187,6 +301,11 @@ display:none;
 background-color: #c0c0c0;
 }
 
+#RisultatiCollegati p
+{
+ margin-bottom: 0em;   
+}
+
 #Error
 {
 text-align:left;
@@ -198,55 +317,19 @@ display:none;
 color: #FF0000;
 }
 
-#RisultatiCollegati p
-{
- margin-bottom: 0em;   
-}
 
-.SearchIntestazione
-{
-    
-    /*margin: 10px;*/
-    /*padding: 10px;*/
-    color: #000000;
-    line-height: 1em;
-    min-height: 150px;
-    
-    
-    
-}
-
-.SearchContainer
-{
-    /*border: thin solid;*/
-    margin-bottom: 5px;
-    /*padding: 10px;*/
-    color: #000000;
-    line-height: 1em;
-    min-height: 170px;
-    background-color: #C0C0C0;   
-}
-
-.SearchForm
-{
-    /*border: thin solid;*/
-    
-    color: #000000;
-    line-height: 1em;
-    padding: 3px;
-    
-    
-}
 
 .schedaVolumi
 {
     clear: both;
     background-color:#c0c0c0;
     min-height: 270px;
-    border-top: solid 5px;
+    border-top: solid 2px;
     border-top-color: #0000ff;
     margin-bottom: 2px;   
 }
+
+
 
 .schedaFrancois
 {
@@ -307,13 +390,18 @@ color: #FF0000;
     padding:5px;
     color:#000000;
     clear: both;
+    width: 93%;
 }
 
-.nav
+.inventario
 {
-    width: 40% ; 
-    padding-bottom:5px;
+    /*background-color: #CCCCCC;*/
+    /*border:thin solid;*/
+    margin:5px;
+    /*padding:5px;*/
+    color:#000000;
     clear: both;
+    width: 93%;
 }
 
 .enabled {

@@ -80,7 +80,9 @@
 <div class="notaVolumi" >
 <p ><strong>Note: </strong><%= volume.note %></p>
 </div>
-<p > <button id="<%= buttonID %>">Inventario</button></p>
+<div class="inventario">
+<p > <button id="<%= buttonID %>">Vedi Inventario</button></p>
+</div>
 </div>
 </script>
 
@@ -121,6 +123,12 @@
 <%=  offset+1 %> di <%= count %>
 </script>
 
+<script id="templateNavVolumi" type="text/template">
+<button id="VolPrev">Prev</button>
+<button id="VolSucc">Succ</button>
+<%=  offset+1 %> di <%= count %>
+</script>
+
 <script id="templateVolumiCollButton" type="text/template">
 <button id="VolumiCollButton">Cerca volumi collegati</button>
 </script>
@@ -155,50 +163,102 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
-      <div class="SearchContainer" style="width: 772px">
-       <div class="ricercaIntestazioneNotai"><strong>Ricerca notaio </strong> </div>
+      
+      
+      
+      <div class="tabContainer" >
+	<div id="tabRicercaNotaio" class="tabNotai"><strong>Ricerca notaio </strong></div>
+	<div id="tabRicercaVolumi" class="tabVolumi"><strong>Ricerca Volumi </strong></div>
+      </div>
+      
+      
+<!--Form per i notai-->  
+      <div id="RicercaNotaioContainer" class="SearchContainerNotaio" >
+       
           <div id="NotaiFormLeft"  >
 	    
 	    <div style="font-size: 1.1em;margin-top: 5px;padding-left: 2px;">
 	    
             <input id="searchNotaio" type="text"  > <br><br>
             <button  id="searchNotaiButton">Cerca </button>
-          </div>
-	     <div id =Intestazione >
-			</div>
+	    <button   onclick=cleanFormNotai()>Cancella </button>
+	    </div>
+	     <div id =IntestazioneNotai ></div>
 	  </div>
-	  <div id="NotaiFormRight"   >
+	  <div id="NotaiFormRight">
 	    
 	    <div id="Loading" >
 <img src='img/ajax-loader.gif'><br>
 Caricamento dati...
-  </div>
-		      
-		     
-		      <div id="RisultatiNotai">             
-              
-            </div>
+  </div>     		     
+	<div id="RisultatiNotai"></div>
 		 <div id="Nav" class="navNotaio" ></div>  
 	   </div>
 		
+     
+    <div id="Error"></div>             
+	         <div id =IntestazioneCollegati></div>
+		 <div id="RisultatiCollegati">            
+              
+            </div>
+	 </div>
+<!--Form per i volumi-->     
+    <div id="RicercaVolumiContainer" class="SearchContainerVolumi" >
+          
+	 
+	   
+		<div class="VolumiFormLeft">
+		    
+		    Fondo: <br>
+		    <select id ="elencoFondi">
+		      <option> </option>
+		    </select><br>
+		    Ufficio: <br>
+		    <select id ="elencoUffici"></select>
+		    
+		    <br>
+		    Testo<br>
+		    <input id="textVolumi" class="formfield" type="text" style="width: 200px" >
+		    
+		    
+		      
+		</div>
+		<div class="VolumiFormRight">
+		  Data iniziale
+		    <input id="dataIniziale" class="formfield" type="text"  >
+		    <br>    
+		    Data finale
+		   <input id="dataFinale" class="formfield" type="text"  >
+		    
+		</div>
+		
+		
+	      
+	    
+	   
+	  <div class="VolumiFormBottom">
+	    
+	  <div style="width:600px">
+	    
+	    <br><button  id="searchVolumiButton" >Cerca</button>
+		      <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
+		      <div id =IntestazioneVolumi style=float:right;></div> 
+		</div>      
+		  
       </div>
-    <div id="Error"></div>
+      <div id="Error"></div>
+      <div id="LoadingVolumi" ><img src='img/ajax-loader.gif'><br>Caricamento dati...  </div>	      
+      
+      <div id="NavVolumi" class="navVolumi" >	
+      </div>
+         
+      <div id="RisultatiVolumi"></div>
+        
+      </div>
       
 		
 		
-              
-	         <div id =IntestazioneCollegati>
-			</div>
-	     
-		<div id="RisultatiCollegati">             
-              
-            </div>
-		
-              
-              
-              
     </div>          
-
   </div>
 </div>
 		
@@ -227,7 +287,7 @@ pulsante accanto.
         <script src="js/main.js"></script>
         
 	<script type="text/javascript">
-         var availableTags;
+         
 $( document ).ready(function() {
 
 var AliasNotai = getAlias();
@@ -248,12 +308,55 @@ select: function( event, ui ) {
 $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
-
+$("#tabRicercaVolumi").bind( "click", function(){
+  //alert('test')
+   $("#RicercaNotaioContainer").hide();
+   $("#RicercaVolumiContainer").show();
+   });
+$("#tabRicercaNotaio").bind( "click", function(){
+  //alert('test')
+   $("#RicercaNotaioContainer").show();
+   $("#RicercaVolumiContainer").hide();
+   
+   });
 
  getNotai();
+ getVolumi();
+ $.datepicker.setDefaults(
+	  $.extend(
+		{'dateFormat':'dd-mm-yy'},
+		$.datepicker.regional['it']
+	    )
+	);
+//$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy" });
+$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy",changeYear: true ,defaultDate:"01-01-1300", yearRange: "1300:1870"});
+$( "#dataFinale" ).datepicker({ dateFormat: "dd-mm-yy", changeYear: true , defaultDate:"01-01-1300", yearRange: "1300:1870"});
 
-                          
+$("#searchVolumiButton").bind( "click", function(){
+  $("#searchText").val('')
+  var args={};
+  var check_date=true
+  args.text=$("#textVolumi").val();
+  args.ufficio=$("#elencoUffici").val();
+  args.fondo=$("#elencoFondi").val();
+  args.dataIniziale=$("#dataIniziale").val();
+  args.dataFinale=$("#dataFinale").val();
+ // console.log($("#dataIniziale").val() + $("#dataFinale").val() )
+  if ($("#dataIniziale").val() !== "" && $("#dataFinale").val() !== "") {
+    check_date=confronta_data(args.dataIniziale,args.dataFinale);
+  
+  }
+  
+    if (check_date) {
+      //console.log(args);
+      getVolumi(args);	
+    }
+  
+   });
 
+ 
+ createSelectFondi(function(){
+ });
 });
 	 
 	</script>

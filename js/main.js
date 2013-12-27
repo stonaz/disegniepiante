@@ -1,7 +1,7 @@
 var notarilia = {};
 
 function cleanScreen(){
-   $("#Intestazione").html('');
+   $("#IntestazioneNotai").html('');
    $("#Risultati").html('');
    $("#IntestazioneCollegati").html('');
    $("#RisultatiCollegati").html('');
@@ -9,6 +9,16 @@ function cleanScreen(){
    $("#Nav").html('');
    $("#Error").hide();
    $("#RisultatiNotai").html('');
+   
+}
+
+function cleanVolumiScreen(){
+   $("#IntestazioneVolumi").html('');
+   $("#RisultatiVolumi").html('');
+   $("#CounterVolumi").html('');
+   $("#NavVolumi").html('');
+   $("#ErrorVolumi").hide();
+   
    
 }
 
@@ -20,7 +30,17 @@ function cancellaSelezioni()
    $("#textVolumi").val('');
    $("#elencoFondi").val('');
    $("#elencoUffici").html('');
+   $("#IntestazioneVolumi").html('');
+   $("#RisultatiVolumi").html('');
+   $("#CounterVolumi").html('');
+   $("#NavVolumi").html('');
+   $("#ErrorVolumi").hide();
    
+}
+
+function cleanFormNotai(){
+   $("#searchNotaio").val('')  ;
+   getNotai('fakenotaiononesiste')
 }
 
 function confronta_data(data1, data2){
@@ -116,9 +136,12 @@ function getAlias()
       return alias;
 }
 
-function getNotai()
+function getNotai(fake)
 {
    var searchText=$("#searchNotaio").val();
+   if (fake !== undefined) {
+      searchText=fake;
+   }
    //console.log(searchText);
    cleanScreen();
    $("#Loading").show();
@@ -147,7 +170,7 @@ var count;
 (data.length === undefined) ? count=0 : count =data.length;
 var tmplMarkup = $('#templateCounter').html();
 var compiledTmpl = _.template(tmplMarkup, { titolo: "Notai",count : count, item : "Occorrenze" });
-$("#Intestazione").append(compiledTmpl);
+$("#IntestazioneNotai").append(compiledTmpl);
 if (count > 0) {
 
 var notaio = data[offset];   
@@ -269,7 +292,7 @@ $("#RisultatiCollegati").html('');
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
-console.log(count)
+//console.log(count)
 if (count > 0) {
 $("#RisultatiCollegati").show();
 francois = data[offset];
@@ -296,8 +319,8 @@ $("#Loading").hide()
 function getVolumi(args)
 {
       var url="php/volumi_to_json.php";
-      cleanScreen();
-      $("#Loading").show();
+      cleanVolumiScreen();
+      $("#LoadingVolumi").show();
       $.ajax({
         async: true, 
         url: url,
@@ -314,44 +337,43 @@ function getVolumi(args)
 
 function printVolumi(data,offset,args)
 {
-cleanScreen();
-$("#RisultatiCollegati").hide();
+cleanVolumiScreen();
 var count;
 
 (data.length === undefined) ? count=0 : count =data.length;
-var tmplMarkup = $('#templateCounter').html();
-var compiledTmpl = _.template(tmplMarkup, {titolo: "Volumi", count : count, item : "Occorrenze"});
-$("#Intestazione").append(compiledTmpl);
+var tmplMarkup = $('#templateCollegatiCounter').html();
+var compiledTmpl = _.template(tmplMarkup, {count : count, item : "Volumi" });
+$("#IntestazioneVolumi").append(compiledTmpl);
 
 if (count > 0) {
-   $("#Risultati").css("width","100%")
+   $("#RisultatiVolumi").css("width","100%")
    volume = data[offset];   
    
    var tmplMarkup = $('#templateVolume').html();
    buttonID="Vol-"+volume.volume+"-"+offset;
    var output = _.template(tmplMarkup, { volume : volume ,buttonID: buttonID } );
-   $("#Risultati").append(output);
+   $("#RisultatiVolumi").append(output);
    $("#"+buttonID).on("click",function(){
       openProvenienza(volume.fondo,volume.ufficio)
       
       }); 
-   var tmplMarkup = $('#templateNav').html();
+   var tmplMarkup = $('#templateNavVolumi').html();
    var output = _.template(tmplMarkup, { offset:offset,count : count, } );
-   $("#Nav").append(output);
+   $("#NavVolumi").append(output);
    
    if (offset > 0) {
-      $("#Prev").on( "click", function(){
+      $("#VolPrev").on( "click", function(){
       printVolumi(data,offset-1);
       
       });
-      $("#Prev").addClass("enabled")
+      $("#VolPrev").addClass("enabled")
    }
    
    if (offset+1 < count) {
-      $("#Succ").on( "click", function(){
+      $("#VolSucc").on( "click", function(){
       printVolumi(data,offset+1);
       });
-      $("#Succ").addClass("enabled")
+      $("#VolSucc").addClass("enabled")
    }
 
 }
@@ -370,7 +392,7 @@ else
    }
    
 }
-$("#Loading").hide()
+$("#LoadingVolumi").hide()
 }
 
 /*
