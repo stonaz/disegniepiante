@@ -8,7 +8,7 @@
 <link href="../common/style_icrcpal2.css" rel="stylesheet" type="text/css" />
 
 <link href="css/main.css" rel="stylesheet" type="text/css" />
-<link href="css/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
 </head>
 
 <body>
@@ -21,19 +21,20 @@
 </script>
 
 <script id="templateNotaio" type="text/template">
-<div class='schedaNotaio'>
+ <div class='schedaNotaio'>
+  <div class="group">
+
+<p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
+<p ><strong>Cognome: </strong><%= notaio.cognome %></p>
+<p><strong>Nome: </strong><%= notaio.nome %></p>
+  </div>
   <div class="group">
 <p class= 'notaioIntestazione'><strong>Varianti</strong></p>
 <p><strong>Fonte: </strong><%= notaio.fonte %></p>
 <p><strong>Alias: </strong><%= notaio.alias %></p>
   </div>
-  <div class="group">
-  
-<p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
-<p><strong>Nome: </strong><%= notaio.nome %></p>
-<p ><strong>Cognome: </strong><%= notaio.cognome %></p>
-  </div>
-</div>
+    </div>
+
 </script>
 
 <script id="templateVolume" type="text/template">
@@ -43,7 +44,7 @@
 <p ><strong>Cognome: </strong><%= volume.cognome %></p>
 <p ><strong>Funzione: </strong><%= volume.funzione %></p>
 <hr>
- <p style="float:right;"> <button id="<%= buttonID %>">Inventario</button></p>
+ 
 <p ><strong>Fondo: </strong><%= volume.fondo %></p>
 <p ><strong>Ufficio: </strong><%= volume.ufficio %></p>
 <p ><strong>Serie: </strong><%= volume.serie %></p>
@@ -60,6 +61,7 @@
 <p ><strong>Lacune: </strong><%= volume.lacune %></p>
 <p ><strong>Documenti: </strong><%= volume.documenti %></p>
 </div>
+
 <div class="group">
 
 <p ><strong>Dorso: </strong><%= volume.dorso %></p>
@@ -77,6 +79,9 @@
 
 <div class="notaVolumi" >
 <p ><strong>Note: </strong><%= volume.note %></p>
+</div>
+<div class="inventario">
+<p > <button id="<%= buttonID %>">Vedi Inventario</button></p>
 </div>
 </div>
 </script>
@@ -105,7 +110,6 @@
 </script>
 
 <script id="templateCounter" type="text/template">
-<div class="titolo"><%= titolo %></div>
 <div class="count"><strong>Occorrenze trovate: </strong><%= count %></div>
 </script>
 
@@ -116,6 +120,12 @@
 <script id="templateNav" type="text/template">
 <button id="Prev">Prev</button>
 <button id="Succ">Succ</button>
+<%=  offset+1 %> di <%= count %>
+</script>
+
+<script id="templateNavVolumi" type="text/template">
+<button id="VolPrev">Prev</button>
+<button id="VolSucc">Succ</button>
 <%=  offset+1 %> di <%= count %>
 </script>
 
@@ -153,20 +163,51 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
-      <div class="SearchContainer" style="width: 772px">
-          <div id="NotaiForm" class="SearchForm" style="float: left;background-color: #E1D8ED; width: 140px;height: 140px;">
-	    <div class="ricercaIntestazioneNotai"><strong>Ricerca notaio </strong> </div>
-	    <div style="font-size: 1.1em;margin-top: 2px;padding-left: 2px;">
-	    Notaio<br>
-            <input id="searchText" class="formfield" type="text"  > <br><br><br><br><br>
+      
+      
+      
+      <div class="tabContainer" >
+	<div id="tabRicercaNotaio" class="tabNotai"><strong>Ricerca notaio </strong></div>
+	<div id="tabRicercaVolumi" class="tabVolumi"><strong>Ricerca Volumi </strong></div>
+      </div>
+      
+      
+<!--Form per i notai-->  
+      <div id="RicercaNotaioContainer" class="SearchContainerNotaio" >
+       
+          <div id="NotaiFormLeft"  >
+	    
+	    <div style="font-size: 1.1em;margin-top: 5px;padding-left: 2px;">
+	    
+            <input id="searchNotaio" type="text"  > <br><br>
             <button  id="searchNotaiButton">Cerca </button>
-          </div>
+	    <button   onclick=cleanFormNotai()>Cancella </button>
+	    </div>
+	     <div id =IntestazioneNotai ></div>
 	  </div>
-	  <div id="VolumiForm" class="SearchForm"  style="float: left;background-color: #C0C0C0;height: 140px;">
-	    <div style="clear: both;" class="ricercaIntestazioneVolumi">
-	    <strong>Ricerca nei volumi</strong>
-	    <div >
-		<div style="float: left;  width: 470px;margin-top: 4px;">
+	  <div id="NotaiFormRight">
+	    
+	    <div id="Loading" >
+<img src='img/ajax-loader.gif'><br>
+Caricamento dati...
+  </div>     		     
+	<div id="RisultatiNotai"></div>
+		 <div id="Nav" class="navNotaio" ></div>  
+	   </div>
+		
+     
+    <div id="Error"></div>             
+	         <div id =IntestazioneCollegati></div>
+		 <div id="RisultatiCollegati">            
+              
+            </div>
+	 </div>
+<!--Form per i volumi-->     
+    <div id="RicercaVolumiContainer" class="SearchContainerVolumi" >
+          
+	 
+	   
+		<div class="VolumiFormLeft">
 		    
 		    Fondo: <br>
 		    <select id ="elencoFondi">
@@ -182,49 +223,42 @@
 		    
 		      
 		</div>
-		<div style="float: left; width: 140px;margin-top: 4px;">
+		<div class="VolumiFormRight">
 		  Data iniziale
 		    <input id="dataIniziale" class="formfield" type="text"  >
 		    <br>    
 		    Data finale
 		   <input id="dataFinale" class="formfield" type="text"  >
-		    <br><br><button  id="searchVolumiButton" >Cerca</button>
+		    
 		</div>
 		
 		
-	      </div> 
-	    </div>
-	   </div>
-	  <div style="clear: both;text-align: center;width: 768px;background-color: grey ">
+	      
+	    
+	   
+	  <div class="VolumiFormBottom">
+	    
+	  <div style="width:600px">
+	    
+	    <br><button  id="searchVolumiButton" >Cerca</button>
 		      <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
-      </div>	
+		      <div id =IntestazioneVolumi style=float:right;></div> 
+		</div>      
+		  
       </div>
-    <div id="Error"></div>
-  <div id="Loading" >
-<img src='img/ajax-loader.gif'><br>
-Caricamento dati...
-  </div>
-		      
-		      <div id =Intestazione style="clear: both";>
-			</div>
-		 <div id="Nav" class="nav" ></div>      
-		<div id="Risultati">             
-              
-            </div>
+      <div id="Error"></div>
+      <div id="LoadingVolumi" ><img src='img/ajax-loader.gif'><br>Caricamento dati...  </div>	      
+      
+      <div id="NavVolumi" class="navVolumi" >	
+      </div>
+         
+      <div id="RisultatiVolumi"></div>
+        
+      </div>
+      
 		
-              
-	         <div id =IntestazioneCollegati>
-			</div>
-	     
-		<div id="RisultatiCollegati">             
-              
-            </div>
 		
-              
-              
-              
     </div>          
-
   </div>
 </div>
 		
@@ -251,9 +285,44 @@ pulsante accanto.
 	<script src="js/vendor/jquery.ui.datepicker-it.js"></script>
 	
         <script src="js/main.js"></script>
+        
 	<script type="text/javascript">
+         
 $( document ).ready(function() {
-$.datepicker.setDefaults(
+
+var AliasNotai = getAlias();
+$( "#searchNotaio" ).autocomplete({
+source: function( request, response ) {
+var matcher = new RegExp( "^" + $.ui.autocomplete.escapeRegex( request.term ), "i" );
+response( $.grep( AliasNotai, function( item ){
+return matcher.test( item );
+}) );
+}
+,
+select: function( event, ui ) {
+  $(this).val(ui.item.value);
+  getNotai();
+}
+});
+//$( "#searchNotaio" ).on( "autocompleteselect", function( event, ui ) {getNotai()} );
+$("#searchNotaiButton").bind( "click", function(){
+   getNotai();
+   });
+$("#tabRicercaVolumi").bind( "click", function(){
+  //alert('test')
+   $("#RicercaNotaioContainer").hide();
+   $("#RicercaVolumiContainer").show();
+   });
+$("#tabRicercaNotaio").bind( "click", function(){
+  //alert('test')
+   $("#RicercaNotaioContainer").show();
+   $("#RicercaVolumiContainer").hide();
+   
+   });
+
+ getNotai();
+ getVolumi();
+ $.datepicker.setDefaults(
 	  $.extend(
 		{'dateFormat':'dd-mm-yy'},
 		$.datepicker.regional['it']
@@ -262,9 +331,7 @@ $.datepicker.setDefaults(
 //$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy" });
 $( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy",changeYear: true ,defaultDate:"01-01-1300", yearRange: "1300:1870"});
 $( "#dataFinale" ).datepicker({ dateFormat: "dd-mm-yy", changeYear: true , defaultDate:"01-01-1300", yearRange: "1300:1870"});
-$("#searchNotaiButton").bind( "click", function(){
-   getNotai();
-   });
+
 $("#searchVolumiButton").bind( "click", function(){
   $("#searchText").val('')
   var args={};
@@ -287,11 +354,9 @@ $("#searchVolumiButton").bind( "click", function(){
   
    });
 
- getNotai();
+ 
  createSelectFondi(function(){
  });
-                          
-
 });
 	 
 	</script>
