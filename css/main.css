@@ -171,9 +171,9 @@ Forms
 {
     clear: both;
     text-align: left;
-    width: 768px;
     background-color: #639257 ;
-    padding-left: 4px;
+    padding: 6px;
+    margin-top: 5px;
     
 }
 
@@ -236,10 +236,9 @@ color: #000000;
  margin-bottom: 0em;
 }
 
-#Risultati
+/*#Risultati
 {
-/*border: thin solid;
-border-color: #0000FF;*/
+
 text-align:left;
 width: 772px ;
 clear: both;
@@ -247,12 +246,12 @@ line-height: 1.2em;
 margin-bottom: 10px;
 color: #000000;
 background-color: #FFFFFF;
-}
+}*/
 
-#Risultati p
+/*#Risultati p
 {
  margin-bottom: 0em;
-}
+}*/
 
 #RisultatiVolumi p
 {
@@ -442,10 +441,10 @@ min-height: 80px;
   cursor:pointer;
 }
 
-.formfield
+/*.formfield
 {
     width: 100px;
-}
+}*/
 
 
 

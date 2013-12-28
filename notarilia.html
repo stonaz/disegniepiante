@@ -90,7 +90,7 @@
 <script id="templateFrancois" type="text/template">
 
  <div class="schedaFrancois">
-
+<div>
 <div class="group" >
 <p ><strong>Fondo: </strong><%= francois.fondo %></p>
 <p ><strong>Ufficio: </strong><%= francois.ufficio %></p>
@@ -99,15 +99,17 @@
 <p ><strong>Nome: </strong><%= francois.nome %></p>
 <p ><strong>Cognome: </strong><%= francois.cognome %></p>
 </div>
+</div>
+<div style="clear: both;">
 <div class="group"  >
 <p ><strong>Inizio: </strong><%= francois["data inizio"] %></p>
 <p ><strong>Fine: </strong><%= francois["data fine"] %></p>
-
 </div>
-<div class="group" 	>
+<div class="group">
 <p ><strong>Successione: </strong><%= francois.successione %></p>
 <p ><strong>Funzione: </strong><%= francois.funzione %></p>
 <p ><strong>Periodo: </strong><%= francois.periodo %></p>
+</div>
 </div>
   </div>
 </script>
@@ -223,17 +225,17 @@ Caricamento dati...
 		    
 		    <br>
 		    Note<br>
-		    <input id="textVolumi" class="formfield" type="text" style="width: 200px" >
+		    <input id="textVolumi"  >
 		    
 		    
 		      
 		</div>
 		<div class="VolumiFormRight">
 		  Data iniziale
-		    <input id="dataIniziale" class="formfield" type="text"  >
+		    <input id="dataIniziale" type="text"  >
 		    <br>    
 		    Data finale
-		   <input id="dataFinale" class="formfield" type="text"  >
+		   <input id="dataFinale" type="text"  >
 		    
 		</div>
 		
@@ -243,12 +245,12 @@ Caricamento dati...
 	   
 	  <div class="VolumiFormBottom">
 	    
-	  <div style="width:600px">
+	  
 	    
-	    <br><button  id="searchVolumiButton" >Cerca</button>
-		      <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
+	   <button  id="searchVolumiButton" >Cerca</button>
+	   <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
 		       
-		</div>      
+		   
 		  
       </div>
 	  <div id =IntestazioneVolumi ></div>
