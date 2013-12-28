@@ -17,6 +17,7 @@
 </script>
 
 <script id="templateSelectUfficio" type="text/template">
+<option> </option>
 <% _.each(uffici, function(ufficio) { %> <option value="<%= ufficio.ufficio %>"> <%= ufficio.ufficio %></option> <% }); %>
 </script>
 
@@ -87,7 +88,9 @@
 </script>
 
 <script id="templateFrancois" type="text/template">
-  <div class="schedaFrancois">
+
+ <div class="schedaFrancois">
+
 <div class="group" >
 <p ><strong>Fondo: </strong><%= francois.fondo %></p>
 <p ><strong>Ufficio: </strong><%= francois.ufficio %></p>
@@ -214,10 +217,12 @@ Caricamento dati...
 		      <option> </option>
 		    </select><br>
 		    Ufficio: <br>
-		    <select id ="elencoUffici"></select>
+		    <select id ="elencoUffici">
+		      <option> </option>
+		    </select>
 		    
 		    <br>
-		    Testo<br>
+		    Note<br>
 		    <input id="textVolumi" class="formfield" type="text" style="width: 200px" >
 		    
 		    
@@ -242,11 +247,12 @@ Caricamento dati...
 	    
 	    <br><button  id="searchVolumiButton" >Cerca</button>
 		      <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
-		      <div id =IntestazioneVolumi style=float:right;></div> 
+		       
 		</div>      
 		  
       </div>
-      <div id="Error"></div>
+	  <div id =IntestazioneVolumi ></div>
+      <div id="ErrorVolumi"></div>
       <div id="LoadingVolumi" ><img src='img/ajax-loader.gif'><br>Caricamento dati...  </div>	      
       
       <div id="NavVolumi" class="navVolumi" >	
@@ -265,14 +271,23 @@ Caricamento dati...
 		
     <div id="secondaryContent">
     <div class="spiegazione">
-      Nella base di dati sono registrati i volumi di tutti i
-fondi/serie notarili.<br>
-Per il fondo dei Notai romani o "30 notai", sono al momento presenti
-solo i volumi degli uffici 1-2: gli altri sono in corso di immissione
-o di schedatura.<br>
-Per  questi ultimi quindi le uniche indicazioni
-disponibili sono ancora quelle del Francois, visualizzabili con il
-pulsante accanto.
+     Nella base di dati sono registrati i volumi
+
+di tutti i fondi/serie notarili descritti negli 
+
+inventari disponibili, ma per il fondo dei Notai
+
+romani o "30 notai", sono al momento presenti 
+
+solo i volumi degli uffici 1-2: gli altri sono in 
+
+corso di immissione o di schedatura.<br>
+
+Per questi ultimi quindi le uniche indicazioni 
+
+disponibili sono ancora quelle del Francois, 
+
+visualizzabili con il pulsante accanto.
    </div>
        
     </div>
@@ -312,6 +327,7 @@ $("#tabRicercaVolumi").bind( "click", function(){
   //alert('test')
    $("#RicercaNotaioContainer").hide();
    $("#RicercaVolumiContainer").show();
+   //getVolumi();
    });
 $("#tabRicercaNotaio").bind( "click", function(){
   //alert('test')
@@ -321,7 +337,7 @@ $("#tabRicercaNotaio").bind( "click", function(){
    });
 
  getNotai();
- getVolumi();
+ 
  $.datepicker.setDefaults(
 	  $.extend(
 		{'dateFormat':'dd-mm-yy'},

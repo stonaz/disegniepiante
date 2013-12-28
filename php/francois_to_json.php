@@ -7,7 +7,7 @@ $sql='SELECT *  FROM "francois" ';
 if ($_GET['nome']){
     $nome= ($_GET['nome']);
     $cognome= ($_GET['cognome']);
-    $sql .= " where nome = '$nome' and cognome = '$cognome' ";
+    $sql .= " where nome = '$nome' and cognome = '$cognome' order by \"data inizio\"";
     
 }
 //echo $sql;

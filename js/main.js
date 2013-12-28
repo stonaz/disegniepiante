@@ -48,9 +48,9 @@ function confronta_data(data1, data2){
         data1str = data1.substr(6)+data1.substr(3, 2)+data1.substr(0, 2);
         data2str = data2.substr(6)+data2.substr(3, 2)+data2.substr(0, 2);
         if (data2str-data1str<0) {
-         cleanScreen();
-         $("#Error").show();
-            $("#Error").html('La data iniziale deve essere precedente quella finale');
+         cleanVolumiScreen();
+         $("#ErrorVolumi").show();
+            $("#ErrorVolumi").html('La data iniziale deve precedere quella finale');
             //console.log("La data iniziale deve essere precedente quella finale");
             return false
         }else{
@@ -59,6 +59,8 @@ function confronta_data(data1, data2){
         }
     
 }
+
+//Creazione liste fondi e uffici
 
 function createSelectFondi() {
                 var tmplMarkup = $('#templateSelectFondi').html();
@@ -102,10 +104,7 @@ function createSelectUffici(fondo) {
                         $('#elencoUffici').html('');
                            var compiledTmpl = _.template(tmplMarkup,{uffici:response});
                            
-                           $('#elencoUffici').append(compiledTmpl);
-                           
-                           
-      
+                           $('#elencoUffici').append(compiledTmpl);      
                         }
         
                 });
@@ -295,6 +294,7 @@ var count;
 //console.log(count)
 if (count > 0) {
 $("#RisultatiCollegati").show();
+$("#IntestazioneCollegati").html("<strong><br>Occorrenze trovate nel Francois: "+count +"</strong> ");
 francois = data[offset];
 
 var tmplMarkup = $('#templateFrancois').html();
@@ -377,21 +377,21 @@ if (count > 0) {
    }
 
 }
-else
-{
-   //Abilita la ricerca nel francois solo se si viene dalla ricerca notaio
-   if (typeof args.cognome !== 'undefined') {
-      var tmplMarkup = $('#templateFrancoisCollButton').html();
-      var output = _.template(tmplMarkup );
-      $("#Intestazione").append(output);
-   
-      $("#FrancoisCollButton").on( "click", function(){
-      getFrancois(args)
-      
-      }); 
-   }
-   
-}
+//else
+//{
+//   //Abilita la ricerca nel francois solo se si viene dalla ricerca notaio
+//   if (typeof args.cognome !== 'undefined') {
+//      var tmplMarkup = $('#templateFrancoisCollButton').html();
+//      var output = _.template(tmplMarkup );
+//      $("#Intestazione").append(output);
+//   
+//      $("#FrancoisCollButton").on( "click", function(){
+//      getFrancois(args)
+//      
+//      }); 
+//   }
+//   
+//}
 $("#LoadingVolumi").hide()
 }
 

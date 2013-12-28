@@ -54,6 +54,7 @@ Forms
     margin-right:  5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    
 /*    border-top: thin solid blue;
     border-left: thin solid blue;
     border-right: thin solid blue;*/
@@ -62,7 +63,7 @@ Forms
 .tabVolumi
 {
     float:left;
-    background-color: #A29AAD;
+    background-color: #639257;
     color: black;   
     /*padding: 2px;*/
     /*border: thin solid;*/
@@ -72,10 +73,20 @@ Forms
     margin-right:  5px;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    
+    
 /*    border-top: thin solid blue;
     border-left: thin solid blue;
     border-right: thin solid blue;*/
 }
+
+/*.tabVolumi:hover {
+ color: #0000FF;
+}
+
+.tabNotai:hover {
+ color: #0000FF;
+}*/
 
 #RicercaVolumiContainer{
     display: none;
@@ -87,11 +98,12 @@ Forms
     margin-bottom: 5px;
     /*padding: 10px;*/
     color: #000000;
-    line-height: 1em;
+    /*line-height: 1em;*/
     min-height: 170px;
     background-color: #C0C0C0;
     width: 772px;
     clear: both;
+    font-size: 14px;
 }
 
 .SearchContainerVolumi
@@ -99,12 +111,14 @@ Forms
     /*border: thin solid;*/
     margin-bottom: 5px;
     /*padding: 10px;*/
+    
     color: #000000;
-    line-height: 1em;
+    /*line-height: 1em;*/
     min-height: 170px;
-    background-color: #A29AAD;
+    background-color: #639257;
     width: 772px;
     clear: both;
+    font-size: 14px;
 }
 
 /* Notai form */
@@ -158,12 +172,20 @@ Forms
     clear: both;
     text-align: left;
     width: 768px;
-    background-color: #A29AAD ;
+    background-color: #639257 ;
     padding-left: 4px;
     
 }
 
 /* Results */
+
+#Loading{
+    display: none;
+}
+
+#LoadingVolumi{
+    display: none;
+}
 
 .navNotaio
 {
@@ -172,6 +194,7 @@ Forms
     clear: both;
     margin-left: 2px;
     background-color: #c0c0c0;
+    padding-left: 4px;
 }
 
 .navVolumi
@@ -179,12 +202,20 @@ Forms
     
     padding-bottom:5px;
     clear: both;
-    margin-left: 2px;
+    /*margin-left: 2px;*/
     background-color: #c0c0c0;
     margin-top: 5px;
     padding-top: 5px;
     padding-left: 4px;
     
+}
+
+.count
+{
+    float: left;
+    margin-top: 6px;
+    margin-left: 6px;
+    font-size: 11px;
 }
 
 #RisultatiNotai
@@ -203,43 +234,6 @@ color: #000000;
 #RisultatiNotai p
 {
  margin-bottom: 0em;
-}
-
-.schedaNotaio
-{
-text-align:left;
-/*width: 80% ;*/
-/*border: 1px solid;
-border-color: #0000FF;*/
-clear: both;
-line-height: 1.2em;
-margin-bottom: 0em;
-color:#000000;
-/*padding: 5px;*/
-min-height: 80px;
-
-}
-
-.notaioIntestazione
-{
-    
-    background-color: #968F96;
-    padding:2px;
-    font-size: 1.1em;
-    
-}
-
-#Intestazione {
-    width: 90%;
-    line-height: 1.0em;
-    margin-bottom: 10px;
-}
-
-#IntestazioneVolumi {
-    
-    line-height: 1.0em;
-    margin-bottom: 10px;
-    margin-top: 5px;
 }
 
 #Risultati
@@ -278,19 +272,9 @@ color: #000000;
 background-color: #FFFFFF;
 }
 
-
-
-
-#IntestazioneCollegati {
-    width: 90%;
-    line-height: 1.0em;
-    margin-bottom: 3px;
-    
-}
-
 #RisultatiCollegati
 {
-overflow:hidden;
+
 text-align:left;
 width:  772px ;
 clear: both;
@@ -306,27 +290,81 @@ background-color: #c0c0c0;
  margin-bottom: 0em;   
 }
 
-#Error
-{
-text-align:left;
 
-clear: both;
-line-height: 1.2em;
-overflow:auto;
-display:none;
-color: #FF0000;
+
+.notaioIntestazione
+{
+    
+    background-color: #968F96;
+    padding:2px;
+    font-size: 1.1em;
+    
+}
+
+#IntestazioneNotai {
+    width: 90%;
+    line-height: 1.0em;
+    margin-bottom: 10px;
+}
+
+#IntestazioneVolumi {
+    
+    line-height: 1.0em;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    line-height: 1.0em;
+    padding:5px;
+}
+
+#IntestazioneCollegati {
+    width: 90%;
+    line-height: 1.0em;
+    margin-bottom: 3px;
+    padding:5px;
+    
 }
 
 
 
+#ErrorVolumi
+{
+text-align:left;
+font-weight: bold;
+clear: both;
+line-height: 1.2em;
+overflow:auto;
+display:none;
+color: #B40404;
+padding:5px;
+}
+
+/*Schede*/
+
+.schedaNotaio
+{
+text-align:left;
+/*width: 80% ;*/
+/*border: 1px solid;
+border-color: #0000FF;*/
+clear: both;
+line-height: 1.2em;
+margin-bottom: 0em;
+color:#000000;
+/*padding: 5px;*/
+min-height: 80px;
+
+}
+
 .schedaVolumi
 {
     clear: both;
-    background-color:#c0c0c0;
+    background-color:#FFFFFF;
     min-height: 270px;
     border-top: solid 2px;
     border-top-color: #0000ff;
-    margin-bottom: 2px;   
+    margin-bottom: 2px;
+    border: thin solid grey;
+    line-height: 1.2em;
 }
 
 
@@ -334,18 +372,19 @@ color: #FF0000;
 .schedaFrancois
 {
     clear: both;
-    background-color:#c0c0c0;
+    background-color:#FFFFFF;
     min-height: 170px;
-    border-top: solid 5px;
+    border-top: solid 2px;
     border-top-color: #0000ff;
-    margin-bottom: 2px;   
+    margin-bottom: 2px;
+    border: thin solid grey;
 }
 
 .schedaProvenienza
 {
     clear: both;
-    background-color:#c0c0c0;
-    border-top: solid 5px;
+    background-color:#FFFFFF;
+    border-top: solid 2px;
     border-top-color: #0000ff;
     margin-bottom: 2px;
     text-align: center;
@@ -362,13 +401,6 @@ color: #FF0000;
     margin-bottom: 5px;
 }
 
-.count
-{
-    float: left;
-    margin-top: 6px;
-    margin-left: 2px;
-    font-size: 11px;
-}
 
 .group
 {
