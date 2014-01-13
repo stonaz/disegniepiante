@@ -300,13 +300,13 @@ visualizzabili con il pulsante accanto.
 	<script src="js/vendor/underscore.js"></script>
 	<script src="js/vendor/jquery-ui-1.10.3.custom.js"></script>
 	<script src="js/vendor/jquery.ui.datepicker-it.js"></script>
-	
         <script src="js/main.js"></script>
-        
+	
 	<script type="text/javascript">
          
 $( document ).ready(function() {
 
+//Ricerca notai
 var AliasNotai = getAlias();
 $( "#searchNotaio" ).autocomplete({
 source: function( request, response ) {
@@ -321,35 +321,41 @@ select: function( event, ui ) {
   getNotai();
 }
 });
-//$( "#searchNotaio" ).on( "autocompleteselect", function( event, ui ) {getNotai()} );
+
 $("#searchNotaiButton").bind( "click", function(){
    getNotai();
    });
+
+//Gestione tabs Notai/Volumi
 $("#tabRicercaVolumi").bind( "click", function(){
-  //alert('test')
    $("#RicercaNotaioContainer").hide();
    $("#RicercaVolumiContainer").show();
-   //getVolumi();
    });
 $("#tabRicercaNotaio").bind( "click", function(){
-  //alert('test')
    $("#RicercaNotaioContainer").show();
    $("#RicercaVolumiContainer").hide();
-   
    });
 
- getNotai();
- 
- $.datepicker.setDefaults(
+
+//Settings per ricerca date 
+$.datepicker.setDefaults(
 	  $.extend(
 		{'dateFormat':'dd-mm-yy'},
 		$.datepicker.regional['it']
 	    )
 	);
-//$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy" });
-$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy",changeYear: true ,defaultDate:"01-01-1300", yearRange: "1300:1870"});
-$( "#dataFinale" ).datepicker({ dateFormat: "dd-mm-yy", changeYear: true , defaultDate:"01-01-1300", yearRange: "1300:1870"});
+$( "#dataIniziale" ).datepicker({ dateFormat: "dd-mm-yy",
+				  changeYear: true ,
+				  defaultDate:"01-01-1300",
+				  yearRange: "1300:1870"
+				  });
+$( "#dataFinale" ).datepicker({ dateFormat: "dd-mm-yy",
+				changeYear: true ,
+				defaultDate:"01-01-1300",
+				yearRange: "1300:1870"
+				});
 
+//Parametri e controllo coerenza date su ricerca volumi				
 $("#searchVolumiButton").bind( "click", function(){
   $("#searchText").val('')
   var args={};
@@ -359,22 +365,20 @@ $("#searchVolumiButton").bind( "click", function(){
   args.fondo=$("#elencoFondi").val();
   args.dataIniziale=$("#dataIniziale").val();
   args.dataFinale=$("#dataFinale").val();
- // console.log($("#dataIniziale").val() + $("#dataFinale").val() )
+
   if ($("#dataIniziale").val() !== "" && $("#dataFinale").val() !== "") {
     check_date=confronta_data(args.dataIniziale,args.dataFinale);
-  
   }
   
     if (check_date) {
-      //console.log(args);
       getVolumi(args);	
     }
   
    });
 
  
- createSelectFondi(function(){
- });
+createSelectFondi();
+getNotai();
 });
 	 
 	</script>
