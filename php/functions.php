@@ -1,4 +1,10 @@
 <?PHP
+require 'conn.php'; // DB connection
+/*
+ *$dbconn = pg_connect ("host=10.148.5.226 port=5432 dbname=notarilia user=postgres password=postgres") or die ('no db');
+*/
+
+
 function get_items_list($dbconn,$sql)
 {
    
@@ -16,7 +22,6 @@ function get_items_list($dbconn,$sql)
  *
  * @return string Indented version of the original JSON string.
  */
-$dbconn = pg_connect ("host=localhost port=5432 dbname=notarilia user=postgres password=postgres") or die ('no db');
 
 function indent($json) {
 
