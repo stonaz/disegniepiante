@@ -44,7 +44,7 @@ Forms
 .tabNotai
 {
     float:left;
-    background-color: #C0C0C0;
+    background-color: #E6E6E6;
     color: black;
     /*padding: 2px;*/
     /*border: thin solid;*/
@@ -63,7 +63,7 @@ Forms
 .tabVolumi
 {
     float:left;
-    background-color: #639257;
+    background-color: #F5F6CE;
     color: black;   
     /*padding: 2px;*/
     /*border: thin solid;*/
@@ -99,8 +99,8 @@ Forms
     /*padding: 10px;*/
     color: #000000;
     /*line-height: 1em;*/
-    min-height: 170px;
-    background-color: #C0C0C0;
+    min-height: 130px;
+    background-color: #E6E6E6;
     width: 772px;
     clear: both;
     font-size: 14px;
@@ -115,7 +115,7 @@ Forms
     color: #000000;
     /*line-height: 1em;*/
     min-height: 170px;
-    background-color: #639257;
+    background-color: #F5F6CE;
     width: 772px;
     clear: both;
     font-size: 14px;
@@ -126,9 +126,9 @@ Forms
 #NotaiFormLeft
 {
     float: left;
-    background-color: #C0C0C0;
-    width: 160px;
-    height: 140px;
+    background-color: #E6E6E6;
+    width: 210px;
+    height: 130px;
     color: #000000;
     line-height: 1em;
     padding: 3px;
@@ -137,9 +137,9 @@ Forms
 #NotaiFormRight
 {
     float: left;
-    background-color: #C0C0C0;
-    height: 140px;
-    width: 500px;
+    background-color: #E6E6E6;
+    height: 130px;
+    width: 450px;
     color: #000000;
     line-height: 1em;
     padding: 3px;
@@ -171,7 +171,7 @@ Forms
 {
     clear: both;
     text-align: left;
-    background-color: #639257 ;
+    background-color: #F5F6CE ;
     padding: 6px;
     margin-top: 5px;
     
@@ -189,12 +189,13 @@ Forms
 
 .navNotaio
 {
-    width: 40% ; 
+   /* width: 50% ;*/ 
     padding-bottom:5px;
     clear: both;
     margin-left: 2px;
     background-color: #c0c0c0;
     padding-left: 4px;
+    float: left;
 }
 
 .navVolumi
@@ -316,10 +317,12 @@ background-color: #c0c0c0;
 }
 
 #IntestazioneCollegati {
-    width: 90%;
+    
     line-height: 1.0em;
     margin-bottom: 3px;
     padding:5px;
+/*    text-align: right;
+*/    float: left;
     
 }
 

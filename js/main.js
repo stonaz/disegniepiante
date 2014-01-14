@@ -294,7 +294,7 @@ var count;
 //console.log(count)
 if (count > 0) {
 $("#RisultatiCollegati").show();
-$("#IntestazioneCollegati").html("<strong><br>Occorrenze trovate nel Francois: "+count +"</strong> ");
+$("#IntestazioneCollegati").html("<strong>Voci nel Francois: "+count +"</strong> ");
 francois = data[offset];
 
 var tmplMarkup = $('#templateFrancois').html();

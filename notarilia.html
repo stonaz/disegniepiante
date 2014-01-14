@@ -115,7 +115,7 @@
 </script>
 
 <script id="templateCounter" type="text/template">
-<div class="count"><strong>Occorrenze trovate: </strong><%= count %></div>
+<div class="count"><strong>Nomi : </strong><%= count %></div>
 </script>
 
 <script id="templateCollegatiCounter" type="text/template">
@@ -123,14 +123,14 @@
 </script>
 
 <script id="templateNav" type="text/template">
-<button id="Prev">Prev</button>
-<button id="Succ">Succ</button>
+<button id="Prev"><<</button>
+<button id="Succ">>></button>
 <%=  offset+1 %> di <%= count %>
 </script>
 
 <script id="templateNavVolumi" type="text/template">
-<button id="VolPrev">Prev</button>
-<button id="VolSucc">Succ</button>
+<button id="VolPrev"><<</button>
+<button id="VolSucc">>></button>
 <%=  offset+1 %> di <%= count %>
 </script>
 
@@ -189,6 +189,8 @@
 	    <button   onclick=cleanFormNotai()>Cancella </button>
 	    </div>
 	     <div id =IntestazioneNotai ></div>
+             <div id="Nav" class="navNotaio" ></div>
+             
 	  </div>
 	  <div id="NotaiFormRight">
 	    
@@ -197,12 +199,16 @@
 Caricamento dati...
   </div>     		     
 	<div id="RisultatiNotai"></div>
-		 <div id="Nav" class="navNotaio" ></div>  
+         <div style="width:606px;min-height: 30px">
+                  
+                  <div id =IntestazioneCollegati></div>
+                  
+         </div>
 	   </div>
 		
      
     <div id="Error"></div>             
-	         <div id =IntestazioneCollegati></div>
+	         
 		 <div id="RisultatiCollegati">            
               
             </div>
@@ -224,7 +230,7 @@ Caricamento dati...
 		    </select>
 		    
 		    <br>
-		    Note<br>
+		    Cerca testo nelle Note<br>
 		    <input id="textVolumi"  >
 		    
 		    
@@ -236,7 +242,9 @@ Caricamento dati...
 		    <br>    
 		    Data finale
 		   <input id="dataFinale" type="text"  >
-		    
+		   <br><br>
+		    <button  id="searchVolumiButton" >Cerca</button>
+	   <button  onclick=cancellaSelezioni() >Cancella</button>
 		</div>
 		
 		
@@ -247,8 +255,7 @@ Caricamento dati...
 	    
 	  
 	    
-	   <button  id="searchVolumiButton" >Cerca</button>
-	   <button  onclick=cancellaSelezioni() >Cancella Selezioni</button>
+	   
 		       
 		   
 		  
