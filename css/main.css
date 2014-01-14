@@ -99,7 +99,7 @@ Forms
     /*padding: 10px;*/
     color: #000000;
     /*line-height: 1em;*/
-    min-height: 130px;
+    min-height: 137px;
     background-color: #E6E6E6;
     width: 772px;
     clear: both;
@@ -147,15 +147,16 @@ Forms
 
 #searchNotaio
 {
-    width:140px;
+    width:180px;
 }
+
 
 /* Volumi form */
 
 .VolumiFormLeft
 {
     float: left;
-    width: 470px;
+    width: 440px;
     margin-top: 4px;
     padding-left: 4px;
 }
@@ -163,8 +164,17 @@ Forms
 .VolumiFormRight
 {
     float: left;
+    width: 160px;
+    margin-top: 4px;
+}
+
+.VolumiFormText
+{
+    float: left;
     width: 140px;
     margin-top: 4px;
+    border: thin solid;
+    padding: 2px;
 }
 
 .VolumiFormBottom
@@ -174,9 +184,20 @@ Forms
     background-color: #F5F6CE ;
     padding: 6px;
     margin-top: 5px;
+    width: 760px;
+    min-height: 20px;
     
 }
 
+#dataIniziale
+{
+    width:100px;
+}
+
+#dataFinale
+{
+    width:100px;
+}
 /* Results */
 
 #Loading{
@@ -185,6 +206,7 @@ Forms
 
 #LoadingVolumi{
     display: none;
+    clear: both;
 }
 
 .navNotaio
@@ -192,8 +214,8 @@ Forms
    /* width: 50% ;*/ 
     padding-bottom:5px;
     clear: both;
-    margin-left: 2px;
-    background-color: #c0c0c0;
+    margin-top: 2px;
+    background-color: #E6E6E6;
     padding-left: 4px;
     float: left;
 }
@@ -202,12 +224,12 @@ Forms
 {
     
     padding-bottom:5px;
-    clear: both;
+    float: left;
     /*margin-left: 2px;*/
-    background-color: #c0c0c0;
-    margin-top: 5px;
+    
+/*    margin-top: 5px;
     padding-top: 5px;
-    padding-left: 4px;
+    padding-left: 4px;*/
     
 }
 
@@ -216,7 +238,7 @@ Forms
     float: left;
     margin-top: 6px;
     margin-left: 6px;
-    font-size: 11px;
+    font-size: 12px;
 }
 
 #RisultatiNotai
@@ -227,7 +249,7 @@ text-align:left;
 width: 606px ;
 clear: both;
 line-height: 1.2em;
-margin-bottom: 10px;
+margin-bottom: 5px;
 color: #000000;
 
 }
@@ -313,7 +335,9 @@ background-color: #c0c0c0;
     margin-bottom: 10px;
     margin-top: 5px;
     line-height: 1.0em;
-    padding:5px;
+/*    padding:5px;*/
+    float: left;
+    width: 440px;
 }
 
 #IntestazioneCollegati {
@@ -321,8 +345,11 @@ background-color: #c0c0c0;
     line-height: 1.0em;
     margin-bottom: 3px;
     padding:5px;
+    float: left;
+    width:415px;
 /*    text-align: right;
-*/    float: left;
+   */ 
+    /**/
     
 }
 
@@ -355,6 +382,30 @@ color:#000000;
 /*padding: 5px;*/
 min-height: 80px;
 
+}
+
+.notaioAlias
+{
+    
+    border:thin solid;
+    margin:5px;
+    padding:5px;
+    float: left;
+    width: 250px;
+    color:#000000;
+    text-align: left;
+}
+
+.notaioNormalizzato
+{
+    
+    border:thin solid;
+    margin:5px;
+    padding:5px;
+    float: left;
+    width: 250px;
+    color:#000000;
+    text-align: left;
 }
 
 .schedaVolumi
@@ -416,9 +467,21 @@ min-height: 80px;
     text-align: left;
 }
 
+.groupVolumi
+{
+    background-color: #F5F6CE;
+    border:thin solid;
+    margin:5px;
+    padding:5px;
+    float: left;
+    width: 45%;
+    color:#000000;
+    text-align: left;
+}
+
 .notaVolumi
 {
-    background-color: #CCCCCC;
+    background-color: #F5F6CE;
     border:thin solid;
     margin:5px;
     padding:5px;

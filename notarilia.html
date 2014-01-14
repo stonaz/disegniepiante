@@ -23,13 +23,13 @@
 
 <script id="templateNotaio" type="text/template">
  <div class='schedaNotaio'>
-  <div class="group">
+  <div class="notaioNormalizzato">
 
 <p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
 <p ><strong>Cognome: </strong><%= notaio.cognome %></p>
 <p><strong>Nome: </strong><%= notaio.nome %></p>
   </div>
-  <div class="group">
+  <div class="notaioAlias">
 <p class= 'notaioIntestazione'><strong>Varianti</strong></p>
 <p><strong>Fonte: </strong><%= notaio.fonte %></p>
 <p><strong>Alias: </strong><%= notaio.alias %></p>
@@ -40,7 +40,7 @@
 
 <script id="templateVolume" type="text/template">
 <div class="schedaVolumi">
-<div class="group">
+<div class="groupVolumi">
 <p ><strong>Nome: </strong><%= volume.nome %></p>
 <p ><strong>Cognome: </strong><%= volume.cognome %></p>
 <p ><strong>Funzione: </strong><%= volume.funzione %></p>
@@ -63,7 +63,7 @@
 <p ><strong>Documenti: </strong><%= volume.documenti %></p>
 </div>
 
-<div class="group">
+<div class="groupVolumi">
 
 <p ><strong>Dorso: </strong><%= volume.dorso %></p>
 <hr>
@@ -199,11 +199,11 @@
 Caricamento dati...
   </div>     		     
 	<div id="RisultatiNotai"></div>
-         <div style="width:606px;min-height: 30px">
-                  
-                  <div id =IntestazioneCollegati></div>
-                  
-         </div>
+	<div style="clear: both;width: 550px;">
+	<div id =IntestazioneCollegati ></div>
+	<div id="VediFrancois" style="float: left"></div>
+         
+	 </div>
 	   </div>
 		
      
@@ -237,34 +237,32 @@ Caricamento dati...
 		      
 		</div>
 		<div class="VolumiFormRight">
-		  Data iniziale
+		  Data iniziale<br>
 		    <input id="dataIniziale" type="text"  >
 		    <br>    
-		    Data finale
+		    Data finale<br>
 		   <input id="dataFinale" type="text"  >
 		   <br><br>
 		    <button  id="searchVolumiButton" >Cerca</button>
-	   <button  onclick=cancellaSelezioni() >Cancella</button>
+		    <button  onclick=cancellaSelezioni() >Cancella</button>
+		</div>
+		<div class="VolumiFormText">
+		  Restringere il numero dei Volumi visualizzati in base all'Ufficio di provenienza e a un arco cronologico
 		</div>
 		
 		
 	      
-	    
-	   
+	    <div id="LoadingVolumi" ><img src='img/ajax-loader.gif'><br>Caricamento dati...  </div>	
+	   <div id="ErrorVolumi"></div>
 	  <div class="VolumiFormBottom">
-	    
-	  
-	    
-	   
-		       
-		   
-		  
-      </div>
 	  <div id =IntestazioneVolumi ></div>
-      <div id="ErrorVolumi"></div>
-      <div id="LoadingVolumi" ><img src='img/ajax-loader.gif'><br>Caricamento dati...  </div>	      
+	  <div id="NavVolumi" class="navVolumi" >  
+	  </div>
+	  
       
-      <div id="NavVolumi" class="navVolumi" >	
+            
+      
+      	
       </div>
          
       <div id="RisultatiVolumi"></div>

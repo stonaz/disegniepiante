@@ -9,6 +9,8 @@ function cleanScreen(){
    $("#Nav").html('');
    $("#Error").hide();
    $("#RisultatiNotai").html('');
+   $("#VediFrancois").html('');
+   
    
 }
 
@@ -256,7 +258,7 @@ else
    if (typeof args.cognome !== 'undefined') {
       var tmplMarkup = $('#templateFrancoisCollButton').html();
       var output = _.template(tmplMarkup );
-      $("#IntestazioneCollegati").append(output);
+      $("#VediFrancois").append(output);
    
       $("#FrancoisCollButton").on( "click", function(){
       getFrancois(args)
