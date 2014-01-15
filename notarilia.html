@@ -26,13 +26,13 @@
   <div class="notaioNormalizzato">
 
 <p class= 'notaioIntestazione'><strong>Nome normalizzato</strong></p>
-<p ><strong>Cognome: </strong><%= notaio.cognome %></p>
-<p><strong>Nome: </strong><%= notaio.nome %></p>
+<p class= 'notaioDettagli'><strong>Cognome: </strong><%= notaio.cognome %></p>
+<p class= 'notaioDettagli'> <strong>Nome: </strong><%= notaio.nome %></p>
   </div>
   <div class="notaioAlias">
 <p class= 'notaioIntestazione'><strong>Varianti</strong></p>
-<p><strong>Fonte: </strong><%= notaio.fonte %></p>
-<p><strong>Alias: </strong><%= notaio.alias %></p>
+<p class= 'notaioDettagli'><strong>Fonte: </strong><%= notaio.fonte %></p>
+<p class= 'notaioDettagli'><strong>Alias: </strong><%= notaio.alias %></p>
   </div>
     </div>
 
@@ -163,7 +163,11 @@
   </div>
 	<div id="content" >
 		
-    <div id="tertiaryContent"> </div>
+    <div id="tertiaryContent">
+      <div style="width: 200px;height: 400px; background-color: #cccccc;">
+	
+      </div>
+    </div>
 
   <div id="primaryContentContainer" >
 

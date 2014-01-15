@@ -5,6 +5,23 @@ button{
     padding: 1px 6px;
 }
 
+#tertiaryContent
+{
+	position: relative;
+	float: right;
+	width: 14em;
+	padding: 3em 2em 1.5em 2em;
+/*	background: #fff url('../images/a2.gif') top left repeat-y;
+*/       
+	z-index: 0;
+}
+
+#primaryContent
+{
+	margin: 1.5em 4em 0em 14.25em;
+	padding: 1.5em 3em 1.5em 3em;
+}
+
 .spiegazione
 {
 
@@ -156,7 +173,7 @@ Forms
 .VolumiFormLeft
 {
     float: left;
-    width: 440px;
+    width: 420px;
     margin-top: 4px;
     padding-left: 4px;
 }
@@ -164,7 +181,7 @@ Forms
 .VolumiFormRight
 {
     float: left;
-    width: 160px;
+    width: 170px;
     margin-top: 4px;
 }
 
@@ -174,7 +191,9 @@ Forms
     width: 140px;
     margin-top: 4px;
     border: thin solid;
-    padding: 2px;
+    padding: 3px;
+    border-radius: 4px;
+    font-size:12px; 
 }
 
 .VolumiFormBottom
@@ -323,6 +342,14 @@ background-color: #c0c0c0;
     
 }
 
+.notaioDettagli
+{
+    
+    padding:2px;
+    font-size: 1.1em;
+    
+}
+
 #IntestazioneNotai {
     width: 90%;
     line-height: 1.0em;
@@ -337,7 +364,7 @@ background-color: #c0c0c0;
     line-height: 1.0em;
 /*    padding:5px;*/
     float: left;
-    width: 440px;
+    width: 420px;
 }
 
 #IntestazioneCollegati {
