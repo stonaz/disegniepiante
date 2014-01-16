@@ -5,14 +5,13 @@ button{
     padding: 1px 6px;
 }
 
-#tertiaryContent
+#ImageContent
 {
 	position: relative;
 	float: right;
 	width: 14em;
 	padding: 3em 2em 1.5em 2em;
-/*	background: #fff url('../images/a2.gif') top left repeat-y;
-*/       
+     
 	z-index: 0;
 }
 
