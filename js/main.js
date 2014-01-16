@@ -348,7 +348,7 @@ var compiledTmpl = _.template(tmplMarkup, {count : count, item : "Volumi" });
 $("#IntestazioneVolumi").append(compiledTmpl);
 
 if (count > 0) {
-   $("#RisultatiVolumi").css("width","100%")
+ //  $("#RisultatiVolumi").css("width","100%")
    volume = data[offset];   
    
    var tmplMarkup = $('#templateVolume').html();
