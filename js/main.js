@@ -245,7 +245,7 @@ if (count > 0) {
       $("#RisultatiCollegati").append(output);
       //var button=i
     $("#"+buttonID).on("click",function(){
-      openProvenienza(v.fondo,v.ufficio)
+      openProvenienza(v.fondo,v.ufficio,v.serie)
       
       }); 
 
@@ -355,7 +355,6 @@ if (count > 0) {
    buttonID="Vol-"+volume.volume+"-"+offset;
    var output = _.template(tmplMarkup, { volume : volume ,buttonID: buttonID } );
    $("#RisultatiVolumi").append(output);
-   console.log(volume['ordine serie'])
    $("#"+buttonID).on("click",function(){
       openProvenienza(volume.fondo,volume.ufficio,volume.serie)
       
