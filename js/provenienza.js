@@ -1,8 +1,8 @@
-function getProvenienza(fondo,ufficio)
+function getProvenienza(fondo,ufficio,serie)
 {
       var url="php/provenienza_to_json.php";
       //cleanScreen();
-      var args ={fondo:fondo,ufficio:ufficio};
+      var args ={fondo:fondo,ufficio:ufficio,serie:serie};
 
       $.ajax({
         async: true, 

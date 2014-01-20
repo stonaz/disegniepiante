@@ -7,8 +7,13 @@ $sql='SELECT *  FROM "provenienza" ';
 if ($_GET['fondo']){
     $fondo= ($_GET['fondo']);
     $sql .= " where fondo = '$fondo' ";
-        $ufficio= ($_GET['ufficio']);
+    $ufficio= ($_GET['ufficio']);
     $sql .= " and ufficio = '$ufficio' ";
+    if ($_GET['serie'])
+      {
+      $serie= ($_GET['serie']);
+      $sql .= " and serie = '$serie' ";
+      }
     
 }
 //echo $sql;

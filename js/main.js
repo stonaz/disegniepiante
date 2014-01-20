@@ -355,8 +355,9 @@ if (count > 0) {
    buttonID="Vol-"+volume.volume+"-"+offset;
    var output = _.template(tmplMarkup, { volume : volume ,buttonID: buttonID } );
    $("#RisultatiVolumi").append(output);
+   console.log(volume['ordine serie'])
    $("#"+buttonID).on("click",function(){
-      openProvenienza(volume.fondo,volume.ufficio)
+      openProvenienza(volume.fondo,volume.ufficio,volume.serie)
       
       }); 
    var tmplMarkup = $('#templateNavVolumi').html();
@@ -401,11 +402,11 @@ $("#LoadingVolumi").hide()
  * Apri finestra Provenienza
  */
 
-function openProvenienza(fondo,ufficio)
+function openProvenienza(fondo,ufficio,serie)
 {
       var url="php/provenienza_to_json.php";
       //cleanScreen();
-      var args ={fondo:fondo,ufficio:ufficio};
+      var args ={fondo:fondo,ufficio:ufficio,serie:serie};
       //console.log(fondo);
       window.provenienza=args;
       window.open("provenienza.html", "provenienza", "location=0,scrollbars=0,resizable=0,height=450,width=600");

@@ -15,9 +15,9 @@
 <div class="group" >
 
 <p ><strong>Ufficio: </strong><%= provenienza.ufficio %></p>
-<p ><strong>Alias: </strong><%= provenienza.alias %></p>
-<p ><strong>Inventario: </strong><%= provenienza.inventario_uffici %></p>
-<p ><strong>Note: </strong><%= provenienza.note_uffici %></p>
+<p ><strong>Alias: </strong><%= provenienza.alias_ufficio %></p>
+<p ><strong>Inventario: </strong><%= provenienza.inventario_ufficio %></p>
+<p ><strong>Note: </strong><%= provenienza.note_ufficio %></p>
 </div>
 <div class="group"  >
 <p ><strong>Serie: </strong><%= provenienza.serie %></p>
@@ -60,7 +60,8 @@
 //alert('opened. Fondo:' +window.opener.provenienza.fondo) ;
 var fondo=window.opener.provenienza.fondo;
 var ufficio=window.opener.provenienza.ufficio;
-getProvenienza(fondo,ufficio);
+var serie=window.opener.provenienza.serie;
+getProvenienza(fondo,ufficio,serie);
 
 });
         
