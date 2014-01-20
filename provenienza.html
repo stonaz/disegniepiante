@@ -11,21 +11,29 @@
 <body>
     <script id="templateProvenienza" type="text/template">
   <div class="schedaProvenienza">
+    <h2>Note provenienza</h2>
+<div  class="groupProvenienzaFondo">
+    <h3>Fondo</h3>
 <p ><strong>Fondo: </strong><%= provenienza.fondo %></p>
-<div class="group" >
-
+<p ><strong>Alias: </strong><%= provenienza.alias_fondo %></p>
+<p ><strong>Note: </strong><%= provenienza.note_fondo %></p>
+</div>
+<div class="groupProvenienza" >
+<h3>Ufficio</h3>
 <p ><strong>Ufficio: </strong><%= provenienza.ufficio %></p>
 <p ><strong>Alias: </strong><%= provenienza.alias_ufficio %></p>
 <p ><strong>Inventario: </strong><%= provenienza.inventario_ufficio %></p>
 <p ><strong>Note: </strong><%= provenienza.note_ufficio %></p>
 </div>
-<div class="group"  >
+<div class="groupProvenienza"  >
+    <h3>Serie</h3>
 <p ><strong>Serie: </strong><%= provenienza.serie %></p>
 <p ><strong>Inventario: </strong><%= provenienza.inventario_serie%></p>	
 <p ><strong>Note: </strong><%= provenienza.note_serie %></p>
 
 </div>
   </div>
+  <br>
 </script>
     <div id="RisultatiProvenienza"></div>
     

@@ -322,7 +322,7 @@ line-height: 1.2em;
 overflow:auto;
 max-height: 500px;
 display:none;
-background-color: #c0c0c0;
+
 }
 
 #RisultatiCollegati p
@@ -468,6 +468,13 @@ min-height: 80px;
     margin-bottom: 2px;
     text-align: center;
     min-height: 450px;
+    padding:5px;
+}
+
+.schedaProvenienza h3
+{
+ color:blue;
+ margin-bottom: 0.2em;
 }
 
 .titolo
@@ -481,14 +488,26 @@ min-height: 80px;
 }
 
 
-.group
+.groupProvenienza
 {
     background-color: #CCCCCC;
     border:thin solid;
     margin:5px;
     padding:5px;
     float: left;
-    width: 45%;
+    width: 46%;
+    color:#000000;
+    text-align: left;
+}
+
+.groupProvenienzaFondo
+{
+    background-color: #CCCCCC;
+    border:thin solid;
+    margin:5px;
+    padding:5px;
+    /*float: left;*/
+    /*width: 92%;*/
     color:#000000;
     text-align: left;
 }

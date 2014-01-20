@@ -408,7 +408,7 @@ function openProvenienza(fondo,ufficio,serie)
       var args ={fondo:fondo,ufficio:ufficio,serie:serie};
       //console.log(fondo);
       window.provenienza=args;
-      window.open("provenienza.html", "provenienza", "location=0,scrollbars=0,resizable=0,height=450,width=600");
+      window.open("provenienza.html", "provenienza", "location=0,scrollbars=0,resizable=1,width=600");
 }
 
 
