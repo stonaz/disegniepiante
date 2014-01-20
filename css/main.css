@@ -487,6 +487,17 @@ min-height: 80px;
     margin-bottom: 5px;
 }
 
+.group
+{
+    background-color: #CCCCCC;
+    border:thin solid;
+    margin:5px;
+    padding:5px;
+    float: left;
+    width: 46%;
+    color:#000000;
+    text-align: left;
+}
 
 .groupProvenienza
 {
