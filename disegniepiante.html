@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html >
+<head>
+<meta charset="utf-8"" />
+<title>Archivio di Stato di Roma - Progetto Imago II</title>
+<meta name="keywords" content="ICRCPAL: Istituto Centrale per il Restauro e la Conservazione del Patrimonio Archivistico e Librario, Restauro, Biblioteca, conservazione, Digital Library, CFLR, Imago, ICPL, ICPAL, ICRCPAL" />
+<meta name="description" content="ICRCPAL: Istituto Centrale per il Restauro e la Conservazione del Patrimonio Archivistico e Librario, Restauro, Biblioteca, conservazione, Digital Library, CFLR, Imago, ICPL,ICPAL, ICRCPAL" />
+<link href="../common/style_icrcpal2.css" rel="stylesheet" type="text/css" />
+
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"
+</head>
+
+<body>
+<script id="templateSegnatura" type="text/template">
+ 
+ <a class="opening" href="#" ><%= luogo %></a>
+ <div class="expanded">
+<% _.each(segnature, function(segnatura) { %> <li > <%= segnatura.cartella %>/<%= segnatura.foglio %>/<%= segnatura.sub %></li> <% }); %>
+</div>
+ <br>
+</script>
+
+
+
+
+
+
+
+<script id="templateSelectUfficio" type="text/template">
+<option> </option>
+<% _.each(uffici, function(ufficio) { %> <option value="<%= ufficio.ufficio %>"> <%= ufficio.ufficio %></option> <% }); %>
+</script>
+
+
+
+
+
+
+
+<script id="templateCounter" type="text/template">
+<div class="count"><strong>Nomi : </strong><%= count %></div>
+</script>
+
+
+
+<script id="templateVolumiCollButton" type="text/template">
+<button id="VolumiCollButton">Cerca volumi collegati</button>
+</script>
+
+<script id="templateFrancoisCollButton" type="text/template">
+ <button id="FrancoisCollButton">Vedi Francois</button>   
+ </script>
+
+<div  id="outer">
+	
+  <div id="header"> 
+    <h1>IMAGO</h1>
+    <h2>Disegni e Piante</h2>
+  </div>
+  <div id="banner"> 
+    <p align='right'> <a style="font-size: 10pt; color: yellow" href="http://www.archiviodistatoroma.beniculturali.it/"> 
+      <img src="../images/header_ASRoma.jpg" width="638" height="59" border="0"><br>
+      Torna al sito istituzionale</a> </div>
+
+	
+  <div id="menu"> 
+    <ul>
+      <li ><a href="../index.html">Home Imago</a></li>
+      <li ><a href="../serie.html">Serie Imago</a></li>
+      <li class="first"><a href="notarilia_intro.html">Disegni e Piante</a></li>
+    </ul>
+  </div>
+	<div id="content" >
+		
+    <div id="ImageContent">
+      <div style="width: 180px;height: 400px; ">
+	<img src="img/notaio.jpg" border=0>
+	
+      </div>
+    </div>
+
+  <div id="primaryContentContainer" >
+
+    <div id="primaryContent">
+      
+      
+      
+      <div class="tabContainer" >
+	<div id="tabRicercaNotaio" class="tabNotai"><strong>Ricerca notaio </strong></div>
+	<div id="tabRicercaVolumi" class="tabVolumi"><strong>Ricerca Volumi </strong></div>
+      </div>
+		
+    </div>          
+  </div>
+</div>
+		
+		
+    <div id="secondaryContent">
+<div id="accordion">
+    <div class="level" id="listaPrincipale">
+        
+        </div><!--/.expanded-->
+    </div><!--/.level-->
+</div><!--/#accordion-->
+       
+    </div>
+    
+</div></div></body>
+
+	
+        <script src="js/vendor/jquery-1.10.1.min.js"></script>
+	<script src="js/vendor/underscore.js"></script>
+	<script src="js/vendor/jquery-ui-1.10.3.custom.js"></script>
+        <script src="js/vendor/flip.js"></script>
+	<script src="js/main.js"></script>
+	<script type="text/javascript">
+         
+$( document ).ready(function() {
+
+getListaMain();
+
+});
+	 
+	</script>
+</html>
