@@ -21,16 +21,22 @@
  <br>
 </script>
 
+<script id="templateScheda" type="text/template">
+ <div>
+  
+  <strong>Luogo: </strong><%= data.luogo %><br>
+  <strong>Segnatura: </strong><%= data.cartella %>/<%= data.foglio %>/<%= data.sub %><br>
+  <% _.each(fogli, function(foglio) { %> <li > <%= foglio.descrizione %>/<%= foglio.foglio %>/<%= foglio.sub %></li> <% }); %>
 
+ </div>
 
-
-
-
-
-<script id="templateSelectUfficio" type="text/template">
-<option> </option>
-<% _.each(uffici, function(ufficio) { %> <option value="<%= ufficio.ufficio %>"> <%= ufficio.ufficio %></option> <% }); %>
 </script>
+
+
+
+
+
+
 
 
 
@@ -74,8 +80,7 @@
 	<div id="content" >
 		
     <div id="ImageContent">
-      <div style="width: 180px;height: 400px; ">
-	<img src="img/notaio.jpg" border=0>
+      
 	
       </div>
     </div>
@@ -86,10 +91,7 @@
       
       
       
-      <div class="tabContainer" >
-	<div id="tabRicercaNotaio" class="tabNotai"><strong>Ricerca notaio </strong></div>
-	<div id="tabRicercaVolumi" class="tabVolumi"><strong>Ricerca Volumi </strong></div>
-      </div>
+  
 		
     </div>          
   </div>
@@ -97,7 +99,7 @@
 		
 		
     <div id="secondaryContent">
-<div id="accordion">
+<div id="accordion" class="lista">
     <div class="level" id="listaPrincipale">
         
         </div><!--/.expanded-->

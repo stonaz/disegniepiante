@@ -13,10 +13,27 @@ function getListaMain()
         dataType: 'json',
         success: function(response){
        CreateListaMain(response)
-          // printNotai(response,0);    
       
           }
-        
+    });
+   getScheda();
+}
+
+function getScheda()
+{
+
+   //cleanScreen();
+   $("#Loading").show();
+   
+      var url="php/scheda.php"
+      $.ajax({
+        async: true, 
+        url: url,
+        dataType: 'json',
+        success: function(response){
+       console.log(response)
+       printScheda(response);          
+          }       
     });
 }
 
@@ -35,37 +52,27 @@ function CreateListaMain(luoghi)
      $("#listaPrincipale").append(compiledTmpl);
 
    }
-        $("#accordion .expanded").hide();
+   $("#accordion .expanded").hide();
     $("a.opening").click(function(){
         $(this).next().slideToggle('fast', function(){
             $(this).prev("a.opening").toggleClass("active");
         });
     return false;
 });
- // initFlip();
-   
-//      $.ajax({
-//        async: true, 
-//        url: url,
-//        dataType: 'json',
-//        success: function(response){
-//       //  console.log(luoghi)
-//       console.log(response)
-//      var arrayLength = luoghi.length;
-//      for (var i = 0; i < arrayLength; i++) {
-//    var luogo=luoghi[i];
-//   // console.log(luogo)
-//  //  console.log(response[luogo]);
-//  //  var compiledTmpl = _.template(tmplMarkup,{fondi:response});
-//                          // $('#elencoFondi').append(compiledTmpl);
-//    //Do something
-//}
-//       $("#listaPrincipale").append('pipo0');
-//          // printNotai(response,0);    
-//      
-//          }
-//        
-//    });
+    $("#Loading").hide();
+}
+
+function printScheda(scheda)
+{
+
+   //cleanScreen();
+   var tmplMarkup = $('#templateScheda').html();
+   data=scheda.data[0]
+   data.cartella=data.cartella
+   console.log(scheda.fogli[0].descrizione)
+   var compiledTmpl = _.template(tmplMarkup,{data:data,fogli:scheda.fogli});
+   $("#Loading").hide();
+   $("#primaryContent").append(compiledTmpl);
 }
 
 
