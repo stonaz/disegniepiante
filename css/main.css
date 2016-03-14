@@ -41,7 +41,11 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 
 /* Results */
 
-#Loading{
+#LoadingLista{
+    display: none;
+}
+
+#LoadingScheda{
     display: none;
 }
 
@@ -62,15 +66,18 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
     margin: 1px;
     /*display: none;*/
     overflow:auto;
-    max-height:600px;
+    max-height:700px;
 }
 
-
-
+.linkScheda{
+    list-style-image:url(images/letter.gif);
+    text-decoration: underline;
+    cursor: pointer;
+}
 a.opening {
-    font-family: 'Oswald', Arial, sans-serif;
+    /*font-family:  Arial, sans-serif;*/
     display:block;
-    background: url(bullet_blue.png) no-repeat 10px center #fff;
+    background: url(images/folder_closed.gif) no-repeat 10px center #fff;
     padding:3px 30px;
     text-decoration:none;
     color:#2f3040;
@@ -81,14 +88,15 @@ a.opening {
     border-right:1px solid #2f3040;*/
     }
   
-a.opening:hover, a.active {
-    color:#fff;
-    background: url(bullet_gray.png) no-repeat 10px center #2f3040;
+ a.active {
+    color:#2f3040;
+    background: url(images/folder_open.gif) no-repeat 10px center #fff;
     }
 .expanded {
     background:url(concrete_wall_3.png);
-    padding:15px;
-    font-size:0.9em;
+    padding-left: 45px;
+    padding-top: 5px;
+    font-size:1.2em;
     letter-spacing:-1px;
 /*    border-bottom:1px solid #2f3040;
     border-left:1px solid #2f3040;

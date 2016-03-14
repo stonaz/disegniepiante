@@ -1,83 +1,122 @@
 var disegniPiante = {};
 
-function getListaMain()
-{
+function getListaMain() {
 
-   //cleanScreen();
-   $("#Loading").show();
-   
-      var url="php/luoghi.php"
-      $.ajax({
-        async: true, 
+    //cleanScreen();
+    $("#LoadingLista").show();
+
+    var url = "php/luoghi.php"
+    $.ajax({
+        async: true,
         url: url,
         dataType: 'json',
-        success: function(response){
-       CreateListaMain(response)
-      
-          }
+        success: function(response) {
+            CreateListaMain(response)
+
+        }
     });
-   getScheda();
+    var segnatura = [1, 8, 1];
+    getScheda(segnatura);
 }
 
-function getScheda()
-{
-
-   //cleanScreen();
-   $("#Loading").show();
-   
-      var url="php/scheda.php"
-      $.ajax({
-        async: true, 
+function getScheda(segnatura) {
+    console.log(segnatura)
+        //cleanScreen();
+    $("#LoadingScheda").show();
+    var cartella = segnatura[0];
+    var foglio = segnatura[1];
+    var sub = segnatura[2];
+    var url = "php/scheda.php"
+    $.ajax({
+        async: true,
         url: url,
         dataType: 'json',
-        success: function(response){
-       console.log(response)
-       printScheda(response);          
-          }       
+        data: {
+            cartella: cartella,
+            foglio: foglio,
+            sub: sub
+        },
+        success: function(response) {
+            console.log(response)
+            printScheda(response);
+        }
     });
 }
 
-function CreateListaMain(luoghi)
-{
-   var tmplMarkup = $('#templateSegnatura').html();
-   //cleanScreen();
- //  $("#Loading").show();
-   console.log(luoghi)
-   var arrayLength = luoghi.length;
-   console.log(arrayLength)
-   for (var i = 0; i < arrayLength; i++) {
-      var luogo=(luoghi[i].luogo);
-      var segnature=(luoghi[i].segnature);
-     var compiledTmpl = _.template(tmplMarkup,{luogo:luogo,segnature:segnature});
-     $("#listaPrincipale").append(compiledTmpl);
+function CreateListaMain(luoghi) {
+    var tmplMarkup = $('#templateSegnatura').html();
+    //cleanScreen();
+    //  $("#Loading").show();
+    //   console.log(luoghi)
+    var arrayLength = luoghi.length;
+    //  console.log(arrayLength)
+    for (var i = 0; i < arrayLength; i++) {
+        var luogo = (luoghi[i].luogo);
+        var segnature = (luoghi[i].segnature);
+        var compiledTmpl = _.template(tmplMarkup, {
+            luogo: luogo,
+            segnature: segnature
+        });
+        $("#listaPrincipale").append(compiledTmpl);
 
-   }
-   $("#accordion .expanded").hide();
-    $("a.opening").click(function(){
-        $(this).next().slideToggle('fast', function(){
+    }
+    $("#accordion .expanded").hide();
+    $("a.opening").click(function() {
+        $(this).next().slideToggle('fast', function() {
             $(this).prev("a.opening").toggleClass("active");
         });
-    return false;
-});
-    $("#Loading").hide();
+        return false;
+    });
+    $("#LoadingLista").hide();
+    $("li").on("click", function() {
+        var segnatura = $(this).text().split("/");
+        getScheda(segnatura);
+    });
+    $("#Nascondi").on("click", function() {
+        $("#accordion .expanded").hide();
+        var sections = $('#accordion').find("a");
+         sections.each(function(index, section){
+    if ($(section).hasClass('active') ) {
+      console.log('active');
+      $(section).toggleClass("active");
+    }
+  });
+       // $("#accordion a.opening").toggleClass("active");
+    });
+    $("#Mostra").on("click", function() {
+        $("#accordion .expanded").show();
+        var sections = $('#accordion').find("a");
+         sections.each(function(index, section){
+    if (!$(section).hasClass('active') ) {
+      console.log('active');
+      $(section).toggleClass("active");
+    }
+  });
+
+        
+    });
 }
 
-function printScheda(scheda)
-{
+function printScheda(scheda) {
 
-   //cleanScreen();
-   var tmplMarkup = $('#templateScheda').html();
-   data=scheda.data[0]
-   data.cartella=data.cartella
-   console.log(scheda.fogli[0].descrizione)
-   var compiledTmpl = _.template(tmplMarkup,{data:data,fogli:scheda.fogli});
-   $("#Loading").hide();
-   $("#primaryContent").append(compiledTmpl);
+    //cleanScreen();
+    var tmplMarkup = $('#templateScheda').html();
+    data = scheda.data[0]
+    data.cartella = data.cartella
+        //console.log(scheda.fogli[0].descrizione)
+    var compiledTmpl = _.template(tmplMarkup, {
+        data: data,
+        fogli: scheda.fogli
+    });
+    $("#LoadingScheda").hide();
+    $("#primaryContent").html(compiledTmpl);
+
 }
+
 
 
 $(function() {
-	
+
     $.ajaxSetup({
 
         error: function(jqXHR, exception) {

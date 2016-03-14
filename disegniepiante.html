@@ -16,17 +16,41 @@
  
  <a class="opening" href="#" ><%= luogo %></a>
  <div class="expanded">
-<% _.each(segnature, function(segnatura) { %> <li > <%= segnatura.cartella %>/<%= segnatura.foglio %>/<%= segnatura.sub %></li> <% }); %>
+<% _.each(segnature, function(segnatura) { %> <li class="linkScheda"><strong><%= segnatura.cartella %>/<%= segnatura.foglio %>/<%= segnatura.sub %></strong></li> <% }); %>
 </div>
- <br>
+
 </script>
 
 <script id="templateScheda" type="text/template">
- <div>
-  
-  <strong>Luogo: </strong><%= data.luogo %><br>
+ <div style="width: 100%; overflow: hidden;border: thin solid;padding:3px;">
+  <div style="width: 200px; float: left; border: thin solid;margin: 1px;">
+<!--   <table border=1 style="border-collapse:collapse">
+    <tr>
+     <td>Luogo</td><td colspan=3><%= data.luogo %></td>
+    </tr>
+    <tr>
+     <td>Segnatura</td><td><%= data.cartella %></td><td><%= data.foglio %></td><td><%= data.sub %></td>
+    </tr>
+        <tr>
+     <td>Segnatura</td><td colspan=1,5><%= data.cartella %></td><td><%= data.foglio %></td>
+    </tr>
+   </table>-->
+    <strong>Luogo: </strong><%= data.luogo %><br>
   <strong>Segnatura: </strong><%= data.cartella %>/<%= data.foglio %>/<%= data.sub %><br>
-  <% _.each(fogli, function(foglio) { %> <li > <%= foglio.descrizione %>/<%= foglio.foglio %>/<%= foglio.sub %></li> <% }); %>
+  <strong>Unità </strong><%= data['numero UD'] %>/<%= data['suffisso UD'] %><br>
+  </div>
+  <div style="width: 250px; float: left; border: thin solid;margin: 1px;">
+    <strong>Tecnica di esecuzione: </strong><%= data['supporto/tecnica di esecuzione'] %><br>
+  <strong>Scala: </strong><%= data.scala %><br>
+  </div>
+   <div style="width: 200px; float: left; bborder: thin solid;margin: 1px;"
+    <strong>Luogo: </strong><%= data.luogo %><br>
+  <strong>Segnatura: </strong><%= data.cartella %>/<%= data.foglio %>/<%= data.sub %><br>
+  </div>
+  <div style="clear: both">
+    <% _.each(fogli, function(foglio) { %> <li > <%= foglio.intestazione %></li> <% }); %>
+  </div>
+ 
 
  </div>
 
@@ -88,7 +112,8 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
-      
+            <div id="LoadingScheda" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>	
+
       
       
   
@@ -99,6 +124,9 @@
 		
 		
     <div id="secondaryContent">
+     <span id="Nascondi">Nascondi tutto</span> <span id="Mostra">Mostra tutto</span>
+      <div id="LoadingLista" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
+      
 <div id="accordion" class="lista">
     <div class="level" id="listaPrincipale">
         
@@ -109,18 +137,17 @@
     </div>
     
 </div></div></body>
-
 	
         <script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="js/vendor/underscore.js"></script>
 	<script src="js/vendor/jquery-ui-1.10.3.custom.js"></script>
-        <script src="js/vendor/flip.js"></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
          
 $( document ).ready(function() {
 
 getListaMain();
+
 
 });
 	 
