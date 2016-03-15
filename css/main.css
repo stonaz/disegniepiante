@@ -1,6 +1,16 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
+
+
+
+#secondaryContent
+{
+	padding: 0em 0em 0em 0em;
+}
+
+
+
 button{
     padding: 1px 6px;
 }
@@ -17,7 +27,7 @@ button{
 
 #primaryContent
 {
-	margin: 1.5em 4em 0em 14.25em;
+	margin: -1em 4em 0em 10.25em;
 	padding: 1.5em 3em 1.5em 3em;
 }
 
@@ -37,6 +47,24 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 
 }
 
+.intestazione
+{
+font-weight: bold;
+}
+
+.foglio{
+    border: thin solid;
+    border-collapse: collapse;
+    
+}
+
+.foglio td, th {
+border: 1px solid black;
+padding:3px;
+}
+
+
+
 
 
 /* Results */
@@ -49,7 +77,12 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
     display: none;
 }
 
-
+.sezione{
+    float: left;
+    border: thin solid;
+    margin: 1px;
+    padding:1px;
+}
 
 .enabled {
   color:white;
@@ -74,6 +107,7 @@ box-shadow: 5px 5px 10px rgba(0,0,0,.5);
     text-decoration: underline;
     cursor: pointer;
 }
+
 a.opening {
     /*font-family:  Arial, sans-serif;*/
     display:block;

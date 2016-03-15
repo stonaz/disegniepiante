@@ -1,5 +1,17 @@
 var disegniPiante = {};
 
+var templateHelpers = {
+  returnBool: function(val){
+    if (val == 0) {
+      return "no"
+    }
+    else{
+      return "si"
+    }
+    
+  }
+}
+
 function getListaMain() {
 
     //cleanScreen();
@@ -37,7 +49,7 @@ function getScheda(segnatura) {
             sub: sub
         },
         success: function(response) {
-            console.log(response)
+      //      console.log(response)
             printScheda(response);
         }
     });
@@ -98,12 +110,12 @@ function CreateListaMain(luoghi) {
 }
 
 function printScheda(scheda) {
-
+   
     //cleanScreen();
     var tmplMarkup = $('#templateScheda').html();
     data = scheda.data[0]
-    data.cartella = data.cartella
-        //console.log(scheda.fogli[0].descrizione)
+    _.extend(data, templateHelpers);
+    console.log(data)
     var compiledTmpl = _.template(tmplMarkup, {
         data: data,
         fogli: scheda.fogli

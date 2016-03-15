@@ -13,7 +13,7 @@ if ($_GET['cartella'])
 }
 else{
    $cartella=1;
-   $foglio=8;
+   $foglio=15;
    $sub=1;
 }
 

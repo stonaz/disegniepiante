@@ -22,65 +22,64 @@
 </script>
 
 <script id="templateScheda" type="text/template">
- <div style="width: 100%; overflow: hidden;border: thin solid;padding:3px;">
-  <div style="width: 200px; float: left; border: thin solid;margin: 1px;">
-<!--   <table border=1 style="border-collapse:collapse">
-    <tr>
-     <td>Luogo</td><td colspan=3><%= data.luogo %></td>
-    </tr>
-    <tr>
-     <td>Segnatura</td><td><%= data.cartella %></td><td><%= data.foglio %></td><td><%= data.sub %></td>
-    </tr>
-        <tr>
-     <td>Segnatura</td><td colspan=1,5><%= data.cartella %></td><td><%= data.foglio %></td>
-    </tr>
-   </table>-->
+ <div style="width: 100%; overflow: hidden;padding:3px;background-color: #F5F6CE;color: black">
+  <div class="sezione" style="width: 200px;">
+
     <strong>Luogo: </strong><%= data.luogo %><br>
   <strong>Segnatura: </strong><%= data.cartella %>/<%= data.foglio %>/<%= data.sub %><br>
   <strong>Unità </strong><%= data['numero UD'] %>/<%= data['suffisso UD'] %><br>
   </div>
-  <div style="width: 250px; float: left; border: thin solid;margin: 1px;">
+  <div class="sezione"  style="width: 250px; ">
     <strong>Tecnica di esecuzione: </strong><%= data['supporto/tecnica di esecuzione'] %><br>
   <strong>Scala: </strong><%= data.scala %><br>
+    <strong>Altezza: </strong><%= data['misure (altezza)'] %> <strong>Larghezza: </strong><%= data['misure (larghezza)'] %><br>
   </div>
-   <div style="width: 200px; float: left; bborder: thin solid;margin: 1px;"
-    <strong>Luogo: </strong><%= data.luogo %><br>
-  <strong>Segnatura: </strong><%= data.cartella %>/<%= data.foglio %>/<%= data.sub %><br>
+   <div class="sezione" style="width: 250px; "</div>
+    <strong>Produttore: </strong><%= data.soggetto_produttore %><br>
+    <table style="border-spacing: 2px;">
+    <tr>
+     <td class="intestazione">Datazione: </td><td ><%= data.datazione %></td><td class="intestazione">Attribuita: </td><td><%= data.returnBool(data['data attribuita']) %></td>
+    </tr>
+    <tr>
+     <td class="intestazione">Data finale: </td><td><%= data.data_finale %></td><td class="intestazione">Attribuita: </td><td><%= data.returnBool(data['data_Fine_attribuita']) %></td>
+    </tr>
+       
+   </table>
+  <strong>Note cronologia: </strong><%= data.note_alla_cronologia %><br>
   </div>
-  <div style="clear: both">
-    <% _.each(fogli, function(foglio) { %> <li > <%= foglio.intestazione %></li> <% }); %>
+    <div class="sezione"  style="width: 350px; ">
+    <strong>Sottoscrizioni: </strong><%= data.sottoscrizioni %><br>
+  <strong>Descrizione intrinseca: </strong><%= data['descrizione intrinseca'] %><br>
+    <strong>Descrizione estrinseca: </strong><%= data.descrizione_estrinseca %> <br>
+      <strong>Note: </strong><%= data.note %><br>
+
   </div>
- 
 
  </div>
+  <div style="width: 100%; overflow: hidden;padding:3px;background-color: #E6E6E6;color: black">
+   <table class="foglio">
+    <tr>
+    <th>Numero</th>
+    <th>Intestazione</th>
+    <th>Descrizione</th>
+    <th>Note</th>
+    <th>Misure</th>
+    <th>Immagine</th>
+    </tr>
 
+    <% _.each(fogli, function(foglio) { %>
+    <tr>
+     <td><%= foglio.numero %></td>
+     <td><%= foglio.intestazione %></td>
+     <td><%= foglio.descrizione %></td>
+     <td><%= foglio.note %></td>
+     <td><%= foglio.misure %></td>
+     <td style="width: 250px;">Immagine Qui</td>
+    </tr>
+    <% }); %>
+       </table>
+  </div>
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script id="templateCounter" type="text/template">
-<div class="count"><strong>Nomi : </strong><%= count %></div>
-</script>
-
-
-
-<script id="templateVolumiCollButton" type="text/template">
-<button id="VolumiCollButton">Cerca volumi collegati</button>
-</script>
-
-<script id="templateFrancoisCollButton" type="text/template">
- <button id="FrancoisCollButton">Vedi Francois</button>   
- </script>
 
 <div  id="outer">
 	
