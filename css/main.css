@@ -1,7 +1,11 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+#primaryContent
+{
+	margin: -1em 4em 0em 10.25em;
+	padding: 1.5em 3em 1.5em 3em;
+}
 
 
 #secondaryContent
@@ -25,11 +29,6 @@ button{
 	z-index: 0;
 }
 
-#primaryContent
-{
-	margin: -1em 4em 0em 10.25em;
-	padding: 1.5em 3em 1.5em 3em;
-}
 
 .spiegazione
 {
@@ -77,6 +76,33 @@ padding:3px;
     display: none;
 }
 
+.lista{
+    font-size:11px;
+    color:#000000;
+    background-color: #FFFFFF;
+    word-wrap: break-word;
+    padding: 1px;
+    margin: 1px;
+    /*display: none;*/
+    overflow:auto;
+    max-height:700px;
+}
+
+#ControlliLista{
+    color:black;
+    margin: 5px;
+     cursor:pointer;
+     text-decoration: underline;
+}
+
+#Nascondi:hover{
+    color: red;
+}
+
+#Mostra:hover{
+    color: green;
+}
+
 .sezione{
     float: left;
     border: thin solid;
@@ -90,22 +116,14 @@ padding:3px;
   cursor:pointer;
 }
 
-.lista{
-    font-size:11px;
-    color:#000000;
-    background-color: #FFFFFF;
-    word-wrap: break-word;
-    padding: 1px;
-    margin: 1px;
-    /*display: none;*/
-    overflow:auto;
-    max-height:700px;
-}
 
 .linkScheda{
-    list-style-image:url(images/letter.gif);
+    background: url(images/letter.gif) left center no-repeat; ;
+    list-style-type: none;
     text-decoration: underline;
     cursor: pointer;
+    padding-left: 20px;
+    margin: 5px;
 }
 
 a.opening {
@@ -127,8 +145,7 @@ a.opening {
     background: url(images/folder_open.gif) no-repeat 10px center #fff;
     }
 .expanded {
-    background:url(concrete_wall_3.png);
-    padding-left: 45px;
+    padding-left: 25px;
     padding-top: 5px;
     font-size:1.2em;
     letter-spacing:-1px;

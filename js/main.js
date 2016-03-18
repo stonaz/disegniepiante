@@ -12,7 +12,7 @@ var templateHelpers = {
   }
 }
 
-function getListaMain() {
+function initialize() {
 
     //cleanScreen();
     $("#LoadingLista").show();
@@ -28,8 +28,61 @@ function getListaMain() {
         }
     });
     var segnatura = [1, 8, 1];
+    createSelectNominativi();
     getScheda(segnatura);
 }
+
+function ricercaAutore(autore) {
+
+    //cleanScreen();
+    $("#LoadingLista").show();
+
+    var url = "php/lista_ricerca_autore.php"
+    $.ajax({
+        async: true,
+        url: url,
+        data:{autore:autore
+         },
+        dataType: 'json',
+        success: function(response) {
+         $("#listaPrincipale").html('');
+            CreateListaMain(response,1);
+            var cartella=(response[0].segnature[0].cartella);
+            var foglio=(response[0].segnature[0].foglio);
+            var sub=(response[0].segnature[0].sub);
+           var segnatura = [cartella, foglio, sub];
+            getScheda(segnatura);
+        }
+    });
+    //var segnatura = [1, 8, 1];
+    //createSelectNominativi();
+    //getScheda(segnatura);
+}
+
+
+function createSelectNominativi() {
+                var tmplMarkup = $('#templateNominativi').html();
+                var url="php/nominativi.php"
+                $.ajax({
+                  async: true, 
+                  url: url,
+                  dataType: 'json',
+                  //data:{fondo: fondo },
+                  success: function(response){
+                       console.log(response)
+                        var compiledTmpl = _.template(tmplMarkup,{nominativi:response});
+                        $('#Ricerca').append(compiledTmpl);
+                        $('#selectRicercaAutore').on("change", function() {
+                           console.log('ricerca autore');
+        var autore = $(this).val();
+        console.log(autore);
+        ricercaAutore(autore);
+    });
+                        }
+        
+                });
+}
+
 
 function getScheda(segnatura) {
     console.log(segnatura)
@@ -55,11 +108,11 @@ function getScheda(segnatura) {
     });
 }
 
-function CreateListaMain(luoghi) {
+function CreateListaMain(luoghi,openlista) {
     var tmplMarkup = $('#templateSegnatura').html();
     //cleanScreen();
     //  $("#Loading").show();
-    //   console.log(luoghi)
+      console.log(luoghi)
     var arrayLength = luoghi.length;
     //  console.log(arrayLength)
     for (var i = 0; i < arrayLength; i++) {
@@ -107,6 +160,10 @@ function CreateListaMain(luoghi) {
 
         
     });
+    if (openlista===1) {
+      $("#Mostra").click();
+    }
+    
 }
 
 function printScheda(scheda) {
@@ -121,7 +178,7 @@ function printScheda(scheda) {
         fogli: scheda.fogli
     });
     $("#LoadingScheda").hide();
-    $("#primaryContent").html(compiledTmpl);
+    $("#scheda").html(compiledTmpl);
 
 }
 

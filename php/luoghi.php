@@ -34,7 +34,7 @@ foreach ($items_list as $luoghi)
  }
    array_push( $lista_luoghi,$arr);
 }
-echo json_encode($lista_luoghi);
-//echo indent(json_encode($lista_luoghi));
+//echo json_encode($lista_luoghi);
+echo indent(json_encode($lista_luoghi));
 
 ?>  

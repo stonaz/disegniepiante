@@ -21,6 +21,14 @@
 
 </script>
 
+<script id="templateNominativi" type="text/template">
+ Ricerca nominativi:
+ <select id="selectRicercaAutore">
+   <option> </option>
+<% _.each(nominativi, function(nominativo) { %> <option value="<%= nominativo %>"> <%= nominativo %></option> <% }); %>
+ </select>
+</script>
+
 <script id="templateScheda" type="text/template">
  <div style="width: 100%; overflow: hidden;padding:3px;background-color: #F5F6CE;color: black">
   <div class="sezione" style="width: 200px;">
@@ -111,19 +119,18 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
-            <div id="LoadingScheda" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>	
-
-      
-      
-  
-		
+            <div id="LoadingScheda" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
+            <div id="Ricerca"></div>
+            <div id="scheda"</div>
     </div>          
   </div>
 </div>
 		
 		
     <div id="secondaryContent">
-     <span id="Nascondi">Nascondi tutto</span> <span id="Mostra">Mostra tutto</span>
+   <div id="ControlliLista">
+    <span id="Nascondi">Comprimi tutto</span> <span id="Mostra">Espandi tutto</span>
+   </div>  
       <div id="LoadingLista" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
       
 <div id="accordion" class="lista">
@@ -145,9 +152,7 @@
          
 $( document ).ready(function() {
 
-getListaMain();
-
-
+initialize();
 });
 	 
 	</script>

@@ -37,8 +37,8 @@ else{
    $scheda['fogli']=[];
 }
 
-//echo json_encode($scheda);
-echo indent(json_encode($scheda))
+echo json_encode($scheda);
+//echo indent(json_encode($scheda))
 
 ?>
 
