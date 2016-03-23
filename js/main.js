@@ -27,7 +27,7 @@ function initialize() {
 
         }
     });
-    var segnatura = [1, 8, 1];
+    var segnatura = [1, 1, 1];
     createSelectNominativi();
     getScheda(segnatura);
 }
@@ -71,16 +71,22 @@ function createSelectNominativi() {
                   success: function(response){
                        console.log(response)
                         var compiledTmpl = _.template(tmplMarkup,{nominativi:response});
-                        $('#Ricerca').append(compiledTmpl);
+                        $('#Ricerca').html(compiledTmpl);
                         $('#selectRicercaAutore').on("change", function() {
                            console.log('ricerca autore');
         var autore = $(this).val();
         console.log(autore);
         ricercaAutore(autore);
     });
+                            $("#azzeraRicerche").on("click", function() {
+                              console.log('azzera')
+                              $("#listaPrincipale").html('');
+        initialize();
+    });
                         }
         
                 });
+                
 }
 
 

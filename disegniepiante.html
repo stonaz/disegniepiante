@@ -27,6 +27,7 @@
    <option> </option>
 <% _.each(nominativi, function(nominativo) { %> <option value="<%= nominativo %>"> <%= nominativo %></option> <% }); %>
  </select>
+ <button id ="azzeraRicerche">Mostra tutte le schede</button>
 </script>
 
 <script id="templateScheda" type="text/template">
@@ -153,6 +154,7 @@
 $( document ).ready(function() {
 
 initialize();
+
 });
 	 
 	</script>
