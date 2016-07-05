@@ -17,13 +17,13 @@ function initialize() {
     //cleanScreen();
     $("#LoadingLista").show();
 
-    var url = "php/luoghi.php"
+    var url = "php/segnature.php"
     $.ajax({
         async: true,
         url: url,
         dataType: 'json',
         success: function(response) {
-            CreateListaMain(response)
+            CreateListaSegnature(response)
 
         }
     });
@@ -31,6 +31,30 @@ function initialize() {
     createSelectNominativi();
     getScheda(segnatura);
 }
+
+function CreateListaSegnature(segnature,openlista) {
+    var tmplMarkup = $('#templateSegnatura').html();
+    //cleanScreen();
+    //  $("#Loading").show();
+     // console.log(segnature)
+    var arrayLength = segnature.length;
+    //  console.log(arrayLength)
+    for (var i = 0; i < arrayLength; i++) {
+        var segnatura = (segnature[i]);
+        //console.log(segnatura)
+        var compiledTmpl = _.template(tmplMarkup, {
+            segnatura: segnatura
+        });
+        $("#listaPrincipale").append(compiledTmpl);
+
+    }
+    $("#LoadingLista").hide();
+    $("li").on("click", function() {
+        var segnatura = $(this).text().split("/");
+        getScheda(segnatura);
+    });
+}
+
 
 function ricercaAutore(autore) {
 

@@ -2,5 +2,6 @@ SELECT scheda."#cartella", scheda."#foglio", scheda."#sub", scheda."luogo"  FROM
 ON
 (scheda."#cartella" = autore."#cartella") AND
 (scheda."#foglio" = autore."#foglio") AND
-(scheda."#sub" = autore."#sub");
+(scheda."#sub" = autore."#sub")
+where autore='Abati';
 
