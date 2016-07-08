@@ -25,7 +25,16 @@
  Ricerca nominativi:
  <select id="selectRicercaAutore">
    <option> </option>
-<% _.each(nominativi, function(nominativo) { %> <option value="<%= nominativo %>"> <%= nominativo %></option> <% }); %>
+<% _.each(autore, function(autore) { %> <option value="<%= autore.nominativo %>"> <%= autore.nominativo %> - <%= autore.qualifica %></option> <% }); %>
+ </select>
+ <button id ="azzeraRicerche">Mostra tutte le schede</button>
+</script>
+
+<script id="templateToponimi" type="text/template">
+ Ricerca toponimi:
+ <select id="selectRicercaToponimo">
+   <option> </option>
+<% _.each(toponimi, function(toponimo) { %> <option value="<%= toponimo %>"> <%= toponimo %> </option> <% }); %>
  </select>
  <button id ="azzeraRicerche">Mostra tutte le schede</button>
 </script>
@@ -121,7 +130,8 @@
 
     <div id="primaryContent">
             <div id="LoadingScheda" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
-            <div id="Ricerca"></div>
+            <div id="RicercaAutore"></div>
+            <div id="RicercaToponimo"></div>
             <div id="scheda"</div>
     </div>          
   </div>

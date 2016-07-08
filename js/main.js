@@ -29,6 +29,7 @@ function initialize() {
     });
     var segnatura = [1, 1, 1];
     createSelectNominativi();
+    createSelectToponimi();
     getScheda(segnatura);
 }
 
@@ -55,34 +56,30 @@ function CreateListaSegnature(segnature,openlista) {
     });
 }
 
-
-function ricercaAutore(autore) {
-
-    //cleanScreen();
-    $("#LoadingLista").show();
-
-    var url = "php/lista_ricerca_autore.php"
-    $.ajax({
-        async: true,
-        url: url,
-        data:{autore:autore
-         },
-        dataType: 'json',
-        success: function(response) {
-         $("#listaPrincipale").html('');
-            CreateListaMain(response,1);
-            var cartella=(response[0].segnature[0].cartella);
-            var foglio=(response[0].segnature[0].foglio);
-            var sub=(response[0].segnature[0].sub);
-           var segnatura = [cartella, foglio, sub];
-            getScheda(segnatura);
-        }
+function createSelectToponimi() {
+                var tmplMarkup = $('#templateToponimi').html();
+                var url="php/toponimi.php"
+                $.ajax({
+                  async: true, 
+                  url: url,
+                  dataType: 'json',
+                  //data:{fondo: fondo },
+                  success: function(response){
+                       console.log(response)
+                        var compiledTmpl = _.template(tmplMarkup,{toponimi:response});
+                        $('#RicercaToponimo').html(compiledTmpl);
+                        $('#selectRicercaToponimo').on("change", function() {
+                           console.log('ricerca toponimo');
+        var toponimo = $(this).val();
+        console.log(toponimo);
+        ricercaToponimo(toponimo);
     });
-    //var segnatura = [1, 8, 1];
-    //createSelectNominativi();
-    //getScheda(segnatura);
+                            
+                        }
+        
+                });
+                
 }
-
 
 function createSelectNominativi() {
                 var tmplMarkup = $('#templateNominativi').html();
@@ -94,8 +91,8 @@ function createSelectNominativi() {
                   //data:{fondo: fondo },
                   success: function(response){
                        console.log(response)
-                        var compiledTmpl = _.template(tmplMarkup,{nominativi:response});
-                        $('#Ricerca').html(compiledTmpl);
+                        var compiledTmpl = _.template(tmplMarkup,{autore:response});
+                        $('#RicercaAutore').html(compiledTmpl);
                         $('#selectRicercaAutore').on("change", function() {
                            console.log('ricerca autore');
         var autore = $(this).val();
@@ -113,9 +110,63 @@ function createSelectNominativi() {
                 
 }
 
+function ricercaAutore(autore) {
+
+    //cleanScreen();
+    $("#LoadingLista").show();
+
+    var url = "php/lista_ricerca_autore.php"
+    $.ajax({
+        async: true,
+        url: url,
+        data:{autore:autore
+         },
+        dataType: 'json',
+        success: function(response) {
+         console.log(response)
+         $("#listaPrincipale").html('');
+            CreateListaSegnature(response,1);
+            var cartella=(response[0].cartella);
+            var foglio=(response[0].foglio);
+            var sub=(response[0].sub);
+           var segnatura = [cartella, foglio, sub];
+           console.log(segnatura)
+            getScheda(segnatura);
+        }
+    });
+}
+
+function ricercaToponimo(toponimo) {
+
+    //cleanScreen();
+    $("#LoadingLista").show();
+
+    var url = "php/ricerca_toponimo.php"
+    $.ajax({
+        async: true,
+        url: url,
+        data:{toponimo:toponimo
+         },
+        dataType: 'json',
+        success: function(response) {
+         console.log(response)
+         $("#listaPrincipale").html('');
+            CreateListaSegnature(response,1);
+            var cartella=(response[0].cartella);
+            var foglio=(response[0].foglio);
+            var sub=(response[0].sub);
+           var segnatura = [cartella, foglio, sub];
+           console.log(segnatura)
+            getScheda(segnatura);
+        }
+    });
+}
+
+
+
 
 function getScheda(segnatura) {
-    console.log(segnatura)
+   // console.log(segnatura)
         //cleanScreen();
     $("#LoadingScheda").show();
     var cartella = segnatura[0];
@@ -138,63 +189,63 @@ function getScheda(segnatura) {
     });
 }
 
-function CreateListaMain(luoghi,openlista) {
-    var tmplMarkup = $('#templateSegnatura').html();
-    //cleanScreen();
-    //  $("#Loading").show();
-      console.log(luoghi)
-    var arrayLength = luoghi.length;
-    //  console.log(arrayLength)
-    for (var i = 0; i < arrayLength; i++) {
-        var luogo = (luoghi[i].luogo);
-        var segnature = (luoghi[i].segnature);
-        var compiledTmpl = _.template(tmplMarkup, {
-            luogo: luogo,
-            segnature: segnature
-        });
-        $("#listaPrincipale").append(compiledTmpl);
-
-    }
-    $("#accordion .expanded").hide();
-    $("a.opening").click(function() {
-        $(this).next().slideToggle('fast', function() {
-            $(this).prev("a.opening").toggleClass("active");
-        });
-        return false;
-    });
-    $("#LoadingLista").hide();
-    $("li").on("click", function() {
-        var segnatura = $(this).text().split("/");
-        getScheda(segnatura);
-    });
-    $("#Nascondi").on("click", function() {
-        $("#accordion .expanded").hide();
-        var sections = $('#accordion').find("a");
-         sections.each(function(index, section){
-    if ($(section).hasClass('active') ) {
-      console.log('active');
-      $(section).toggleClass("active");
-    }
-  });
-       // $("#accordion a.opening").toggleClass("active");
-    });
-    $("#Mostra").on("click", function() {
-        $("#accordion .expanded").show();
-        var sections = $('#accordion').find("a");
-         sections.each(function(index, section){
-    if (!$(section).hasClass('active') ) {
-      console.log('active');
-      $(section).toggleClass("active");
-    }
-  });
-
-        
-    });
-    if (openlista===1) {
-      $("#Mostra").click();
-    }
-    
-}
+//function CreateListaMain(luoghi,openlista) {
+//    var tmplMarkup = $('#templateSegnatura').html();
+//    //cleanScreen();
+//    //  $("#Loading").show();
+//      console.log(luoghi)
+//    var arrayLength = luoghi.length;
+//    //  console.log(arrayLength)
+//    for (var i = 0; i < arrayLength; i++) {
+//        var luogo = (luoghi[i].luogo);
+//        var segnature = (luoghi[i].segnature);
+//        var compiledTmpl = _.template(tmplMarkup, {
+//            luogo: luogo,
+//            segnature: segnature
+//        });
+//        $("#listaPrincipale").append(compiledTmpl);
+//
+//    }
+//    $("#accordion .expanded").hide();
+//    $("a.opening").click(function() {
+//        $(this).next().slideToggle('fast', function() {
+//            $(this).prev("a.opening").toggleClass("active");
+//        });
+//        return false;
+//    });
+//    $("#LoadingLista").hide();
+//    $("li").on("click", function() {
+//        var segnatura = $(this).text().split("/");
+//        getScheda(segnatura);
+//    });
+//    $("#Nascondi").on("click", function() {
+//        $("#accordion .expanded").hide();
+//        var sections = $('#accordion').find("a");
+//         sections.each(function(index, section){
+//    if ($(section).hasClass('active') ) {
+//      console.log('active');
+//      $(section).toggleClass("active");
+//    }
+//  });
+//       // $("#accordion a.opening").toggleClass("active");
+//    });
+//    $("#Mostra").on("click", function() {
+//        $("#accordion .expanded").show();
+//        var sections = $('#accordion').find("a");
+//         sections.each(function(index, section){
+//    if (!$(section).hasClass('active') ) {
+//      console.log('active');
+//      $(section).toggleClass("active");
+//    }
+//  });
+//
+//        
+//    });
+//    if (openlista===1) {
+//      $("#Mostra").click();
+//    }
+//    
+//}
 
 function printScheda(scheda) {
    
@@ -202,7 +253,7 @@ function printScheda(scheda) {
     var tmplMarkup = $('#templateScheda').html();
     data = scheda.data[0]
     _.extend(data, templateHelpers);
-    console.log(data)
+   // console.log(data)
     var compiledTmpl = _.template(tmplMarkup, {
         data: data,
         fogli: scheda.fogli

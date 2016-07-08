@@ -2,13 +2,13 @@
 require 'functions.php'; // functions used in the script
 //$dbconn = pg_connect ("host=192.168.1.14 port=5432 dbname=ruggeri user=postgres password=Superman123") or die ('no db');
 header('Content-Type: application/json'); //for correct output in browsers
-$autore = pg_escape_string($_GET['autore']);
-$sql="SELECT scheda.\"#cartella\", scheda.\"#foglio\", scheda.\"#sub\", scheda.\"luogo\"  FROM \"Principale_CD\" as scheda INNER JOIN \"Autore_CD\" as autore
+$toponimo = pg_escape_string($_GET['toponimo']);
+$sql="SELECT scheda.\"#cartella\", scheda.\"#foglio\", scheda.\"#sub\", scheda.\"luogo\"  FROM \"Principale_CD\" as scheda INNER JOIN \"Toponimo_CD\" as toponimo
 ON
-(scheda.\"#cartella\" = autore.\"#cartella\") AND
-(scheda.\"#foglio\" = autore.\"#foglio\") AND
-(scheda.\"#sub\" = autore.\"#sub\")
-and autore.\"Nominativo\" = '$autore';";
+(scheda.\"#cartella\" = toponimo.\"#cartella\") AND
+(scheda.\"#foglio\" = toponimo.\"#foglio\") AND
+(scheda.\"#sub\" = toponimo.\"#sub\")
+and toponimo.\"mix2\" = '$toponimo';";
 
 //echo $sql;
 //$items_list=get_items_list($dbconn,$sql);
