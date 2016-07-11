@@ -16,27 +16,42 @@
  
  
  <div class="expanded">
- <li class="linkScheda"><strong><%= segnatura.cartella %>/<%= segnatura.foglio %>/<%= segnatura.sub %></strong></li>  
+  <% _.each(segnature, function(segnatura) { %>  <li class="linkScheda"><strong><%= segnatura.cartella %> / <%= segnatura.foglio %> / <%= segnatura.sub %></strong></li> <% }); %>
+  
 </div>
 
 </script>
 
 <script id="templateNominativi" type="text/template">
- Ricerca nominativi:
+ <div class="labelRicerche">Ricerca per nominativo:</div>
  <select id="selectRicercaAutore">
    <option> </option>
 <% _.each(autore, function(autore) { %> <option value="<%= autore.nominativo %>"> <%= autore.nominativo %> - <%= autore.qualifica %></option> <% }); %>
  </select>
- <button id ="azzeraRicerche">Mostra tutte le schede</button>
+</script>
+
+<script id="templateClassificazioni" type="text/template">
+ <div class="labelRicerche">Ricerca per classificazione:</div>
+ <select id="selectRicercaClassificazione">
+   <option> </option>
+<% _.each(luogo, function(luogo) { %> <option value="<%= luogo %>"> <%= luogo %> </option> <% }); %>
+ </select>
+
 </script>
 
 <script id="templateToponimi" type="text/template">
- Ricerca toponimi:
+ <div class="labelRicerche">Ricerca per toponimo:</div>
  <select id="selectRicercaToponimo">
    <option> </option>
 <% _.each(toponimi, function(toponimo) { %> <option value="<%= toponimo %>"> <%= toponimo %> </option> <% }); %>
  </select>
- <button id ="azzeraRicerche">Mostra tutte le schede</button>
+
+</script>
+
+<script id="templateTesto" type="text/template">
+ <strong>Ricerca testo libero:</strong>
+ <input type="text" id="RicercaTesto">
+ <button id="ButtonRicercaTesto">Cerca</button>  
 </script>
 
 <script id="templateScheda" type="text/template">
@@ -115,7 +130,7 @@
     <ul>
       <li ><a href="../index.html">Home Imago</a></li>
       <li ><a href="../serie.html">Serie Imago</a></li>
-      <li class="first"><a href="notarilia_intro.html">Disegni e Piante</a></li>
+      <li class="first"><a href="disegniepiante.html">Disegni e Piante</a></li>
     </ul>
   </div>
 	<div id="content" >
@@ -129,10 +144,24 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
+<div id="primaryContentLeft">
             <div id="LoadingScheda" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
-            <div id="RicercaAutore"></div>
+            <div id="RicercaClassificazione"></div>
             <div id="RicercaToponimo"></div>
-            <div id="scheda"</div>
+            <div id="RicercaAutore"></div>
+
+            <div>
+         <div class="labelRicerche">Ricerca testo libero:   </div>
+         <div class ="campoRicerca">
+           <input type="text" id="RicercaTesto">
+           <button id="ButtonRicercaTesto">Cerca</button>
+         </div>
+ 
+            </div>
+ </div>
+            <div id="primaryContentRight"> <button id ="azzeraRicerche">Azzera ricerche</button></div>
+
+            <div id="scheda"></div>
     </div>          
   </div>
 </div>
@@ -151,7 +180,9 @@
        
     </div>
     
-</div></div></body>
+</div>
+</div>
+</body>
 	
         <script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="js/vendor/underscore.js"></script>

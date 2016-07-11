@@ -7,7 +7,7 @@ header('Content-Type: application/json'); //for correct output in browsers
    
 
 $segnature_list=array();
-$sql="SELECT *  FROM \"Principale_CD\"  " ;
+$sql="SELECT *  FROM \"Principale_CD\"  order by 1,2,3" ;
  //echo $sql;
  $segnatura_list=get_items_list($dbconn,$sql);
  //echo $segnatura;

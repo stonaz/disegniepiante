@@ -2,23 +2,9 @@
 require 'functions.php'; // functions used in the script
 //$dbconn = pg_connect ("host=192.168.1.14 port=5432 dbname=ruggeri user=postgres password=Superman123") or die ('no db');
 header('Content-Type: application/json'); //for correct output in browsers
-$testo = pg_escape_string($_GET['testo']);
-
-
-$sql="SELECT DISTINCT
-  principale.\"#cartella\", 
-  principale.\"#foglio\", 
-  principale.\"#sub\"
-FROM 
-  \"Fogli_CD\" as fogli,
-  \"Principale_CD\" as principale
-WHERE 
-  fogli.\"#cartella\" = principale.\"#cartella\" AND
-  fogli.\"#foglio\" = principale.\"#foglio\" AND
-  fogli.\"#sub\" = principale.\"#sub\" AND
- ( fogli.intestazione LIKE '%$testo%' OR 
-  fogli.descrizione LIKE '%$testo%' OR principale.\"descrizione intrinseca\" LIKE '%$testo%' )
-  ORDER BY 1,2,3;";
+$luogo = pg_escape_string($_GET['luogo']);
+$sql="SELECT scheda.\"#cartella\", scheda.\"#foglio\", scheda.\"#sub\", scheda.\"luogo\"  FROM \"Principale_CD\" as scheda WHERE
+\"luogo\" = '$luogo';";
 
 //echo $sql;
 //$items_list=get_items_list($dbconn,$sql);

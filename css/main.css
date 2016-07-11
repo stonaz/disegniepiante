@@ -13,6 +13,26 @@
 	padding: 0em 0em 0em 0em;
 }
 
+#primaryContentLeft
+{
+    float: left;
+    background-color: #cccccc;
+    height: 100px;
+
+}
+
+#primaryContentRight
+{
+    float: left;
+    background-color: #cccccc;
+        height: 100px;
+	width:120px;
+	padding-left: 10px;
+
+    
+
+}
+
 
 
 button{
@@ -63,7 +83,11 @@ padding:3px;
 }
 
 
-
+#azzeraRicerche{
+    position: relative;
+    top: 40px;
+    
+}
 
 
 /* Results */
@@ -124,6 +148,21 @@ padding:3px;
     cursor: pointer;
     padding-left: 20px;
     margin: 5px;
+}
+
+.labelRicerche {
+    width: 175px;
+    height: 19px;
+    font-weight: bold;
+    display:inline-block;
+}
+
+.campoRicerca{
+    display:inline-block;
+    height: 19px;
+    background-color: #cccccc;
+
+    
 }
 
 a.opening {
