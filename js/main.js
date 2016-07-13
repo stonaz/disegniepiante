@@ -37,8 +37,18 @@ function initialize() {
                 $('#selectRicercaClassificazione').val('');
                 $('#selectRicercaAutore').val('');
       var testo = $('#RicercaTesto').val();
+      var testo2 = $('#RicercaTesto2').val();
       console.log(testo)
-      ricercaTesto(testo);
+      console.log(testo2)
+      if (testo == '') {
+         alert ( 'inserire il primo termine per la ricerca')
+      }
+      
+      else
+      {
+         ricercaTesto(testo,testo2);
+      }
+      
     });
     $("#azzeraRicerche").on("click", function() {
                               console.log('azzera')
@@ -210,7 +220,7 @@ console.log(luogo)
     });
 }
 
-function ricercaTesto(testo) {
+function ricercaTesto(testo,testo2) {
 
     //cleanScreen();
   $("#LoadingLista").show();
@@ -220,7 +230,8 @@ function ricercaTesto(testo) {
         async: true,
         url: url,
         data: {
-            testo: testo
+            testo: testo,
+            testo2: testo2
         },
         dataType: 'json',
         success: function(response) {
