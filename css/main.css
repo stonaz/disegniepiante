@@ -5,12 +5,21 @@
 {
 	margin: -1em 4em 0em 10.25em;
 	padding: 1.5em 3em 1.5em 3em;
+	/*background-color: #cccccc;*/
+	
 }
 
 
 #secondaryContent
 {
 	padding: 0em 0em 0em 0em;
+}
+
+#ricerche
+{
+    width: 100%;
+    overflow: auto;
+    background-color: #cccccc;
 }
 
 #primaryContentLeft
@@ -28,9 +37,6 @@
         height: 100px;
 	width:120px;
 	padding-left: 10px;
-
-    
-
 }
 
 
@@ -50,7 +56,7 @@ button{
 }
 
 
-.spiegazione
+/*.spiegazione
 {
 
 text-align:left;
@@ -64,7 +70,7 @@ border-top: 12px solid #0000FF;
 border-radius: 4px;
 box-shadow: 5px 5px 10px rgba(0,0,0,.5);
 
-}
+}*/
 
 .intestazione
 {
@@ -165,8 +171,8 @@ padding:3px;
     
 }
 
-a.opening {
-    /*font-family:  Arial, sans-serif;*/
+/*a.opening {
+    font-family:  Arial, sans-serif;
     display:block;
     background: url(images/folder_closed.gif) no-repeat 10px center #fff;
     padding:3px 30px;
@@ -174,10 +180,11 @@ a.opening {
     color:#2f3040;
     font-weight:bold;
     font-size:1.2em;
-/*    border-bottom:1px solid #2f3040;
+   border-bottom:1px solid #2f3040;
     border-left:1px solid #2f3040;
-    border-right:1px solid #2f3040;*/
+    border-right:1px solid #2f3040;
     }
+    
   
  a.active {
     color:#2f3040;
@@ -188,9 +195,9 @@ a.opening {
     padding-top: 5px;
     font-size:1.2em;
     letter-spacing:-1px;
-/*    border-bottom:1px solid #2f3040;
+   border-bottom:1px solid #2f3040;
     border-left:1px solid #2f3040;
-    border-right:1px solid #2f3040;*/
+    border-right:1px solid #2f3040;
     }
 .expanded p {
     padding-bottom:20px;
@@ -203,3 +210,4 @@ a.opening {
 .expanded .expanded p {
     padding:15px;
     }
+/* 

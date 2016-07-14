@@ -65,7 +65,8 @@ function initialize() {
 function CreateListaSegnature(segnature, openlista) {
     var tmplMarkup = $('#templateSegnatura').html();
         var compiledTmpl = _.template(tmplMarkup, {
-            segnature: segnature
+            segnature: segnature,
+            count: segnature.length
         });
         $("#listaPrincipale").append(compiledTmpl);
     $("#LoadingLista").hide();

@@ -16,6 +16,8 @@
  
  
  <div class="expanded">
+  <strong>SEGNATURE<br>
+  Schede trovate : </strong><%= count %>
   <% _.each(segnature, function(segnatura) { %>  <li class="linkScheda"><strong><%= segnatura.cartella %> / <%= segnatura.foglio %> / <%= segnatura.sub %></strong></li> <% }); %>
   
 </div>
@@ -55,11 +57,17 @@
 </script>
 
 <script id="templateScheda" type="text/template">
+<div style="width: 100%; overflow: hidden;padding:3px;background-color: #F5F6CE;color: black;">
+ <strong>Segnatura <%= data.cartella %> / <%= data.foglio %> / <%= data.sub %></strong>
+</div>
  <div style="width: 100%; overflow: hidden;padding:3px;background-color: #F5F6CE;color: black">
+  
   <div class="sezione" style="width: 200px;">
 
     <strong>Luogo: </strong><%= data.luogo %><br>
-  <strong>Segnatura: </strong><%= data.cartella %>/<%= data.foglio %>/<%= data.sub %><br>
+  <strong>Cartella: </strong><%= data.cartella %><br>
+  <strong>Foglio: </strong><%= data.foglio %><br>
+  <strong>Sub: </strong><%= data.sub %><br>
   <strong>Unità </strong><%= data['numero UD'] %>/<%= data['suffisso UD'] %><br>
   </div>
   <div class="sezione"  style="width: 250px; ">
@@ -89,7 +97,8 @@
   </div>
 
  </div>
-  <div style="width: 100%; overflow: hidden;padding:3px;background-color: #E6E6E6;color: black">
+  <div style="width: 100%; overflow: hidden;padding:5px;background-color: #E6E6E6;color: black">
+   <strong>Fogli:</strong><br><br>
    <table class="foglio">
     <tr>
     <th>Numero</th>
@@ -144,6 +153,7 @@
   <div id="primaryContentContainer" >
 
     <div id="primaryContent">
+     <div id="ricerche">
 <div id="primaryContentLeft">
             <div id="LoadingScheda" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
             <div id="RicercaClassificazione"></div>
@@ -160,7 +170,7 @@
             </div>
  </div>
             <div id="primaryContentRight"> <button id ="azzeraRicerche">Azzera ricerche</button></div>
-
+</div>
             <div id="scheda"></div>
     </div>          
   </div>
@@ -173,7 +183,7 @@
       
 <div id="accordion" class="lista">
     <div class="level" id="listaPrincipale">
-        SEGNATURE<br>
+        
         </div><!--/.expanded-->
     </div><!--/.level-->
 </div><!--/#accordion-->
