@@ -4,7 +4,7 @@ require 'functions.php'; // functions used in the script
 header('Content-Type: application/json'); //for correct output in browsers
 $luogo = pg_escape_string($_GET['luogo']);
 $sql="SELECT scheda.\"#cartella\", scheda.\"#foglio\", scheda.\"#sub\", scheda.\"luogo\"  FROM \"Principale_CD\" as scheda WHERE
-\"luogo\" = '$luogo';";
+\"classificazione\" = '$luogo';";
 
 //echo $sql;
 //$items_list=get_items_list($dbconn,$sql);
