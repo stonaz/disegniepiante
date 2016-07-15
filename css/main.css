@@ -20,6 +20,7 @@
     width: 100%;
     overflow: auto;
     background-color: #cccccc;
+    height: 110px;
 }
 
 #primaryContentLeft
