@@ -26,7 +26,7 @@ function initialize() {
 
         }
     });
-    var segnatura = [1, 1, 1];
+    var segnatura = [80, 239, 1];
     createSelectNominativi();
     createSelectToponimi();
     createSelectToponimi();
@@ -143,7 +143,7 @@ function createSelectClassificazioni() {
         url: url,
         dataType: 'json',
         success: function(response) {
-            console.log(response)
+         //   console.log(response)
             var compiledTmpl = _.template(tmplMarkup, {
                 luogo: response
             });
@@ -294,10 +294,11 @@ function printScheda(scheda) {
     var tmplMarkup = $('#templateScheda').html();
     data = scheda.data[0]
     _.extend(data, templateHelpers);
-    // console.log(data)
+    console.log(scheda.fogli)
     var compiledTmpl = _.template(tmplMarkup, {
         data: data,
-        fogli: scheda.fogli
+        fogli: scheda.fogli,
+        images: scheda.fogli.images
     });
     $("#LoadingScheda").hide();
     $("#scheda").html(compiledTmpl);
@@ -330,7 +331,14 @@ $(function() {
     });
 });
 
-
+function immv(file,dir)
+{
+	url_inizio="http://212.189.172.99:9001/StyleServer/calcrgn?browser=win_ie&cat=Imago&style=default/view.xsl&wid=400&hei=300&browser=win_ie&plugin=false&item=";
+	url_fine="&wid=400&hei=300&style=default/view.xsl&plugin=false";
+	url=url_inizio+dir+"\\"+file+url_fine;
+	window.open(url,'disegniepiante', "height=400,width=600,status=yes,toolbar=no,menubar=no,location=no");
+	
+}
 //function CreateListaMain(luoghi,openlista) {
 //    var tmplMarkup = $('#templateSegnatura').html();
 //    //cleanScreen();

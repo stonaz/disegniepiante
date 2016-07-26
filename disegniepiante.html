@@ -108,7 +108,6 @@
     <th>Misure</th>
     <th>Immagine</th>
     </tr>
-
     <% _.each(fogli, function(foglio) { %>
     <tr>
      <td><%= foglio.numero %></td>
@@ -116,7 +115,15 @@
      <td><%= foglio.descrizione %></td>
      <td><%= foglio.note %></td>
      <td><%= foglio.misure %></td>
-     <td style="width: 250px;">Qui anteprima immagine su cui cliccare</td>
+     <td style="width: 500px;">
+      <div class="boxImmagine">
+       <% _.each(foglio.images, function(image) { %>
+       <A  onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor='text'" onClick="javascript:immv('<%= image %>.jp2','/DisegniPiante/Collezione%20I/0<%= foglio.cartella %>/<%= foglio.foglio %>')" BORDER=0>
+           <IMG BORDER="0" SRC="http://212.189.172.99/lizardtech/iserv/getthumb?cat=Imago&item=DisegniPiante/Collezione%20I/0<%= foglio.cartella %>/<%= foglio.foglio %>/<%= image %>.jp2&thumbspec=middlebig">
+</A>
+            <% }); %>
+      </div>
+     </td>
     </tr>
     <% }); %>
        </table>

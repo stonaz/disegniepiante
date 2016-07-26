@@ -12,8 +12,8 @@ if ($_GET['cartella'])
     
 }
 else{
-   $cartella=1;
-   $foglio=15;
+   $cartella=81;
+   $foglio=271;
    $sub=1;
 }
 
@@ -32,13 +32,42 @@ $items_list=get_items_list($dbconn,$sql);
 if ($items_list){
  //  echo indent(json_encode($items_list));
    $scheda['fogli']=$items_list;
+   //print_r($scheda['fogli']);
+  $index=0;
+   foreach  ($scheda['fogli'] as $foglioscheda)
+   {
+      $scheda['fogli'][$index]['cartella']=$foglioscheda['#cartella'];
+      $scheda['fogli'][$index]['foglio']=$foglioscheda['#foglio'];
+      $scheda['fogli'][$index]['sub']=$foglioscheda['#sub'];      
+      
+      $numero = $foglioscheda['numero'];
+      $sql="SELECT \"#image\"  FROM \"images\" where \"#cartella\"='$cartella' and \"#sub\"='$sub' and \"#foglio\"='$foglio' and \"numero\"='$numero'";
+      $items_list=get_items_list($dbconn,$sql);
+      if ($items_list){
+         
+         $scheda['fogli'][$index]['images']=array();
+         foreach($items_list as $images)
+         {
+            $image= $images['#image'];
+            if ( strlen($image) > 1){
+               array_push($scheda['fogli'][$index]['images'],$image);
+
+            }
+            
+         }
+         
+         
+      }
+   $index++;
+    }
+   
 }
 else{
    $scheda['fogli']=[];
 }
 
-echo json_encode($scheda);
-//echo indent(json_encode($scheda))
+//echo json_encode($scheda);
+echo indent(json_encode($scheda))
 
 ?>
 

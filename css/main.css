@@ -56,22 +56,13 @@ button{
 	z-index: 0;
 }
 
-
-/*.spiegazione
+.boxImmagine
 {
-
-text-align:left;
-width: 95% ;
-line-height: 1.5em;
-margin-bottom: 0em;
-color:#000000;
-padding: 5px;
-border: 1px solid #0000FF;
-border-top: 12px solid #0000FF;
-border-radius: 4px;
-box-shadow: 5px 5px 10px rgba(0,0,0,.5);
-
-}*/
+    overflow: auto;
+    background-color: #cccccc;
+    height: 315px;
+    width: 500px;
+}
 
 .intestazione
 {
