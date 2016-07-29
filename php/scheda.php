@@ -32,7 +32,7 @@ $items_list=get_items_list($dbconn,$sql);
 if ($items_list){
  //  echo indent(json_encode($items_list));
    $scheda['fogli']=$items_list;
-   //print_r($scheda['fogli']);
+   //, numero($scheda['fogli']);
   $index=0;
    foreach  ($scheda['fogli'] as $foglioscheda)
    {

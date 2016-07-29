@@ -15,6 +15,7 @@ function initialize() {
 
     //cleanScreen();
     $("#LoadingLista").show();
+    $("#LoadingRicerche").show();
 
     var url = "php/segnature.php"
     $.ajax({
@@ -29,8 +30,8 @@ function initialize() {
     var segnatura = [80, 239, 1];
     createSelectNominativi();
     createSelectToponimi();
-    createSelectToponimi();
     createSelectClassificazioni();
+    
     getScheda(segnatura);
     $("#ButtonRicercaTesto").on("click", function() {
                 $('#selectRicercaToponimo').val('');
@@ -38,8 +39,6 @@ function initialize() {
                 $('#selectRicercaAutore').val('');
       var testo = $('#RicercaTesto').val();
       var testo2 = $('#RicercaTesto2').val();
-      console.log(testo)
-      console.log(testo2)
       if (testo == '') {
          alert ( 'inserire il primo termine per la ricerca')
       }
@@ -148,6 +147,7 @@ function createSelectClassificazioni() {
                 luogo: response
             });
             $('#RicercaClassificazione').html(compiledTmpl);
+            $("#LoadingRicerche").hide();
             $('#selectRicercaClassificazione').on("change", function() {
                $('#RicercaTesto').val('');
                 $('#selectRicercaToponimo').val('');
@@ -244,7 +244,6 @@ function ricercaTesto(testo,testo2) {
 
 function getSegnatureDaRicerca(segnature) {
    console.log(segnature)
- //  $("#LoadingScheda").show();
    if (segnature.length == 0) {
     $("#listaPrincipale").html('Nessun risultato trovato');
     $("#scheda").html('');
@@ -265,7 +264,8 @@ function getSegnatureDaRicerca(segnature) {
 
 function getScheda(segnatura) {
    
-   
+   // $("#LoadingScheda").show();
+
    var cartella = segnatura[0];
     var foglio = segnatura[1];
     var sub = segnatura[2];
@@ -300,8 +300,9 @@ function printScheda(scheda) {
         fogli: scheda.fogli,
         images: scheda.fogli.images
     });
-    $("#LoadingScheda").hide();
+    
     $("#scheda").html(compiledTmpl);
+  //  $("#LoadingScheda").hide();
 
 }
 
