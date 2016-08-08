@@ -15,8 +15,8 @@ function initialize() {
 
     //cleanScreen();
     $("#LoadingLista").show();
-    $("#LoadingRicerche").show();
-
+   $("#LoadingRicerche").show();
+    var segnatura = [80, 239, 1];
     var url = "php/segnature.php"
     $.ajax({
         async: true,
@@ -27,10 +27,10 @@ function initialize() {
 
         }
     });
-    var segnatura = [80, 239, 1];
-    createSelectNominativi();
-    createSelectToponimi();
-    createSelectClassificazioni();
+    createAllSelects();
+    //createSelectNominativi();
+    //createSelectToponimi();
+    //createSelectClassificazioni();
     
     getScheda(segnatura);
     $("#ButtonRicercaTesto").on("click", function() {
@@ -61,6 +61,21 @@ function initialize() {
 
 }
 
+function hideLoadingRicerche()
+{
+   $("#LoadingRicerche").hide();
+}
+
+function createAllSelects(){
+createSelectToponimi( function() {
+  createSelectNominativi(function() {
+    createSelectClassificazioni();
+  });
+});
+}
+
+
+
 function CreateListaSegnature(segnature, openlista) {
     var tmplMarkup = $('#templateSegnatura').html();
         var compiledTmpl = _.template(tmplMarkup, {
@@ -75,7 +90,8 @@ function CreateListaSegnature(segnature, openlista) {
     });
 }
 
-function createSelectToponimi() {
+function createSelectToponimi(callback) {
+   console.log('Toponimi')
     var tmplMarkup = $('#templateToponimi').html();
     var url = "php/toponimi.php"
     $.ajax({
@@ -101,10 +117,11 @@ function createSelectToponimi() {
         }
 
     });
-
+   callback();
 }
 
-function createSelectNominativi() {
+function createSelectNominativi(callback) {
+   console.log('Nominativi')
     var tmplMarkup = $('#templateNominativi').html();
     var url = "php/nominativi.php"
     $.ajax({
@@ -117,6 +134,7 @@ function createSelectNominativi() {
                 autore: response
             });
             $('#RicercaAutore').html(compiledTmpl);
+            
             $('#selectRicercaAutore').on("change", function() {
                 $('#RicercaTesto').val('');
                 $('#selectRicercaToponimo').val('');
@@ -131,10 +149,11 @@ function createSelectNominativi() {
         
 
     });
-    
+    callback();
 }
 
-function createSelectClassificazioni() {
+function createSelectClassificazioni(callback) {
+   console.log('Classificazioni')
     var tmplMarkup = $('#templateClassificazioni').html();
     var url = "php/classificazioni.php"
     $.ajax({
@@ -147,7 +166,8 @@ function createSelectClassificazioni() {
                 luogo: response
             });
             $('#RicercaClassificazione').html(compiledTmpl);
-            $("#LoadingRicerche").hide();
+            setTimeout(hideLoadingRicerche, 1000);
+          //  $("#LoadingRicerche").hide();
             $('#selectRicercaClassificazione').on("change", function() {
                $('#RicercaTesto').val('');
                 $('#selectRicercaToponimo').val('');

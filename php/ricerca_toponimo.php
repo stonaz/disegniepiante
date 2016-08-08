@@ -24,7 +24,7 @@ and toponimo.\"mix2\" = '$toponimo';";
   array_push( $segnatura_list,$segnature);
 
  }
-//echo json_encode($luoghi);
-echo indent(json_encode($segnatura_list));
+echo json_encode($segnatura_list);
+//echo indent(json_encode($segnatura_list));
 
 ?>  
