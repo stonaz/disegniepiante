@@ -166,7 +166,7 @@ function createSelectClassificazioni(callback) {
                 luogo: response
             });
             $('#RicercaClassificazione').html(compiledTmpl);
-            setTimeout(hideLoadingRicerche, 1000);
+            setTimeout(hideLoadingRicerche, 4000);
           //  $("#LoadingRicerche").hide();
             $('#selectRicercaClassificazione').on("change", function() {
                $('#RicercaTesto').val('');
