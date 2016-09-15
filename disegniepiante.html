@@ -12,16 +12,24 @@
 
 <body>
 <script id="templateSegnatura" type="text/template">
- 
- 
+  <div id="accordion">
+  <a class="opening" href="#" ><%= cartella %></a>
  <div class="expanded">
+<% _.each(schede, function(scheda) { %> <li class="linkScheda"> <strong><%= cartella %> - <%= scheda.foglio %>/<%= scheda.sub %></strong></li> <% }); %>
+</div>
+</div>
+</script>
+
+<script id="templateSegnatureTrovate" type="text/template">
+ <div >
   <strong>SEGNATURE <br>(cartella/foglio/numero)<br>
   Schede trovate : </strong><%= count %>
-  <% _.each(segnature, function(segnatura) { %>  <li class="linkScheda"><strong><%= segnatura.cartella %> / <%= segnatura.foglio %> / <%= segnatura.sub %></strong></li> <% }); %>
-  
+  <% _.each(segnature, function(segnatura) { %>  <li class="linkScheda"><strong><%= segnatura.cartella %> - <%= segnatura.foglio %>/<%= segnatura.sub %></strong></li> <% }); %>
 </div>
 
 </script>
+  
+
 
 <script id="templateNominativi" type="text/template">
  <div class="labelRicerche">Ricerca per nominativo:</div>
@@ -172,7 +180,7 @@
 
     <div id="primaryContent">
      <div id="ricerche">
-<div id="primaryContentLeft">
+
   <div id="LoadingRicerche" ><img src='img/ajax-loader.gif'><br>Caricamento menu ricerca  </div>
             <div id="RicercaClassificazione"></div>
             <div id="RicercaToponimo"></div>
@@ -183,11 +191,12 @@
          <div class ="campoRicerca">
            <input type="text" id="RicercaTesto"> OR <input type="text" id="RicercaTesto2">
            <button id="ButtonRicercaTesto">Cerca</button>
+           <button id ="azzeraRicerche">Azzera ricerche</button>
          </div>
  
             </div>
- </div>
-            <div id="primaryContentRight"> <button id ="azzeraRicerche">Azzera ricerche</button></div>
+
+            
 </div>
             <div id="scheda">
 
@@ -202,7 +211,7 @@
       <div id="LoadingLista" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
       
     <div class="lista" id="listaPrincipale">
-        
+         <strong>SEGNATURE <br>(cartella/foglio/numero)<br>
         </div>
 </div>
        
@@ -215,6 +224,7 @@
         <script src="js/vendor/jquery-1.10.1.min.js"></script>
 	<script src="js/vendor/underscore.js"></script>
 	<script src="js/vendor/jquery-ui-1.10.3.custom.js"></script>
+        <script src='js/lista_segnature.js'></script>
 	<script src="js/main.js"></script>
 	<script type="text/javascript">
          

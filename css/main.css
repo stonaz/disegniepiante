@@ -3,7 +3,7 @@
    ========================================================================== */
 #primaryContent
 {
-	margin: -1em 4em 0em 10.25em;
+	margin: -1em 4em 0em 8.25em;
 	padding: 1.5em 3em 1.5em 3em;
 	/*background-color: #cccccc;*/
 	
@@ -13,6 +13,7 @@
 #secondaryContent
 {
 	padding: 0em 0em 0em 0em;
+	width:12em;
 }
 
 #ricerche
@@ -84,8 +85,8 @@ vertical-align: top;
 
 
 #azzeraRicerche{
-    position: relative;
-    top: 40px;
+/*    position: relative;
+    top: 40px;*/
     
 }
 
@@ -101,6 +102,8 @@ vertical-align: top;
 }
 #LoadingRicerche{
     display: none;
+    margin: 0 auto;
+    width: 50%;
 }
 
 .lista{
@@ -140,9 +143,9 @@ vertical-align: top;
 
 
 .linkScheda{
-    background: url(images/letter.gif) left center no-repeat; ;
+    background: url(images/letter.gif) left center no-repeat; 
     list-style-type: none;
-    text-decoration: underline;
+    /*text-decoration: underline;*/
     cursor: pointer;
     padding-left: 20px;
     margin: 5px;
@@ -163,8 +166,7 @@ vertical-align: top;
     
 }
 
-/*
- *
+
 #Nascondi:hover{
     color: red;
 }
@@ -206,11 +208,10 @@ a.opening {
     padding-bottom:20px;
     }
 .expanded .expanded {
-    background:url(concrete_wall.png);
+    background:url(images/letter.gif);
     padding:0;
-    color:#fff;
+    color:#ccc;
     }
 .expanded .expanded p {
     padding:15px;
     }
-/* 

@@ -1,4 +1,15 @@
 var disegniPiante = {};
+var JSON;
+
+ //$.getJSON('js/lista_segnature.json', function(response){
+ //  console.log(response)
+ //      JSON = response;
+ //      alert(JSON.property);
+ //})
+ ////feel free to use chained handlers, or even make custom events out of them!
+ //.success(function() { alert("second success"); })
+ //.error(function(error) { console.log(error); })
+ //.complete(function() { alert("complete"); });
 
 var templateHelpers = {
     returnBool: function(val) {
@@ -14,25 +25,14 @@ var templateHelpers = {
 function initialize() {
 
     //cleanScreen();
-    $("#LoadingLista").show();
+   $("#LoadingLista").show();
    $("#LoadingRicerche").show();
-    var segnatura = [80, 239, 1];
-    var url = "php/segnature.php"
-    $.ajax({
-        async: true,
-        url: url,
-        dataType: 'json',
-        success: function(response) {
-            CreateListaSegnature(response)
-
-        }
-    });
+   CreateListaMain(lista_segnature,0)
+ //   getListaSegnature();
     createAllSelects();
-    //createSelectNominativi();
-    //createSelectToponimi();
-    //createSelectClassificazioni();
+
     
-    getScheda(segnatura);
+    
     $("#ButtonRicercaTesto").on("click", function() {
                 $('#selectRicercaToponimo').val('');
                 $('#selectRicercaClassificazione').val('');
@@ -55,8 +55,9 @@ function initialize() {
                                               $('#selectRicercaToponimo').val('');
                 $('#selectRicercaClassificazione').val('');
                 $('#selectRicercaAutore').val('');
-                $('#RicercaTesto').val();
-                              initialize();
+                $('#RicercaTesto').val('');
+                $('#RicercaTesto2').val('');
+                              getListaSegnature();
     });
 
 }
@@ -64,6 +65,65 @@ function initialize() {
 function hideLoadingRicerche()
 {
    $("#LoadingRicerche").hide();
+}
+
+function CreateListaMain(lista_segnature,openlista) {
+    var tmplMarkup = $('#templateSegnatura').html();
+    //cleanScreen();
+    //  $("#Loading").show();
+    //  console.log(luoghi)
+    var arrayLength = lista_segnature.length;
+    //  console.log(arrayLength)
+    for (var i = 0; i < arrayLength; i++) {
+        var cartella = (lista_segnature[i].cartella);
+        var schede = (lista_segnature[i].schede);
+        var compiledTmpl = _.template(tmplMarkup, {
+            cartella: cartella,
+            schede: schede
+        });
+        $("#listaPrincipale").append(compiledTmpl);
+
+    }
+    $("#accordion .expanded").hide();
+    $("a.opening").click(function() {
+        $(this).next().slideToggle('fast', function() {
+            $(this).prev("a.opening").toggleClass("active");
+        });
+        return false;
+    });
+    $("#LoadingLista").hide();
+    $("li").on("click", function() {
+        
+        var segnatura = $(this).text();
+        getScheda(segnatura);
+    });
+    $("#Nascondi").on("click", function() {
+        $("#accordion .expanded").hide();
+        var sections = $('#accordion').find("a");
+         sections.each(function(index, section){
+    if ($(section).hasClass('active') ) {
+      console.log('active');
+      $(section).toggleClass("active");
+    }
+  });
+        $("#accordion a.opening").toggleClass("active");
+    });
+    $("#Mostra").on("click", function() {
+        $("#accordion .expanded").show();
+        var sections = $('#accordion').find("a");
+         sections.each(function(index, section){
+    if (!$(section).hasClass('active') ) {
+      console.log('active');
+      $(section).toggleClass("active");
+    }
+  });
+
+        
+    });
+    if (openlista===1) {
+      $("#Mostra").click();
+    }
+    
 }
 
 function createAllSelects(){
@@ -74,10 +134,23 @@ createSelectToponimi( function() {
 });
 }
 
+function getListaSegnature(){
+   var segnatura = [80, 239, 1];
+    var url = "php/segnature.php"
+    $.ajax({
+        async: true,
+        url: url,
+        dataType: 'json',
+        success: function(response) {
+            CreateListaSegnature(response)
 
+        }
+    });
+    getScheda(segnatura);
+}
 
 function CreateListaSegnature(segnature, openlista) {
-    var tmplMarkup = $('#templateSegnatura').html();
+    var tmplMarkup = $('#templateSegnatureTrovate').html();
         var compiledTmpl = _.template(tmplMarkup, {
             segnature: segnature,
             count: segnature.length
@@ -85,7 +158,7 @@ function CreateListaSegnature(segnature, openlista) {
         $("#listaPrincipale").append(compiledTmpl);
     $("#LoadingLista").hide();
     $("li").on("click", function() {
-        var segnatura = $(this).text().split("/");
+        var segnatura = $(this).text();
         getScheda(segnatura);
     });
 }
@@ -282,13 +355,28 @@ function getSegnatureDaRicerca(segnature) {
    }
 }
 
-function getScheda(segnatura) {
+function getScheda(segn) {
    
    // $("#LoadingScheda").show();
-
+   
+   console.log(typeof(segn));
+   if (typeof(segn) === 'string') {
+      var segnatura = segn.split("-");
+  
    var cartella = segnatura[0];
-    var foglio = segnatura[1];
-    var sub = segnatura[2];
+   var scheda= segnatura[1].split("/");
+    var foglio = scheda[0];
+    var sub = scheda[1];
+   
+   }
+   else{
+      console.log(segn);
+      var cartella = (segn[0]);
+    var foglio = (segn[1]);
+    var sub = (segn[2]);
+      
+   }
+   
     var url = "php/scheda.php"
     $.ajax({
         async: true,
@@ -360,60 +448,4 @@ function immv(file,dir)
 	window.open(url,'disegniepiante', "height=400,width=600,status=yes,toolbar=no,menubar=no,location=no");
 	
 }
-//function CreateListaMain(luoghi,openlista) {
-//    var tmplMarkup = $('#templateSegnatura').html();
-//    //cleanScreen();
-//    //  $("#Loading").show();
-//      console.log(luoghi)
-//    var arrayLength = luoghi.length;
-//    //  console.log(arrayLength)
-//    for (var i = 0; i < arrayLength; i++) {
-//        var luogo = (luoghi[i].luogo);
-//        var segnature = (luoghi[i].segnature);
-//        var compiledTmpl = _.template(tmplMarkup, {
-//            luogo: luogo,
-//            segnature: segnature
-//        });
-//        $("#listaPrincipale").append(compiledTmpl);
-//
-//    }
-//    $("#accordion .expanded").hide();
-//    $("a.opening").click(function() {
-//        $(this).next().slideToggle('fast', function() {
-//            $(this).prev("a.opening").toggleClass("active");
-//        });
-//        return false;
-//    });
-//    $("#LoadingLista").hide();
-//    $("li").on("click", function() {
-//        var segnatura = $(this).text().split("/");
-//        getScheda(segnatura);
-//    });
-//    $("#Nascondi").on("click", function() {
-//        $("#accordion .expanded").hide();
-//        var sections = $('#accordion').find("a");
-//         sections.each(function(index, section){
-//    if ($(section).hasClass('active') ) {
-//      console.log('active');
-//      $(section).toggleClass("active");
-//    }
-//  });
-//       // $("#accordion a.opening").toggleClass("active");
-//    });
-//    $("#Mostra").on("click", function() {
-//        $("#accordion .expanded").show();
-//        var sections = $('#accordion').find("a");
-//         sections.each(function(index, section){
-//    if (!$(section).hasClass('active') ) {
-//      console.log('active');
-//      $(section).toggleClass("active");
-//    }
-//  });
-//
-//        
-//    });
-//    if (openlista===1) {
-//      $("#Mostra").click();
-//    }
-//    
-//}
+
