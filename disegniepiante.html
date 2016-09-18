@@ -12,6 +12,7 @@
 
 <body>
 <script id="templateSegnatura" type="text/template">
+ 
   <div id="accordion">
   <a class="opening" href="#" ><%= cartella %></a>
  <div class="expanded">
@@ -21,9 +22,8 @@
 </script>
 
 <script id="templateSegnatureTrovate" type="text/template">
- <div >
-  <strong>SEGNATURE <br>(cartella/foglio/numero)<br>
-  Schede trovate : </strong><%= count %>
+ <div class="risultatiRicerca">
+  <strong>Schede trovate : </strong><%= count %>
   <% _.each(segnature, function(segnatura) { %>  <li class="linkScheda"><strong><%= segnatura.cartella %> - <%= segnatura.foglio %>/<%= segnatura.sub %></strong></li> <% }); %>
 </div>
 
@@ -65,13 +65,13 @@
 
 <script id="templateScheda" type="text/template">
 <div style="width: 100%; overflow: hidden;padding:5px;background-color: #F5F6CE;color: black;">
- <strong>Segnatura <%= data.cartella %> / <%= data.foglio %> / <%= data.sub %></strong>
+ <strong>Segnatura: </strong><%= data.cartella %> - <%= data.foglio %> / <%= data.sub %>
 </div>
- <div style="width: 100%; overflow: hidden;padding:5px;background-color: #F5F6CE;color: black">
-  
-  <div class="sezione" style="width: 200px;">
 
-    <strong>Luogo: </strong><%= data.luogo %><br>
+  
+<div class="sezione" style="width: 100px;">
+
+ <strong>Luogo: </strong><%= data.luogo %><br>
   <strong>Cartella: </strong><%= data.cartella %><br>
   <strong>Foglio: </strong><%= data.foglio %><br>
   <strong>Sub: </strong><%= data.sub %><br>
@@ -80,7 +80,6 @@
   <div class="sezione"  style="width: 250px; ">
     <strong>Tecnica di esecuzione: </strong><%= data['supporto/tecnica di esecuzione'] %><br>
   <strong>Scala: </strong><%= data.scala %><br>
-    <strong>Altezza: </strong><%= data['misure (altezza)'] %> <strong>Larghezza: </strong><%= data['misure (larghezza)'] %><br>
   </div>
    <div class="sezione" style="width: 250px; ">
     <strong>Produttore: </strong><%= data.soggetto_produttore %><br>
@@ -93,10 +92,10 @@
     </tr>
        
    </table>
-  
+  <strong>Sottoscrizioni: </strong><%= data.sottoscrizioni %><br>
   </div>
-    <div class="sezione"  style="width: 350px; ">
-    <strong>Sottoscrizioni: </strong><%= data.sottoscrizioni %><br>
+    <div class="sezione"  style="width: 250px; ">
+    
   <strong>Descrizione intrinseca: </strong><%= data['descrizione intrinseca'] %><br>
     <strong>Descrizione estrinseca: </strong><%= data.descrizione_estrinseca %> <br>
       
@@ -107,15 +106,15 @@
     </div>
 <p><strong>Note: </strong><%= data.note %></p>
 <p><strong>Note cronologia: </strong><%= data.note_alla_cronologia %><br></p>
- </div>
-  <div style="width: 100%; overflow: hidden;padding:5px;background-color: #E6E6E6;color: black">
+
+ 
+  <div class="fogli">
    <strong>Fogli:</strong><br><br>
    <table class="foglio">
     <tr>
     <th>Numero</th>
     <th>Intestazione</th>
     <th>Descrizione</th>
-    <th>Note</th>
     <th>Misure</th>
     <th>Immagine</th>
     </tr>
@@ -124,7 +123,6 @@
      <td><%= foglio.numero %></td>
      <td><%= foglio.intestazione %></td>
      <td><%= foglio.descrizione %></td>
-     <td><%= foglio.note %></td>
      <td width="100px"><%= foglio.misure %></td>
      <td >
       <% if (foglio.images.length > 0) { %> 
@@ -165,7 +163,7 @@
     <ul>
       <li ><a href="../index.html">Home Imago</a></li>
       <li ><a href="../serie.html">Serie Imago</a></li>
-      <li class="first"><a href="disegniepiante.html">Disegni e Piante - Collezione I</a></li>
+      <li class="first"><a href="http://localhost/disegniepiante/disegniepiante.html">Disegni e Piante - Collezione I</a></li>
     </ul>
   </div>
 	<div id="content" >
@@ -209,9 +207,9 @@
     <div id="secondaryContent">
 
       <div id="LoadingLista" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
-      
+   <span class="lista"> <strong>SEGNATURE <br>(Cartella - Foglio/Numero)<br></span>  
     <div class="lista" id="listaPrincipale">
-         <strong>SEGNATURE <br>(cartella/foglio/numero)<br>
+        
         </div>
 </div>
        

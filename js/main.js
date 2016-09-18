@@ -27,7 +27,7 @@ function initialize() {
     //cleanScreen();
    $("#LoadingLista").show();
    $("#LoadingRicerche").show();
-   CreateListaMain(lista_segnature,0)
+   createListaMain(lista_segnature,0)
  //   getListaSegnature();
     createAllSelects();
 
@@ -57,17 +57,14 @@ function initialize() {
                 $('#selectRicercaAutore').val('');
                 $('#RicercaTesto').val('');
                 $('#RicercaTesto2').val('');
-                              getListaSegnature();
+               createListaMain(lista_segnature,0);
     });
 
 }
 
-function hideLoadingRicerche()
-{
-   $("#LoadingRicerche").hide();
-}
 
-function CreateListaMain(lista_segnature,openlista) {
+
+function createListaMain(lista_segnature,openlista) {
     var tmplMarkup = $('#templateSegnatura').html();
     //cleanScreen();
     //  $("#Loading").show();
@@ -129,7 +126,9 @@ function CreateListaMain(lista_segnature,openlista) {
 function createAllSelects(){
 createSelectToponimi( function() {
   createSelectNominativi(function() {
-    createSelectClassificazioni();
+    createSelectClassificazioni(function(){
+      hideLoadingRicerche();
+      });
   });
 });
 }
@@ -161,6 +160,12 @@ function CreateListaSegnature(segnature, openlista) {
         var segnatura = $(this).text();
         getScheda(segnatura);
     });
+}
+
+function hideLoadingRicerche()
+{
+   console.log('Chiudi')
+   $("#LoadingRicerche").hide();
 }
 
 function createSelectToponimi(callback) {
@@ -239,7 +244,8 @@ function createSelectClassificazioni(callback) {
                 luogo: response
             });
             $('#RicercaClassificazione').html(compiledTmpl);
-            setTimeout(hideLoadingRicerche, 4000);
+            
+           // setTimeout(hideLoadingRicerche, 4000);
           //  $("#LoadingRicerche").hide();
             $('#selectRicercaClassificazione').on("change", function() {
                $('#RicercaTesto').val('');
@@ -254,7 +260,7 @@ function createSelectClassificazioni(callback) {
         
 
     });
-    
+    callback();
 }
 
 function ricercaAutore(autore) {
@@ -422,19 +428,20 @@ $(function() {
 
         error: function(jqXHR, exception) {
             if (jqXHR.status === 0) {
-                alert('Not connect.\n Verify Network.');
+               console.log(jqXHR);
+                console.log('Not connect.\n Verify Network.' + jqXHR);
             } else if (jqXHR.status == 404) {
-                alert('Requested page not found. [404]');
+                console.log('Requested page not found. [404]');
             } else if (jqXHR.status == 500) {
-                alert('Internal Server Error [500].');
+                console.log('Internal Server Error [500].');
             } else if (exception === 'parsererror') {
-                alert('Requested JSON parse failed.');
+                console.log('Requested JSON parse failed.');
             } else if (exception === 'timeout') {
-                alert('Time out error.');
+                console.log('Time out error.');
             } else if (exception === 'abort') {
-                alert('Ajax request aborted.');
+                console.log('Ajax request aborted.');
             } else {
-                alert('Uncaught Error.\n' + jqXHR.responseText);
+                console.log('Uncaught Error.\n' + jqXHR.responseText);
             }
         }
     });
