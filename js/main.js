@@ -65,6 +65,7 @@ function initialize() {
 
 
 function createListaMain(lista_segnature,openlista) {
+   console.log('main')
     var tmplMarkup = $('#templateSegnatura').html();
     //cleanScreen();
     //  $("#Loading").show();
@@ -376,8 +377,8 @@ function getScheda(segn) {
    
    }
    else{
-      console.log(segn);
-      var cartella = (segn[0]);
+   console.log(segn);
+   var cartella = (segn[0]);
     var foglio = (segn[1]);
     var sub = (segn[2]);
       

@@ -26,19 +26,26 @@
 	z-index: 0;
 }
 
-@media (min-width: 1024px) {
+select {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+	    width: 70%;
+}
+
+@media (max-width: 1024px) {
 
 #ricerche
 {
     width: 850px;
-    overflow: auto;
+    overflow: hidden;
     background-color: #cccccc;
     padding: 5px;
 }
 
 #scheda {
     width: 850px;
-    overflow: auto;
+    overflow: hidden;
     background-color: #F5F6CE;
     color: black;
     padding: 5px;
@@ -47,19 +54,19 @@
 
 }
 
-@media (min-width: 1280px) {
+@media (min-width: 1025px) and (max-width: 1280px){
 
 #ricerche
 {
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: #cccccc;
     padding: 5px;
 }
 
 #scheda {
     width: 100%;
-    overflow: auto;
+    overflow: hidden;
     background-color: #F5F6CE;
     color: black;
     padding: 5px;
@@ -68,19 +75,19 @@
 
 }
 
-@media (min-width: 1900px) {
+@media (min-width: 1281px) {
 
 #ricerche
 {
     width: 1200px;
-    overflow: auto;
+    overflow: hidden;
     background-color: #cccccc;
     padding: 5px;
 }
 
 #scheda {
     width: 1200px;
-    overflow: auto;
+    overflow: hidden;
     background-color: #F5F6CE;
     color: black;
     padding: 5px;
@@ -105,6 +112,11 @@ button{
 .intestazione
 {
 font-weight: bold;
+}
+
+.count
+{
+font-weight: lighter;
 }
 
 .foglio{

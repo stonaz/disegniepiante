@@ -23,7 +23,7 @@
 
 <script id="templateSegnatureTrovate" type="text/template">
  <div class="risultatiRicerca">
-  <strong>Schede trovate : </strong><%= count %>
+  Schede trovate : <span class="count"><%= count %></span>
   <% _.each(segnature, function(segnatura) { %>  <li class="linkScheda"><strong><%= segnatura.cartella %> - <%= segnatura.foglio %>/<%= segnatura.sub %></strong></li> <% }); %>
 </div>
 
@@ -64,7 +64,7 @@
 </script>
 
 <script id="templateScheda" type="text/template">
-<div style="width: 100%; overflow: hidden;padding:5px;background-color: #F5F6CE;color: black;">
+<div style="width: 100%; overflow: hidden;padding:1px;background-color: #F5F6CE;color: black;">
  <strong>Segnatura: </strong><%= data.cartella %> - <%= data.foglio %> / <%= data.sub %>
 </div>
 
@@ -83,7 +83,7 @@
   </div>
    <div class="sezione" style="width: 250px; ">
     <strong>Produttore: </strong><%= data.soggetto_produttore %><br>
-    <table style="border-spacing: 2px;">
+    <table style="border-spacing: 2px;margin-left: -2px;">
     <tr>
      <td class="intestazione">Datazione: </td><td ><%= data.datazione %></td><td class="intestazione">Attribuita: </td><td><%= data.returnBool(data['data attribuita']) %></td>
     </tr>
@@ -94,7 +94,7 @@
    </table>
   <strong>Sottoscrizioni: </strong><%= data.sottoscrizioni %><br>
   </div>
-    <div class="sezione"  style="width: 250px; ">
+    <div class="sezione"  style="width: 200px; ">
     
   <strong>Descrizione intrinseca: </strong><%= data['descrizione intrinseca'] %><br>
     <strong>Descrizione estrinseca: </strong><%= data.descrizione_estrinseca %> <br>
@@ -163,7 +163,7 @@
     <ul>
       <li ><a href="../index.html">Home Imago</a></li>
       <li ><a href="../serie.html">Serie Imago</a></li>
-      <li class="first"><a href="http://localhost/disegniepiante/disegniepiante.html">Disegni e Piante - Collezione I</a></li>
+      <li class="first"><a href="disegniepiante.html">Disegni e Piante - Collezione I</a></li>
     </ul>
   </div>
 	<div id="content" >
