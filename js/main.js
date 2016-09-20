@@ -67,6 +67,7 @@ function initialize() {
 function createListaMain(lista_segnature,openlista) {
    console.log('main')
     var tmplMarkup = $('#templateSegnatura').html();
+    var tmplMarkup2 = $('#templateHome').html();
     //cleanScreen();
     //  $("#Loading").show();
     //  console.log(luoghi)
@@ -80,6 +81,9 @@ function createListaMain(lista_segnature,openlista) {
             schede: schede
         });
         $("#listaPrincipale").append(compiledTmpl);
+        var compiledTmpl2 = _.template(tmplMarkup2);
+        $("#scheda").html(compiledTmpl2);
+        
 
     }
     $("#accordion .expanded").hide();

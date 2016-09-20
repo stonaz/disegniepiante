@@ -26,6 +26,11 @@
 	z-index: 0;
 }
 
+.homeImage{
+    display: table;
+    margin: 0 auto; 
+}
+
 select {
     -webkit-box-sizing: border-box;
        -moz-box-sizing: border-box;

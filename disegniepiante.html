@@ -11,6 +11,14 @@
 </head>
 
 <body>
+ 
+<script id="templateHome" type="text/template">
+ 
+  <div >
+<img src="img/home.jpg" class="homeImage">
+</div>
+</script>
+ 
 <script id="templateSegnatura" type="text/template">
  
   <div id="accordion">
@@ -79,10 +87,6 @@
   </div>
   <div class="sezione"  style="width: 250px; ">
     <strong>Tecnica di esecuzione: </strong><%= data['supporto/tecnica di esecuzione'] %><br>
-  <strong>Scala: </strong><%= data.scala %><br>
-  </div>
-   <div class="sezione" style="width: 250px; ">
-    <strong>Produttore: </strong><%= data.soggetto_produttore %><br>
     <table style="border-spacing: 2px;margin-left: -2px;">
     <tr>
      <td class="intestazione">Datazione: </td><td ><%= data.datazione %></td><td class="intestazione">Attribuita: </td><td><%= data.returnBool(data['data attribuita']) %></td>
@@ -92,6 +96,11 @@
     </tr>
        
    </table>
+  <strong>Scala: </strong><%= data.scala %><br>
+  </div>
+   <div class="sezione" style="width: 250px; ">
+    <strong>Produttore: </strong><%= data.soggetto_produttore %><br>
+    
   <strong>Sottoscrizioni: </strong><%= data.sottoscrizioni %><br>
   </div>
     <div class="sezione"  style="width: 200px; ">
