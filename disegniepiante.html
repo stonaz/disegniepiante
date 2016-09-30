@@ -77,7 +77,7 @@
 </div>
 
   
-<div class="sezione" style="width: 100px;">
+<div class="sezione_small">
 
  <strong>Luogo: </strong><%= data.luogo %><br>
   <strong>Cartella: </strong><%= data.cartella %><br>
@@ -85,7 +85,7 @@
   <strong>Sub: </strong><%= data.sub %><br>
   <strong>Unità </strong><%= data['numero UD'] %>/<%= data['suffisso UD'] %><br>
   </div>
-  <div class="sezione"  style="width: 250px; ">
+  <div class="sezione"">
     <strong>Tecnica di esecuzione: </strong><%= data['supporto/tecnica di esecuzione'] %><br>
     <table style="border-spacing: 2px;margin-left: -2px;">
     <tr>
@@ -98,12 +98,12 @@
    </table>
   <strong>Scala: </strong><%= data.scala %><br>
   </div>
-   <div class="sezione" style="width: 250px; ">
+   <div class="sezione"">
     <strong>Produttore: </strong><%= data.soggetto_produttore %><br>
     
   <strong>Sottoscrizioni: </strong><%= data.sottoscrizioni %><br>
   </div>
-    <div class="sezione"  style="width: 200px; ">
+    <div class="sezione">
     
   <strong>Descrizione intrinseca: </strong><%= data['descrizione intrinseca'] %><br>
     <strong>Descrizione estrinseca: </strong><%= data.descrizione_estrinseca %> <br>
@@ -113,11 +113,13 @@
     <div style="clear: both">
      
     </div>
+    <div style="width:80%" >
 <p><strong>Note: </strong><%= data.note %></p>
 <p><strong>Note cronologia: </strong><%= data.note_alla_cronologia %><br></p>
-
+<br>
+</div>
  
-  <div class="fogli">
+  <div style="width:98%" >
    <strong>Fogli:</strong><br><br>
    <table class="foglio">
     <tr>
@@ -138,8 +140,8 @@
       <div class="boxImmagine">
        <% _.each(foglio.images, function(image) { %>
        
-       <A  onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor='text'" onClick="javascript:immv('<%= image %>.jp2','/DisegniPiante/Collezione%20I/0<%= foglio.cartella %>/<%= foglio.foglio %>')" BORDER=0>
-           <IMG BORDER="0" SRC="http://212.189.172.99/lizardtech/iserv/getthumb?cat=Imago&item=DisegniPiante/Collezione%20I/0<%= foglio.cartella %>/<%= foglio.foglio %>/<%= image %>.jp2&thumbspec=middlebig">
+       <A  onMouseOver="this.style.cursor='pointer'" onMouseOut="this.style.cursor='text'" onClick="javascript:immv('<%= image %>.jp2','/DisegniPiante/Collezione%20I/<%= foglio.cartella %>/<%= foglio.foglio %>')" BORDER=0>
+           <IMG BORDER="0" SRC="http://212.189.172.99/lizardtech/iserv/getthumb?cat=Imago&item=DisegniPiante/Collezione%20I/<%= foglio.cartella %>/<%= foglio.foglio %>/<%= image %>.jp2&thumbspec=middlebig">
 </A>
             <% }); %>
       </div>
@@ -157,7 +159,6 @@
 </script>
 
 <div  id="outer">
-	
   <div id="header"> 
     <h1>IMAGO</h1>
     <h2>Disegni e Piante - Collezione I</h2>
@@ -166,8 +167,6 @@
     <p align='right'> <a style="font-size: 10pt; color: yellow" href="http://www.archiviodistatoroma.beniculturali.it/"> 
       <img src="../images/header_ASRoma.jpg" width="638" height="59" border="0"><br>
       Torna al sito istituzionale</a> </div>
-
-	
   <div id="menu"> 
     <ul>
       <li ><a href="../index.html">Home Imago</a></li>
@@ -175,17 +174,21 @@
       <li class="first"><a href="disegniepiante.html">Disegni e Piante - Collezione I</a></li>
     </ul>
   </div>
-	<div id="content" >
+<div id="container" >
 		
-    <div id="ImageContent">
+<!--    <div id="ImageContent">    
+</div>-->
+      <div id="left">
+
+      <div id="LoadingLista" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
+   <span class="lista"> <strong>SEGNATURE : </strong><br>(Cartella - Foglio/Numero)<br></span>  
+    <div class="lista" id="listaPrincipale">
+        
+        </div>
+</div>
       
-	
-      </div>
-    </div>
-
-  <div id="primaryContentContainer" >
-
-    <div id="primaryContent">
+  <div id="right" >
+   
      <div id="ricerche">
 
   <div id="LoadingRicerche" ><img src='img/ajax-loader.gif'><br>Caricamento menu ricerca  </div>
@@ -208,23 +211,15 @@
             <div id="scheda">
 
             </div>
-    </div>          
+             
   </div>
-</div>
-		
-		
-    <div id="secondaryContent">
 
-      <div id="LoadingLista" ><img src='img/ajax-loader.gif'><br>Caricamento dati. Attendere...  </div>
-   <span class="lista"> <strong>SEGNATURE <br>(Cartella - Foglio/Numero)<br></span>  
-    <div class="lista" id="listaPrincipale">
-        
-        </div>
-</div>
+				
+
        
     </div>
     
-</div>
+
 </div>
 </body>
 	

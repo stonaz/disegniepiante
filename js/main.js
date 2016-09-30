@@ -401,10 +401,7 @@ function getScheda(segn) {
         success: function(response) {
             printScheda(response);
         }
-    });   
-   
-    
-    
+    });      
 }
 
 function printScheda(scheda) {
@@ -413,6 +410,14 @@ function printScheda(scheda) {
     var tmplMarkup = $('#templateScheda').html();
     data = scheda.data[0]
     _.extend(data, templateHelpers);
+    
+    _.each(scheda.fogli, function(foglio){
+        console.log(foglio.cartella);
+        foglio.cartella = addZeros(foglio.cartella)
+        foglio.foglio = addZeros(foglio.foglio)
+        console.log(foglio.cartella);
+    
+});
     console.log(scheda.fogli)
     var compiledTmpl = _.template(tmplMarkup, {
         data: data,
@@ -421,8 +426,17 @@ function printScheda(scheda) {
     });
     
     $("#scheda").html(compiledTmpl);
-  //  $("#LoadingScheda").hide();
+}
 
+function addZeros(str){
+   if (str.length == 1) {
+      str = '00' +str
+   }
+   if (str.length == 2) {
+      str = '0' +str
+   }
+   return str;
+   
 }
 
 
